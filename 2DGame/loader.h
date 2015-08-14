@@ -1,48 +1,29 @@
-#ifndef LOAD&STORE_H_INCLUDED
-#define LOAD&STORE_H_INCLUDED
+#ifndef LOADER_H_INCLUDED
+#define LOADER_H_INCLUDED
+
+///TODO:
+/*
+- Use smart pointers... (aparently you cannot delete a pointer that you do not assign through new)
+- Control the use of the string independantly within each of the subStores - aka load datablocks and process them
+- Make a version of loading work on copying/instancing from a pointer rather than pure literal string
+- Find a way to put implementations of templates in .cpp
+*/
+
+/**
+- All loading from the program should be evoked through the loader.
+- This then sends commands to the appropriate subStore which can then process the loading as it wishes.
+- The subStore will most likely then evoke other loading through either this loader or through others - Eg. textureLoading through SOIL.
+**/
 
 #include <map>
 #include <string>
 #include <iostream>
 #include "fileReader.h"
+#include "store.h"
 
-//Holds the base object class
-class BaseStore
-{
-    template <class T> friend class Load;
-    template <class T> friend class Unload;
-public:
-    BaseStore() { usageCount+=1; }; //Each new object increases usageCount
-    virtual ~BaseStore(){};
-
-protected:
-    //Prevent usage outside of the class, subclass and friends
-    int usageCount = 0; //! Used as an internal counter.
-    bool correctlyLoaded = false; //! Used to signify if the object has been loaded correctly. If not the object will be immediately deleted. (Save guard)
-    std::string internalName; //! Used as a check on the object that's been loaded and maintained
-};
-
-class SceneStore : public BaseStore
-{
-public:
-    SceneStore(std::string);
-    ~SceneStore(){};
-
-    DataBlock* sceneBlock;
-    int amountOfElements;
-};
-
-class TextureStore : public BaseStore
-{
-public:
-    TextureStore(std::string);
-    ~TextureStore(){};
-
-    //GLuint textureID;
-};
+extern std::map<std::string, Store*> internalMap;
 
 
-extern std::map<std::string, BaseStore*> internalMap;
 ///Distribution Classes
 template <class T>
 class Load
@@ -57,7 +38,7 @@ template <class T>
 bool Load<T>::Object(T** returnLoc, std::string s)
 {
     //Loading is controlled by the string
-    std::map<std::string, BaseStore*>::iterator it = internalMap.find(s); //see if the object already exists
+    std::map<std::string, Store*>::iterator it = internalMap.find(s); //see if the object already exists
     if(it != internalMap.end())
     {
         //if it exists, double check name is correct,
@@ -71,7 +52,7 @@ bool Load<T>::Object(T** returnLoc, std::string s)
         else
         {
             //Name mismatch: Give error
-            std::cout<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr."<<std::endl; //cannot guarentee safety of the pointer.
+            std::cout<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr. \n"<<std::endl; //cannot guarentee safety of the pointer.
             *returnLoc = nullptr;
             return false;
         }
@@ -83,7 +64,7 @@ bool Load<T>::Object(T** returnLoc, std::string s)
         if(create->correctlyLoaded)
         {
             //check loading process succeded
-            internalMap.insert(std::pair<std::string, BaseStore*>(s, create));
+            internalMap.insert(std::pair<std::string, Store*>(s, create));
             create->internalName = s;
             *returnLoc = create;
             return true;
@@ -94,7 +75,7 @@ bool Load<T>::Object(T** returnLoc, std::string s)
             delete create;
             //set returnLoc to point to default or just nullptr it?
             //Loading incomplete: Give error
-            std::cout<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr."<<std::endl; //Loading a new object hasnt worked - report it
+            std::cout<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n"<<std::endl; //Loading a new object hasnt worked - report it
             *returnLoc = nullptr;
             return false;
         }
@@ -114,7 +95,7 @@ template <class T>
 bool Unload<T>::Object(T** deletePtr)
 {
     //Deleting is controlled by pointers
-    std::map<std::string, BaseStore*>::const_iterator it;
+    std::map<std::string, Store*>::const_iterator it;
     std::string key = "";
     T* editablePtr;
     for (it = internalMap.begin(); it != internalMap.end(); ++it) //loop through to find the existing pointer
@@ -140,18 +121,9 @@ bool Unload<T>::Object(T** deletePtr)
         *deletePtr = nullptr;
         return true;
     }
-     std::cout<<"Unload Error: Cannot locate object. Returning nullptr."<<std::endl;
+    std::cout<<"Unload Error: Cannot locate object. Returning nullptr. \n"<<std::endl;
     *deletePtr = nullptr;
     return false;
 }
 
-///TODO:
-/*
-- Use smart pointers... (aparently you cannot delete a pointer that you do not assign through new :O )
-- Control the use of the string independantly within each of the subStores
-- Make a version of loading so as if you dont care about what model something is using and u only care with what ur being pointed to?
-- Find a way to put implementations of templates in .cpp
-*/
-
-
-#endif // LOAD&STORE_H_INCLUDED
+#endif // LOADER_H_INCLUDED

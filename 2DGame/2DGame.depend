@@ -1,0 +1,113 @@
+# depslib dependency file v1.0
+1439534818 source:e:\stuff\2dgame\trunk\2dgame\component.cpp
+	"component.h"
+
+1439534818 e:\stuff\2dgame\trunk\2dgame\component.h
+
+1439534818 source:e:\stuff\2dgame\trunk\2dgame\entity.cpp
+	"entity.h"
+	"component.h"
+	"system.h"
+	<stdlib.h>
+
+1439534818 e:\stuff\2dgame\trunk\2dgame\entity.h
+	<map>
+
+1439534820 e:\stuff\2dgame\trunk\2dgame\system.h
+	<vector>
+
+1439541430 source:e:\stuff\2dgame\trunk\2dgame\filereader.cpp
+	"fileReader.h"
+	<iostream>
+
+1439539912 e:\stuff\2dgame\trunk\2dgame\filereader.h
+	<string>
+	<vector>
+	<fstream>
+
+1439534818 source:e:\stuff\2dgame\trunk\2dgame\globals.cpp
+	"globals.h"
+
+1439534818 e:\stuff\2dgame\trunk\2dgame\globals.h
+	<map>
+	"entity.h"
+	"component.h"
+	"system.h"
+
+1439534820 source:e:\stuff\2dgame\trunk\2dgame\system.cpp
+	"system.h"
+	"entity.h"
+	"globals.h"
+	<map>
+	<iostream>
+
+1439534820 source:e:\stuff\2dgame\trunk\2dgame\testcomponent.cpp
+	"testComponent.h"
+
+1439534820 e:\stuff\2dgame\trunk\2dgame\testcomponent.h
+	"component.h"
+
+1439541494 source:e:\stuff\2dgame\trunk\2dgame\testsystem.cpp
+	"testSystem.h"
+	"globals.h"
+	<iostream>
+	"testComponent.h"
+
+1439534820 e:\stuff\2dgame\trunk\2dgame\testsystem.h
+	"system.h"
+
+1439536304 source:e:\stuff\2dgame\trunk\2dgame\load&store.cpp
+	"load&store.h"
+	<iostream>
+
+1439536300 e:\stuff\2dgame\trunk\2dgame\load&store.h
+	<map>
+	<string>
+	<iostream>
+	"fileReader.h"
+
+1439537180 source:e:\stuff\2dgame\trunk\2dgame\loader.cpp
+	"loader.h"
+
+1439538180 e:\stuff\2dgame\trunk\2dgame\loader.h
+	<map>
+	<string>
+	<iostream>
+	"fileReader.h"
+	"store.h"
+
+1439536988 e:\stuff\2dgame\trunk\2dgame\store.h
+	<string>
+
+1439539202 source:e:\stuff\2dgame\trunk\2dgame\main.cpp
+	"main.h"
+	"globals.h"
+	"entity.h"
+	"component.h"
+	"system.h"
+	"store.h"
+	"loader.h"
+	"testSystem.h"
+	"testComponent.h"
+	"sceneStore.h"
+	<iostream>
+
+1439534820 e:\stuff\2dgame\trunk\2dgame\main.h
+
+1439536462 e:\stuff\2dgame\trunk\2dgame\scenestore.h
+	"fileReader.h"
+	"store.h"
+
+1439535604 source:e:\stuff\2dgame\trunk\2dgame\scenestore.cpp
+	"sceneStore.h"
+
+1439537008 source:e:\stuff\2dgame\trunk\2dgame\store.cpp
+	"store.h"
+
+1439540644 source:e:\stuff\2dgame\trunk\2dgame\texturestore.cpp
+	"textureStore.h"
+
+1439539642 e:\stuff\2dgame\trunk\2dgame\texturestore.h
+	"fileReader.h"
+	"store.h"
+

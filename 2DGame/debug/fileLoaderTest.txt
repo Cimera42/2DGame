@@ -1,0 +1,10 @@
+Data "chunk"
+{
+property1: value1, value2;
+property2: value2, value4, value1;
+}
+
+Data "chunk2"
+{
+property1: value,a;
+}

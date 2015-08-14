@@ -111,7 +111,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
             if(optionalToken)
             {
                 int extractPos1 = block.find_first_of('"', currentPos)-currentPos;
-                int extractPos2 = block.find_first_of('{', currentPos)-currentPos;
+                //int extractPos2 = block.find_first_of('{', currentPos)-currentPos;
                 //first do the "
                 std::string optionalTokenStr = block.substr(currentPos, extractPos1);
                 if(!checkToken(optionalTokenStr))
@@ -137,7 +137,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
         if(i == 2)
         {
             //break the properties section
-            int first = currentPos;
+            //int first = currentPos;
             int last = block.find_first_of('}', currentPos);
             while(currentPos < last)//loop through all the properties
             {

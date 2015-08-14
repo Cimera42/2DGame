@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="2DGame" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/2DGame" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wfatal-errors" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add directory="../libraries/include" />
+				</Compiler>
+				<Linker>
+					<Add library="..\libraries\shared\lib\libglew32.dll.a" />
+					<Add library="..\libraries\shared\lib\glfw3dll.a" />
+					<Add library="..\libraries\shared\lib\libSOIL.a" />
+					<Add library="..\libraries\shared\lib\libassimp.dll.a" />
+					<Add library="glu32" />
+					<Add library="opengl32" />
+					<Add library="gdi32" />
+					<Add library="comdlg32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/2DGame" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-Os" />
+					<Add option="-O3" />
+					<Add option="-O2" />
+					<Add option="-O1" />
+					<Add option="-O" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="component.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="component.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="entity.cpp">
+			<Option virtualFolder="Entity/" />
+		</Unit>
+		<Unit filename="entity.h">
+			<Option virtualFolder="Entity/" />
+		</Unit>
+		<Unit filename="fileReader.cpp">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="fileReader.h">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="globals.cpp">
+			<Option virtualFolder="Global/" />
+		</Unit>
+		<Unit filename="globals.h">
+			<Option virtualFolder="Global/" />
+		</Unit>
+		<Unit filename="loader.cpp">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="loader.h">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
+		<Unit filename="sceneStore.cpp">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="sceneStore.h">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="store.cpp">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="store.h">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="system.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="system.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="testComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="testComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="testSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="testSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="textureStore.cpp">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="textureStore.h">
+			<Option virtualFolder="Store/" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

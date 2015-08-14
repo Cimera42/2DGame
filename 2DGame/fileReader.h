@@ -47,7 +47,4 @@ private:
 
 };
 
-
-
-
 #endif // FILEREADER_H_INCLUDED

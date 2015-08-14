@@ -3,14 +3,26 @@
 #include "entity.h"
 #include "component.h"
 #include "system.h"
+#include "store.h"
+#include "loader.h"
 
 #include "testSystem.h"
 #include "testComponent.h"
+#include "sceneStore.h"
 
 #include <iostream>
 
 int main()
 {
+    //File loading TEST
+    SceneStore * scene;
+    if(Load<SceneStore>::Object(&scene, "debug/fileLoaderTest.txt"))
+    {
+        std::cout<<"Test Chunks: "<<scene->amountOfElements<<std::endl;
+        std::cout<<scene->sceneBlock->elements[1]->properties[0]->values[0]<<"\n"<<std::endl;
+    }
+
+    //ECS TEST
     System * sys = new System();
     systems[System::getStaticID()] = sys;
     System * testSys = new TestSystem();
