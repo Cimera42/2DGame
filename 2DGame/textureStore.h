@@ -3,6 +3,7 @@
 
 #include "fileReader.h"
 #include "store.h"
+#include "openglBits.h"
 
 class TextureStore : public Store
 {
@@ -11,7 +12,7 @@ public:
     ~TextureStore(){};
 
     DataBlock* textureBlock;
-    //GLuint textureID;
+    GLuint textureID;
 };
 
 #endif // TEXTURESTORE_H_INCLUDED

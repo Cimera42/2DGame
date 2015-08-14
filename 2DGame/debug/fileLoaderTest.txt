@@ -4,7 +4,8 @@ property1: value1, value2;
 property2: value2, value4, value1;
 }
 
-Data "chunk2"
+Texture "whatever"
 {
-property1: value,a;
+filename: hello.png;
+srgb: true;
 }

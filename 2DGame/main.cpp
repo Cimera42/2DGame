@@ -9,17 +9,18 @@
 #include "testSystem.h"
 #include "testComponent.h"
 #include "sceneStore.h"
+#include "textureStore.h"
 
 #include <iostream>
+#include <fstream>
 
 int main()
 {
     //File loading TEST
-    SceneStore * scene;
-    if(Load<SceneStore>::Object(&scene, "debug/fileLoaderTest.txt"))
+    TextureStore * scene;
+    if(Load<TextureStore>::Object(&scene, "debug/fileLoaderTest.txt"))
     {
-        std::cout<<"Test Chunks: "<<scene->amountOfElements<<std::endl;
-        std::cout<<scene->sceneBlock->elements[1]->properties[0]->values[0]<<"\n"<<std::endl;
+        std::cout<<scene->textureBlock->elements[1]->properties[0]->values[0]<<"\n"<<std::endl;
     }
 
     //ECS TEST

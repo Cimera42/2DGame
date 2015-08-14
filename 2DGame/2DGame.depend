@@ -16,7 +16,7 @@
 1439534820 e:\stuff\2dgame\trunk\2dgame\system.h
 	<vector>
 
-1439541430 source:e:\stuff\2dgame\trunk\2dgame\filereader.cpp
+1439553982 source:e:\stuff\2dgame\trunk\2dgame\filereader.cpp
 	"fileReader.h"
 	<iostream>
 
@@ -69,17 +69,18 @@
 1439537180 source:e:\stuff\2dgame\trunk\2dgame\loader.cpp
 	"loader.h"
 
-1439538180 e:\stuff\2dgame\trunk\2dgame\loader.h
+1439553984 e:\stuff\2dgame\trunk\2dgame\loader.h
 	<map>
 	<string>
 	<iostream>
 	"fileReader.h"
 	"store.h"
 
-1439536988 e:\stuff\2dgame\trunk\2dgame\store.h
+1439554032 e:\stuff\2dgame\trunk\2dgame\store.h
 	<string>
+	<iostream>
 
-1439539202 source:e:\stuff\2dgame\trunk\2dgame\main.cpp
+1439556744 source:e:\stuff\2dgame\trunk\2dgame\main.cpp
 	"main.h"
 	"globals.h"
 	"entity.h"
@@ -90,7 +91,9 @@
 	"testSystem.h"
 	"testComponent.h"
 	"sceneStore.h"
+	"textureStore.h"
 	<iostream>
+	<fstream>
 
 1439534820 e:\stuff\2dgame\trunk\2dgame\main.h
 
@@ -104,10 +107,58 @@
 1439537008 source:e:\stuff\2dgame\trunk\2dgame\store.cpp
 	"store.h"
 
-1439540644 source:e:\stuff\2dgame\trunk\2dgame\texturestore.cpp
+1439557184 source:e:\stuff\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
+	"loadTexture.h"
 
-1439539642 e:\stuff\2dgame\trunk\2dgame\texturestore.h
+1439555758 e:\stuff\2dgame\trunk\2dgame\texturestore.h
 	"fileReader.h"
 	"store.h"
+	"openglBits.h"
+
+1439555674 source:e:\stuff\2dgame\trunk\2dgame\loadtexture.cpp
+	"loadTexture.h"
+
+1439555260 e:\stuff\2dgame\trunk\2dgame\loadtexture.h
+	"openglBits.h"
+	<SOIL.h>
+	<iostream>
+	<vector>
+
+1439555450 e:\stuff\2dgame\trunk\2dgame\openglbits.h
+	"glew.h"
+	<GLFW/glfw3.h>
+
+1374444682 e:\stuff\2dgame\trunk\2dgame\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1432891030 e:\stuff\2dgame\trunk\libraries\include\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl3ext.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl3.h>
+	<GLES3/gl2ext.h>
+	<GLES3/gl31.h>
+	<GLES3/gl2ext.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<GL/glu.h>
+
+1417956600 e:\stuff\2dgame\trunk\libraries\include\soil.h
+
+1439555412 source:e:\stuff\2dgame\trunk\2dgame\openglbits.cpp
+	"openglBits.h"
+	<iostream>
 

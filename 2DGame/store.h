@@ -2,6 +2,7 @@
 #define STORE_H_INCLUDED
 
 #include <string>
+#include <iostream>
 
 //Holds the base object class
 class Store
