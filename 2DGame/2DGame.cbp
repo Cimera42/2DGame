@@ -76,10 +76,10 @@
 		<Unit filename="globals.h">
 			<Option virtualFolder="Global/" />
 		</Unit>
-		<Unit filename="loadTexture.cpp">
+		<Unit filename="loadShader.cpp">
 			<Option virtualFolder="Loading/" />
 		</Unit>
-		<Unit filename="loadTexture.h">
+		<Unit filename="loadShader.h">
 			<Option virtualFolder="Loading/" />
 		</Unit>
 		<Unit filename="loader.cpp">
@@ -90,14 +90,28 @@
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
-		<Unit filename="openglBits.cpp" />
-		<Unit filename="openglBits.h" />
+		<Unit filename="openGLFunctions.cpp" />
+		<Unit filename="openGLFunctions.h" />
+		<Unit filename="render2DComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="render2DComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="render2DSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="render2DSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
 		<Unit filename="sceneStore.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>
 		<Unit filename="sceneStore.h">
 			<Option virtualFolder="Store/" />
 		</Unit>
+		<Unit filename="shaders/frag.frag" />
+		<Unit filename="shaders/vert.vert" />
 		<Unit filename="store.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>
@@ -127,6 +141,24 @@
 		</Unit>
 		<Unit filename="textureStore.h">
 			<Option virtualFolder="Store/" />
+		</Unit>
+		<Unit filename="windowComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="windowComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="windowSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="windowSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="worldComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="worldComponent.h">
+			<Option virtualFolder="Component/" />
 		</Unit>
 		<Extensions>
 			<envvars />

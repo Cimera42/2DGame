@@ -10,7 +10,14 @@ Entity::Entity()
     //Give entity unique id
     entityID = globalEntityIncrementorID++;
 }
-Entity::~Entity(){}
+Entity::~Entity()
+{
+    for(std::map<ComponentID, Component*>::iterator componentPair = components.begin(); componentPair != components.end(); ++componentPair)
+    {
+        delete componentPair->second;
+        components.erase(componentPair->first);
+    }
+}
 
 EntityID Entity::getID()
 {
@@ -72,6 +79,8 @@ bool Entity::deleteComponent(ComponentID compID)
     //Check if component exists
     if(hasComponent(compID))
     {
+        //Unsubscribe to systems
+        unsubscribeToSystems(this, compID);
         //Delete object
         delete components[compID];
         //Remove empty pointer from list of components

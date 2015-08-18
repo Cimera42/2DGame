@@ -8,11 +8,13 @@
 #include "component.h"
 #include "system.h"
 
-typedef int SystemID;
+extern bool shouldExit;
 
 extern std::map<SystemID, System*> systems;
 extern std::map<EntityID, Entity*> entities;
 
 void addEntity(Entity*);
+void deleteEntities();
+void deleteSystems();
 
 #endif // GLOBALS_H_INCLUDED

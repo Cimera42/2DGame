@@ -1,5 +1,6 @@
-#include "openglBits.h"
+#include "openGLFunctions.h"
 #include <iostream>
+#include <stdlib.h>
 
 GLenum currentState;
 void glSetActiveTexture(GLenum state) //Handler to stop redundant glActiveTexture calls, hopefully speed up frames.
@@ -69,17 +70,19 @@ void initGL()
     {
         std::cout<<"GLEW failed to load"<<std::endl;
     }
-    std::cout << "OpenGL " << glGetString(GL_VERSION) << ", GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    else
+    {
+        std::cout<<"GLEW loaded"<<std::endl;
+        std::cout << "OpenGL " << glGetString(GL_VERSION) << ", GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
-    //Sets up common OpenGL Functions
-    glEnable(GL_MULTISAMPLE);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_PROGRAM_POINT_SIZE);
-    //glEnable(GL_LINE_SMOOTH);
-    glLineWidth(1);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    /*glShadeModel(GL_FLAT);
-    glProvokingVertex(GL_FIRST_VERTEX_CONVENTION);*/
+        //Sets up common OpenGL Functions
+        //glEnable(GL_MULTISAMPLE);
+        //glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_CULL_FACE);
+        //glEnable(GL_PROGRAM_POINT_SIZE);
+        //glEnable(GL_LINE_SMOOTH);
+        //glLineWidth(1);
+        //glEnable(GL_BLEND);
+        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
 }

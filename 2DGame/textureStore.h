@@ -3,7 +3,7 @@
 
 #include "fileReader.h"
 #include "store.h"
-#include "openglBits.h"
+#include "openGLFunctions.h"
 
 class TextureStore : public Store
 {

@@ -29,13 +29,16 @@ class System
         std::vector<EntityID> subscribedEntities;
         bool checkComponent(ComponentID);
         bool checkEntityComponents(Entity*);
-        bool checkEntityAlreadySubscribed(EntityID);
+        int checkEntityAlreadySubscribed(EntityID);
         bool subscribe(Entity*, ComponentID);
+        bool unsubscribe(Entity*, ComponentID);
 
         virtual void update();
 };
 
 //Attempt to subscribe entity to all systems
 void subscribeToSystems(Entity*, ComponentID);
+//Attempt to unsubscribe entity to all systems
+void unsubscribeToSystems(Entity*, ComponentID);
 
 #endif // SYSTEM_H_INCLUDED

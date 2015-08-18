@@ -1,7 +1,7 @@
 #ifndef LOADTEXTURE_H_INCLUDED
 #define LOADTEXTURE_H_INCLUDED
 
-#include "openglBits.h"
+#include "openGLFunctions.h"
 #include <SOIL.h>
 #include <iostream>
 #include <vector>

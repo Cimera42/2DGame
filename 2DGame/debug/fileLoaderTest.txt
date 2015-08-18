@@ -1,7 +1,7 @@
-Data "chunk"
+Data "window"
 {
-property1: value1, value2;
-property2: value2, value4, value1;
+bgColour: 0.55, 0.65, 0.7;
+windowSize: 800, 450;
 }
 
 Texture "whatever"

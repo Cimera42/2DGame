@@ -35,14 +35,14 @@ bool System::checkEntityComponents(Entity* inEntity)
 }
 
 //Check if entity is already subscribed to system
-bool System::checkEntityAlreadySubscribed(EntityID inEntID)
+int System::checkEntityAlreadySubscribed(EntityID inEntID)
 {
     for(int i = 0; i < subscribedEntities.size(); i++)
     {
         if(subscribedEntities[i] == inEntID)
-            return true;
+            return i;
     }
-    return false;
+    return -1;
 }
 
 bool System::subscribe(Entity* inEntity, ComponentID newCompID)
@@ -51,7 +51,7 @@ bool System::subscribe(Entity* inEntity, ComponentID newCompID)
     if(checkComponent(newCompID))
     {
         //Check if entity is already subscribed to system
-        if(!checkEntityAlreadySubscribed(inEntity->entityID))
+        if(checkEntityAlreadySubscribed(inEntity->entityID) == -1)
         {
             //Check entity has all required components
             if(checkEntityComponents(inEntity))
@@ -67,6 +67,22 @@ bool System::subscribe(Entity* inEntity, ComponentID newCompID)
     return false;
 }
 
+bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
+{
+    //Check if newly removed component is in list
+    if(checkComponent(oldCompID))
+    {
+        //Check if entity is already subscribed to system
+        int subID = checkEntityAlreadySubscribed(inEntity->entityID);
+        if(subID != -1)
+        {
+            subscribedEntities.erase(subscribedEntities.begin() + subID);
+            return true;
+        }
+    }
+    return false;
+}
+
 //Attempt to subscribe entity to all systems
 void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
 {
@@ -76,5 +92,17 @@ void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
         System* system = systemPair->second;
 
         system->subscribe(inEntity, newCompID);
+    }
+}
+
+//Attempt to subscribe entity to all systems
+void unsubscribeToSystems(Entity* inEntity, ComponentID oldCompID)
+{
+    //Attempt to subscribe entity to all systems
+    for(std::map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
+    {
+        System* system = systemPair->second;
+
+        system->unsubscribe(inEntity, oldCompID);
     }
 }
