@@ -7,11 +7,11 @@
 class SceneStore : public Store
 {
 public:
-    SceneStore(std::string);
+    SceneStore();//Default values set
     ~SceneStore(){};
+    void loadStore(std::string); //Load the actual data on a new thread
 
     DataBlock* sceneBlock;
-    int amountOfElements;
 };
 
 #endif // SCENESTORE_H_INCLUDED

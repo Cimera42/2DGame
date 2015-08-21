@@ -1,0 +1,5 @@
+Texture "whatever"
+{
+filename: hello.png;
+srgb: true;
+}

@@ -10,8 +10,9 @@ class Store
     template <class T> friend class Load;
     template <class T> friend class Unload;
 public:
-    Store();
+    Store(); ///Set the default values
     virtual ~Store();
+    virtual void loadStore(std::string); ///Load the actual data on a new thread
 
 protected:
     //Prevent usage outside of the class, subclass and friends

@@ -201,7 +201,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
         }
         if(i == 3)
         {
-            if(currentPos >= block.size())
+            if(currentPos >= (int) block.size())
                 continue;
             else
             {
@@ -220,7 +220,7 @@ std::string File::omitComments(std::string input)
     {
         //check if comment exists
         int commentPos = input.find("/*");
-        if(commentPos != std::string::npos)
+        if(commentPos != (int) std::string::npos)
         {
             output += input.substr(0, commentPos);
             currentlyCommenting = true;
@@ -234,7 +234,7 @@ std::string File::omitComments(std::string input)
     {
         //if we're in the middle of a comment, find the end or omit whole word
         int commentPos = input.find("*/");
-        if(commentPos != std::string::npos)
+        if(commentPos != (int) std::string::npos)
         {
             output += input.substr(commentPos+2,input.size());
             currentlyCommenting = false;
@@ -260,7 +260,7 @@ DataBlock* File::readFromFile(std::string name)
             //Do a check to determine if comments exist and get rid of them.
             word = omitComments(word);
             //Append word to blocks
-            if(block.size()+word.size() > maxSize)
+            if((int)(block.size()+word.size()) > maxSize)
             {
                 std::cout<<"STRING IS FULL - HOW?!?!!"<<std::endl;
                 break;
@@ -284,4 +284,63 @@ DataBlock* File::readFromFile(std::string name)
     success = false;
     std::cout<<"Something went wrong when attempting to read from file: "<<fileName<<std::endl;
     return nullptr;
+}
+
+
+///DataBlock reading function
+
+bool DataBlock::getNextElement()
+{
+    //FOR SOME REASON -1 > 2-1... what
+    //vector.size is an unsigned int
+    //comparison between signed and unsigned
+    //convertes signed to unsigned
+    if(elementIndex < (int) elements.size()-1) //Get next element if we can
+    {
+        propertyIndex = -1;
+        elementIndex++;
+        return true;
+    }
+    else if (elementIndex == (int) elements.size()-1) //Reset index if we reach max
+    {
+        elementIndex = -1;
+        return false;
+    }
+    return false;
+}
+
+bool DataBlock::checkCurrentElement(std::string elementNameT)
+{
+    if(elements[elementIndex]->elementName == elementNameT) //checks the input to the element
+        return true;
+    return false;
+}
+
+bool DataBlock::getNextProperty()
+{
+    if(elementIndex == -1)
+        return false;
+    if(propertyIndex < (int) elements[elementIndex]->properties.size()-1) //Get next property if we can
+    {
+        propertyIndex++;
+        return true;
+    }
+    return false;
+}
+
+bool DataBlock::checkCurrentProperty(std::string propertyNameT)
+{
+    if(elements[elementIndex]->properties[propertyIndex]->propertyName == propertyNameT) //checks the input to the property
+        return true;
+    return false;
+}
+
+void DataBlock::resetElementIndex()
+{
+    elementIndex = -1;
+}
+
+void DataBlock::resetPropertyIndex()
+{
+    propertyIndex = -1;
 }

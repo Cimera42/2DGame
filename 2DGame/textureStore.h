@@ -8,10 +8,16 @@
 class TextureStore : public Store
 {
 public:
-    TextureStore(std::string);
+    TextureStore();
     ~TextureStore(){};
+    void loadStore(std::string);
 
+    //Extracted
     DataBlock* textureBlock;
+    std::string textureFile;
+    bool srgb;
+
+    //Loaded
     GLuint textureID;
 };
 

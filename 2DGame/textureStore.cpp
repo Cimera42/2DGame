@@ -1,61 +1,48 @@
 #include "textureStore.h"
 #include "loadTexture.h"
 
-bool stringToBool(std::string const& s) {
-    if(s == "1" || s == "true")
-        return true;
-    return false;
-}
-
-///TextureStore is an example to show how weird and difficult it may be to load file properties...
-TextureStore::TextureStore(std::string name)
+///TextureStore allows us to store the actual textures from files!
+void TextureStore::loadStore(std::string name)
 {
-    //load the actual texture - todo
-
     //Read file
     File readFile;
     textureBlock = readFile.readFromFile(name);
     if(readFile.success)
     {
-        //extract the element(s) from the file.
-        for(int i = 0; i < textureBlock->elements.size(); i++)
+        if(textureBlock->getNextElement()) //Changed to if for only the one texture.
         {
-            if(textureBlock->elements[i]->elementName == "Texture") //Checks that the element is a texture. Aka. ignore all non textures in file, which shouldnt exist anyway.
+            if(textureBlock->checkCurrentElement("Texture"))
             {
-                //hate not being able to use the values immediately. basically the same issue as we had with loading...
-                std::string textureFile = "";
-                bool srgb = false;
-                //HOW TO EXTRACT PROPERTIES SO THERE IS KINDA SOME FORM OF ERROR CHECKING + FASTISH
-                for(int j = 0; j < textureBlock->elements[i]->properties.size(); j++)
+                while(textureBlock->getNextProperty())
                 {
-                    if(textureBlock->elements[i]->properties[j]->propertyName == "filename")
-                    {
-                        //Handle settings here rather than inside the loadTexture???
-                        textureFile = textureBlock->elements[i]->properties[j]->values[0]; //assume only 1 data value??? or what.
-                    }
-                    else if(textureBlock->elements[i]->properties[j]->propertyName == "srgb")
-                    {
-                        srgb = stringToBool(textureBlock->elements[i]->properties[j]->values[0]); //convert to bool
-                    }
+                    if(textureBlock->checkCurrentProperty("filename"))
+                        textureFile = textureBlock->getCurrentValue<std::string>();
+                    else if(textureBlock->checkCurrentProperty("srgb"))
+                        srgb = textureBlock->getCurrentValue<bool>();
                     else
-                    {
                         std::cout<<"Innapropriate texture property in: "<<readFile.fileName<<std::endl;
-                    }
                 }
                 if (textureFile != "") //After we've loaded all properties for the texture element, we can actually load the texture!...
                 {
-                    textureID = load2DTexture(textureFile, stringToBool);
+                    textureID = load2DTexture(textureFile, srgb); //Load the actual texture we store
+                    if(textureID != 0)
+                        correctlyLoaded = true;
                 }
             }
-            else
-            {
-                std::cout<<"Innapropriate texture element in: "<<readFile.fileName<<std::endl;
-            }
         }
-        correctlyLoaded = true;
     }
+}
 
-    //possibly load a file containing texture parameters (via. load) and then use that datablock to load
-    //a new texture with properties (srgb, height/widths/ mipmaps/ whatever).
-    //correctlyLoaded = true;
+TextureStore::TextureStore()
+{
+    //This store deals with only extracting 1 texture from 1 file.
+    /* TODO:
+    - multiple textures - texturepackStore? - this will evoke many textureStores which can be used to preload data (or pass pointers around I guess)
+    - fix this up to only contain 1 texture & make property loading less dodgy
+    */
+
+    //Default values
+    textureID = 0;
+    srgb = false;
+    textureFile = "";
 }

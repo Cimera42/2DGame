@@ -20,6 +20,7 @@
 #include <iostream>
 #include "fileReader.h"
 #include "store.h"
+#include <pthread.h>
 
 extern std::map<std::string, Store*> internalMap;
 
@@ -28,15 +29,30 @@ extern std::map<std::string, Store*> internalMap;
 template <class T>
 class Load
 {
+private:
+    static void *threadedLoad(void*);
 public:
     //scene
     static bool Object(T** returnLoc, std::string s);//objects
 };
 
-//IMPLEMENTATION - needs to be moved and the acceptable classes controlled in .cpp
 template <class T>
-bool Load<T>::Object(T** returnLoc, std::string s)
+class LoadJoin //Class to allow for paramter transfer to thread
 {
+public:
+    T** returnLoc;
+    std::string s;
+};
+
+template <class T>
+void* Load<T>::threadedLoad(void* inptr)
+{
+    LoadJoin<T> inParam;
+    inParam = *((LoadJoin<T>*) inptr);
+    std::string s = inParam.s;
+    std::cout << s <<" In Load"<< std::endl;
+    T** returnLoc = inParam.returnLoc;
+
     //Loading is controlled by the string
     std::map<std::string, Store*>::iterator it = internalMap.find(s); //see if the object already exists
     if(it != internalMap.end())
@@ -46,28 +62,32 @@ bool Load<T>::Object(T** returnLoc, std::string s)
         {
             //if the name matches (which it should unless its been altered, use this
             it->second->usageCount += 1;
+            //use this and return
             *returnLoc = static_cast<T*>(it->second);
-            return true;
+            return NULL; //true;
         }
         else
         {
             //Name mismatch: Give error
-            std::cout<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr. \n"<<std::endl; //cannot guarentee safety of the pointer.
+            std::cout<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr. \n \n"; //cannot guarentee safety of the pointer.
+            //use default and return
             *returnLoc = nullptr;
-            return false;
+            return NULL; //false;
         }
     }
     else
     {
         //if it doesnt exist, create it
-        T* create = new T(s);
+        T* create = new T();
+        create->loadStore(s);
         if(create->correctlyLoaded)
         {
             //check loading process succeded
             internalMap.insert(std::pair<std::string, Store*>(s, create));
             create->internalName = s;
+            //overide and delete and return
             *returnLoc = create;
-            return true;
+            return NULL; //true;
         }
         else
         {
@@ -75,11 +95,37 @@ bool Load<T>::Object(T** returnLoc, std::string s)
             delete create;
             //set returnLoc to point to default or just nullptr it?
             //Loading incomplete: Give error
-            std::cout<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n"<<std::endl; //Loading a new object hasnt worked - report it
+            std::cout<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n \n"; //Loading a new object hasnt worked - report it
+            //use default and delete the new threaded one etc etc and return
             *returnLoc = nullptr;
-            return false;
+            return NULL; //false;
         }
     }
+}
+
+#include <GLFW/glfw3.h>
+//IMPLEMENTATION - needs to be moved and the acceptable classes controlled in .cpp
+template <class T>
+bool Load<T>::Object(T** returnLoc, std::string s)
+{
+    //Create a new instance of the store
+    T * create = new T();
+    create->loadStore(s); //REMOVE IF 2ND THREAD
+    create->internalName = s; //REMOVE IF 2ND THREAD
+    *returnLoc = create;
+
+    //Create paramters to send to secondary thread
+    LoadJoin<T> param;
+    param.returnLoc = returnLoc;
+    param.s = s;
+
+    //IF 2ND THREAD, REMOVE COMMENTS
+    //Create a thread which does loading, and in the meantime - return the created instance of the store.
+    //pthread_t thread;
+    //pthread_create(&thread, NULL, threadedLoad, (void*) &param);
+    //pthread_join(thread, NULL);
+
+    return true;
 }
 
 template <typename T>
@@ -121,7 +167,7 @@ bool Unload<T>::Object(T** deletePtr)
         *deletePtr = nullptr;
         return true;
     }
-    std::cout<<"Unload Error: Cannot locate object. Returning nullptr. \n"<<std::endl;
+    std::cout<<"Unload Error: Cannot locate object. Returning nullptr. \n \n";
     *deletePtr = nullptr;
     return false;
 }

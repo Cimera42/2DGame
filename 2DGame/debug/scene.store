@@ -1,0 +1,10 @@
+Entity
+{
+window: debug/window.cfg;
+}
+
+Entity2
+{
+world: 0,0;
+render2d: file;
+}

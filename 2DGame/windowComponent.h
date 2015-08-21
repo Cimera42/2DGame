@@ -1,8 +1,11 @@
 #ifndef WINDOWCOMPONENT_H_INCLUDED
 #define WINDOWCOMPONENT_H_INCLUDED
 
+#include <string>
 #include "component.h"
+#include "fileReader.h"
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class WindowComponent : public Component
 {
@@ -10,12 +13,15 @@ class WindowComponent : public Component
         static ComponentID ID;
 
     public:
-        WindowComponent(char*, int, int);
+        WindowComponent(std::string fileName);
         virtual ~WindowComponent();
 
         //Values set
-        char* windowTitle;
-        int windowWidth, windowHeight;
+        std::string windowTitle;
+        glm::vec2 windowSize;
+        bool modeWindowed = true;
+        bool modeFullscreen = false;
+        bool modeBorderless = false;
 
         //Values generated
         float windowAspect;

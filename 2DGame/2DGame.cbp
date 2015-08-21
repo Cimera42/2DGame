@@ -28,6 +28,7 @@
 					<Add library="opengl32" />
 					<Add library="gdi32" />
 					<Add library="comdlg32" />
+					<Add library="..\libraries\shared\lib\libpthreadGC2.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -80,6 +81,12 @@
 			<Option virtualFolder="Loading/" />
 		</Unit>
 		<Unit filename="loadShader.h">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="loadTexture.cpp">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="loadTexture.h">
 			<Option virtualFolder="Loading/" />
 		</Unit>
 		<Unit filename="loader.cpp">
@@ -142,6 +149,8 @@
 		<Unit filename="textureStore.h">
 			<Option virtualFolder="Store/" />
 		</Unit>
+		<Unit filename="typeConversion.cpp" />
+		<Unit filename="typeConversion.h" />
 		<Unit filename="windowComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>
