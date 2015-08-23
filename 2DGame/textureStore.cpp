@@ -4,6 +4,20 @@
 #include <pthread.h>
 
 ///TextureStore allows us to store the actual textures from files!
+TextureStore::TextureStore()
+{
+    //This store deals with only extracting 1 texture from 1 file.
+    /* TODO:
+    - multiple textures - texturepackStore? - this will evoke many textureStores which can be used to preload data (or pass pointers around I guess)
+    - fix this up to only contain 1 texture & make property loading less dodgy
+    */
+
+    //Default values
+    textureID = 0;
+    srgb = false;
+    textureFile = "";
+}
+
 void TextureStore::loadStore(std::string name)
 {
     //Read file
@@ -18,7 +32,7 @@ void TextureStore::loadStore(std::string name)
                 while(textureBlock->getNextProperty())
                 {
                     if(textureBlock->checkCurrentProperty("filename"))
-                        textureFile = textureBlock->getCurrentValue<std::string>();
+                        textureFile = readFile.fileDirectory+textureBlock->getCurrentValue<std::string>();
                     else if(textureBlock->checkCurrentProperty("srgb"))
                         srgb = textureBlock->getCurrentValue<bool>();
                     else
@@ -49,16 +63,3 @@ void TextureStore::loadStore(std::string name)
     }
 }
 
-TextureStore::TextureStore()
-{
-    //This store deals with only extracting 1 texture from 1 file.
-    /* TODO:
-    - multiple textures - texturepackStore? - this will evoke many textureStores which can be used to preload data (or pass pointers around I guess)
-    - fix this up to only contain 1 texture & make property loading less dodgy
-    */
-
-    //Default values
-    textureID = 0;
-    srgb = false;
-    textureFile = "";
-}

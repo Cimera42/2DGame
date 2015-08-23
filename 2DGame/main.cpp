@@ -41,11 +41,6 @@ int main()
     SceneStore * scene;
     if(Load<SceneStore>::Object(&scene, "debug/scene.store"))
     {
-        Entity * testEnt = new Entity();
-        addEntity(testEnt);
-        testEnt->addComponent(new WorldComponent(glm::vec2(0.0f,0.0f)));
-        testEnt->addComponent(new Render2DComponent(1,1));
-
         glClearColor(0.55f,0.65f,0.7f,1.0f);
         while(!shouldExit)
         {

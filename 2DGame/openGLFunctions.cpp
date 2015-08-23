@@ -83,6 +83,7 @@ bool initGLFW()
     glfwSetErrorCallback(errCallback);
 
     mainWindow = new WindowComponent("debug/window.cfg");
+    glfwMakeContextCurrent(mainWindow->glfwWindow);
 
     return true;
 }

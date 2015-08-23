@@ -182,7 +182,7 @@
 
 1439534818 f:\stuff\2dgame\trunk\2dgame\component.h
 
-1439962240 source:f:\stuff\2dgame\trunk\2dgame\entity.cpp
+1440166576 source:f:\stuff\2dgame\trunk\2dgame\entity.cpp
 	"entity.h"
 	"component.h"
 	"system.h"
@@ -194,18 +194,19 @@
 1439962248 f:\stuff\2dgame\trunk\2dgame\system.h
 	<vector>
 
-1439947838 source:f:\stuff\2dgame\trunk\2dgame\filereader.cpp
+1440233708 source:f:\stuff\2dgame\trunk\2dgame\filereader.cpp
 	"fileReader.h"
 	<iostream>
+	<algorithm>
 
-1439983380 f:\stuff\2dgame\trunk\2dgame\filereader.h
+1440232792 f:\stuff\2dgame\trunk\2dgame\filereader.h
 	<string>
 	<vector>
 	<fstream>
 	<glm/glm.hpp>
 	"typeConversion.h"
 
-1439962244 source:f:\stuff\2dgame\trunk\2dgame\globals.cpp
+1440166494 source:f:\stuff\2dgame\trunk\2dgame\globals.cpp
 	"globals.h"
 	<iostream>
 
@@ -218,23 +219,23 @@
 1439537180 source:f:\stuff\2dgame\trunk\2dgame\loader.cpp
 	"loader.h"
 
-1440158544 f:\stuff\2dgame\trunk\2dgame\loader.h
+1440333836 f:\stuff\2dgame\trunk\2dgame\loader.h
 	<map>
 	<string>
 	<iostream>
 	"fileReader.h"
 	"store.h"
+	"openGLFunctions.h"
 	<pthread.h>
-	<GLFW/glfw3.h>
 
 1440035156 f:\stuff\2dgame\trunk\2dgame\store.h
 	<string>
 	<iostream>
 
-1439555674 source:f:\stuff\2dgame\trunk\2dgame\loadtexture.cpp
+1440331848 source:f:\stuff\2dgame\trunk\2dgame\loadtexture.cpp
 	"loadTexture.h"
 
-1439962246 f:\stuff\2dgame\trunk\2dgame\loadtexture.h
+1440331848 f:\stuff\2dgame\trunk\2dgame\loadtexture.h
 	"openGLFunctions.h"
 	<SOIL.h>
 	<iostream>
@@ -273,7 +274,7 @@
 
 1417956600 f:\stuff\2dgame\trunk\libraries\include\soil.h
 
-1440158290 source:f:\stuff\2dgame\trunk\2dgame\main.cpp
+1440331848 source:f:\stuff\2dgame\trunk\2dgame\main.cpp
 	"main.h"
 	"globals.h"
 	"entity.h"
@@ -289,10 +290,10 @@
 	"render2DComponent.h"
 	"sceneStore.h"
 	"textureStore.h"
+	"textureLoadSystem.h"
 	<iostream>
 	<string>
 	<fstream>
-	<pthread.h>
 
 1439976408 f:\stuff\2dgame\trunk\2dgame\main.h
 	"windowSystem.h"
@@ -308,7 +309,7 @@
 	"fileReader.h"
 	"store.h"
 
-1440052592 f:\stuff\2dgame\trunk\2dgame\texturestore.h
+1440331848 f:\stuff\2dgame\trunk\2dgame\texturestore.h
 	"fileReader.h"
 	"store.h"
 	"openGLFunctions.h"
@@ -317,18 +318,20 @@
 	"openglBits.h"
 	<iostream>
 
-1440150296 source:f:\stuff\2dgame\trunk\2dgame\scenestore.cpp
+1440333710 source:f:\stuff\2dgame\trunk\2dgame\scenestore.cpp
 	"sceneStore.h"
 	"openGLFunctions.h"
 	"entity.h"
 	"globals.h"
 	"main.h"
 	"windowComponent.h"
+	"render2DComponent.h"
+	"worldComponent.h"
 
-1440053106 source:f:\stuff\2dgame\trunk\2dgame\store.cpp
+1440166614 source:f:\stuff\2dgame\trunk\2dgame\store.cpp
 	"store.h"
 
-1439962248 source:f:\stuff\2dgame\trunk\2dgame\system.cpp
+1440166642 source:f:\stuff\2dgame\trunk\2dgame\system.cpp
 	"system.h"
 	"entity.h"
 	"globals.h"
@@ -344,9 +347,11 @@
 	<iostream>
 	"testComponent.h"
 
-1440052600 source:f:\stuff\2dgame\trunk\2dgame\texturestore.cpp
+1440333294 source:f:\stuff\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
 	"loadTexture.h"
+	"textureLoadSystem.h"
+	<pthread.h>
 
 1439902816 f:\stuff\2dgame\trunk\2dgame\typeconversion.h
 	<string>
@@ -795,7 +800,7 @@
 	<OpenGL/glu.h>
 	<GL/glu.h>
 
-1439962246 f:\stuff\2dgame\trunk\2dgame\openglfunctions.h
+1440331848 f:\stuff\2dgame\trunk\2dgame\openglfunctions.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 
@@ -806,38 +811,40 @@
 1439962248 f:\stuff\2dgame\trunk\2dgame\windowsystem.h
 	"system.h"
 
-1439984336 f:\stuff\2dgame\trunk\2dgame\windowcomponent.h
+1440331848 f:\stuff\2dgame\trunk\2dgame\windowcomponent.h
 	<string>
 	"component.h"
 	"fileReader.h"
-	<GLFW/glfw3.h>
+	"openGLFunctions.h"
 	<glm/glm.hpp>
 
-1439962246 f:\stuff\2dgame\trunk\2dgame\render2dsystem.h
+1440331848 f:\stuff\2dgame\trunk\2dgame\render2dsystem.h
 	"system.h"
 	"render2DComponent.h"
+	"textureStore.h"
 	<GL/glew.h>
 
 1439962246 f:\stuff\2dgame\trunk\2dgame\render2dcomponent.h
 	"component.h"
 	<glm/glm.hpp>
 
-1439962246 source:f:\stuff\2dgame\trunk\2dgame\openglfunctions.cpp
+1440332638 source:f:\stuff\2dgame\trunk\2dgame\openglfunctions.cpp
 	"openGLFunctions.h"
 	<iostream>
 	<stdlib.h>
+	"windowComponent.h"
 
 1439962246 source:f:\stuff\2dgame\trunk\2dgame\render2dcomponent.cpp
 	"render2DComponent.h"
 
-1439962246 source:f:\stuff\2dgame\trunk\2dgame\render2dsystem.cpp
+1440331848 source:f:\stuff\2dgame\trunk\2dgame\render2dsystem.cpp
 	"render2DSystem.h"
 	"globals.h"
 	<iostream>
 	"worldComponent.h"
-	"render2DComponent.h"
 	"loadShader.h"
 	"openGLFunctions.h"
+	"loader.h"
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
@@ -854,16 +861,18 @@
 
 1417956538 f:\stuff\2dgame\trunk\libraries\include\glm\gtx\transform.inl
 
-1440033978 source:f:\stuff\2dgame\trunk\2dgame\windowcomponent.cpp
+1440333752 source:f:\stuff\2dgame\trunk\2dgame\windowcomponent.cpp
 	"windowComponent.h"
 	"globals.h"
+	"openGLFunctions.h"
 	<iostream>
 
-1439962248 source:f:\stuff\2dgame\trunk\2dgame\windowsystem.cpp
+1440331850 source:f:\stuff\2dgame\trunk\2dgame\windowsystem.cpp
 	"windowSystem.h"
 	"globals.h"
 	<iostream>
 	"windowComponent.h"
+	"openGLFunctions.h"
 
 1439962248 source:f:\stuff\2dgame\trunk\2dgame\worldcomponent.cpp
 	"worldComponent.h"
@@ -2113,5 +2122,16 @@
 1440305338 e:\programming\c++\projects\2dgame\trunk\2dgame\textureloadsystem.h
 	"system.h"
 	"openGLFunctions.h"
+	<pthread.h>
+
+1440331848 f:\stuff\2dgame\trunk\2dgame\textureloadsystem.h
+	"system.h"
+	"openGLFunctions.h"
+	<pthread.h>
+
+1440334028 source:f:\stuff\2dgame\trunk\2dgame\textureloadsystem.cpp
+	"textureLoadSystem.h"
+	"loadTexture.h"
+	"globals.h"
 	<pthread.h>
 

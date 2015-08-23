@@ -1,6 +1,7 @@
 #include "fileReader.h"
 
 #include <iostream>
+#include <algorithm>
 
 ///Purpose is to extract properties under a common token layout within a non-binary format
 ///These properties will be checked against a set for different loadTypes.
@@ -243,10 +244,78 @@ std::string File::omitComments(std::string input)
     return output;
 }
 
+std::string File::omitWhitespace(std::string input)
+{
+    std::string output;
+    bool startOmit = false;
+    bool omitting = false;
+    for(int i = 0; i < (int) input.length(); i++)
+    {
+        if(startOmit && !omitting) //if we're in the ":   ," region
+        {
+            //get rid of spaces until the first character that isnt one.
+            if(isspace(input[i]))
+            {
+                continue;
+            }
+            else
+            {
+                omitting = true;
+                startOmit = false;
+                output += input[i];
+                continue;
+            }
+        }
+        else if (omitting && !startOmit) //if we're in a ", :" or ", ," region
+        {
+            if(input[i] == ',')
+            {
+                omitting = false;
+                startOmit = true;
+                output += input[i];
+                continue;
+            }
+            else if (input[i] == ';')
+            {
+                omitting = false;
+                output += input[i];
+                continue;
+            }
+            else
+            {
+                output += input[i];
+                continue;
+            }
+        }
+        else if(input[i] == ':') //if we're beginning, start the process
+        {
+            startOmit = true;
+            output += input[i];
+            continue;
+        }
+        //Anything that remains we can strip spaces from
+        if(isspace(input[i]))
+        {
+            continue;
+        }
+        else
+        {
+            output += input[i];
+        }
+    }
+    return output;
+}
+
 DataBlock* File::readFromFile(std::string name)
 {
     readOrWrite = 0;
     fileName = name;
+    //Get the directory
+    int lastSlash = fileName.find_first_of("/");
+    if(lastSlash != std::string::npos)
+    {
+        fileDirectory = fileName.substr(0, lastSlash+1);
+    }
     fileStream.open(fileName.c_str(), std::fstream::in);//Tell we need to open to read
     if(fileStream.is_open()) //check if file opened
     {
@@ -255,10 +324,12 @@ DataBlock* File::readFromFile(std::string name)
         int maxSize = block.max_size();
         DataBlock* datablock = new DataBlock();
         //Add: getline - first line = header?
-        while(fileStream >> word)//get all data to remove whitespace
+        while(std::getline(fileStream, word))//get all data to remove whitespace
         {
             //Do a check to determine if comments exist and get rid of them.
             word = omitComments(word);
+            //Check for spaces except on values and get rid of them
+            word = omitWhitespace(word);
             //Append word to blocks
             if((int)(block.size()+word.size()) > maxSize)
             {

@@ -90,6 +90,7 @@ class File
 {
 public:
     std::string fileName; ///Name of the file
+    std::string fileDirectory; ///The directory of the file
     std::fstream fileStream; ///Can be used to check if the current file is being accessed (is_open()) and also used as stream itself
     bool readOrWrite; ///Read = 0, Write = 1;
     bool success = true;///Assumed true, can write otherwise if errors
@@ -103,7 +104,9 @@ private:
     bool checkToken(std::string token);///Checks whether file symbols exist inside a string
     void checkExtractPos(int* a);///Used in ReadDataBlock to determine if the extracted position is < current position
     bool currentlyCommenting = false;///Used within ommition of comments
+    bool currentlyWhitespacing = false;///Used within ommition of whitespace
     std::string omitComments(std::string input); ///Returns a string with no comments
+    std::string omitWhitespace(std::string input); ///Returns a string with only whitespace in values
 
 };
 

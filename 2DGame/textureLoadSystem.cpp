@@ -20,6 +20,6 @@ void TextureLoadSystem::update()
             TextureToLoad* texToLoad = &texturesToLoad[i];
             *texToLoad->idLoc = load2DTextureByData(texToLoad->data, texToLoad->width, texToLoad->height, texToLoad->srgb);
         }
+        texturesToLoad.clear();
     }
-    texturesToLoad.clear();
 }

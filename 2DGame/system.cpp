@@ -5,7 +5,7 @@
 #include <map>
 #include <iostream>
 
-SystemID System::systemIDIncrementor = 1;;
+SystemID System::systemIDIncrementor = 1;
 SystemID System::ID;
 
 System::System(){}

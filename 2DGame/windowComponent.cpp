@@ -40,7 +40,6 @@ WindowComponent::WindowComponent(std::string fileName)
             }
         }
     }
-    std::cout << "window size" << windowSize.x << std::endl;
 
     windowAspect = windowSize.x/windowSize.y;
 
@@ -67,13 +66,8 @@ WindowComponent::WindowComponent(std::string fileName)
     {
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
         glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, NULL);
-        if(!glfwWindow)
-        {
-            std::cout << "new window not made" << std::endl;
-        }
         glfwSetWindowPos(glfwWindow, clientWidth/2-windowSize.x/2, clientHeight/2-windowSize.y/2);
     }
-
     if(!glfwWindow)
     {
         std::cout << "Failed to create window" << std::endl;
@@ -81,7 +75,6 @@ WindowComponent::WindowComponent(std::string fileName)
     }
     else
     {
-        glfwMakeContextCurrent(glfwWindow);
         glfwSetWindowCloseCallback(glfwWindow, windowCloseEvent);
     }
 }

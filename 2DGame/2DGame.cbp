@@ -5,7 +5,7 @@
 		<Option title="2DGame" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;" />
+		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/2DGame" prefix_auto="1" extension_auto="1" />
@@ -13,6 +13,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-pedantic-errors" />
 					<Add option="-Wfatal-errors" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
@@ -95,10 +96,18 @@
 		<Unit filename="loader.h">
 			<Option virtualFolder="Loading/" />
 		</Unit>
-		<Unit filename="main.cpp" />
-		<Unit filename="main.h" />
-		<Unit filename="openGLFunctions.cpp" />
-		<Unit filename="openGLFunctions.h" />
+		<Unit filename="main.cpp">
+			<Option virtualFolder="Other/" />
+		</Unit>
+		<Unit filename="main.h">
+			<Option virtualFolder="Other/" />
+		</Unit>
+		<Unit filename="openGLFunctions.cpp">
+			<Option virtualFolder="Loading/" />
+		</Unit>
+		<Unit filename="openGLFunctions.h">
+			<Option virtualFolder="Loading/" />
+		</Unit>
 		<Unit filename="render2DComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>
@@ -117,8 +126,12 @@
 		<Unit filename="sceneStore.h">
 			<Option virtualFolder="Store/" />
 		</Unit>
-		<Unit filename="shaders/frag.frag" />
-		<Unit filename="shaders/vert.vert" />
+		<Unit filename="shaders/frag.frag">
+			<Option virtualFolder="Shaders/" />
+		</Unit>
+		<Unit filename="shaders/vert.vert">
+			<Option virtualFolder="Shaders/" />
+		</Unit>
 		<Unit filename="store.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>
@@ -155,8 +168,12 @@
 		<Unit filename="textureStore.h">
 			<Option virtualFolder="Store/" />
 		</Unit>
-		<Unit filename="typeConversion.cpp" />
-		<Unit filename="typeConversion.h" />
+		<Unit filename="typeConversion.cpp">
+			<Option virtualFolder="Other/" />
+		</Unit>
+		<Unit filename="typeConversion.h">
+			<Option virtualFolder="Other/" />
+		</Unit>
 		<Unit filename="windowComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>

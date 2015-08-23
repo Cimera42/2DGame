@@ -5,6 +5,8 @@
 #include "globals.h"
 #include "main.h"
 #include "windowComponent.h"
+#include "render2DComponent.h"
+#include "worldComponent.h"
 /**SceneStore allows us to store the entities and any global properties.
     - Evokes components on entities. Essentially the only reason this is a store is to allow for preloading of levels in the future.
 **/
@@ -31,15 +33,29 @@ void SceneStore::loadStore(std::string name)
                 {
                     if(sceneBlock->checkCurrentProperty("window"))
                     {
+                        //Window component
+                        /*std::string filename = readFile.fileDirectory+sceneBlock->getCurrentValue<std::string>();
+                        WindowComponent* win = new WindowComponent(filename);
+                        //Temporary system init???? WHERE TO PUT
+                        ent->addComponent(win);*/
                     }
                     else if(sceneBlock->checkCurrentProperty("render2d"))
-                        bool null = sceneBlock->getCurrentValue<bool>();
+                    {
+                        //Render2D component FOR NOW
+                        glm::vec2 heightWidth = sceneBlock->getCurrentValue<glm::vec2>(); //get the 2 float parameters in one FOR NOW
+                        Render2DComponent* render = new Render2DComponent(heightWidth.x, heightWidth.y);
+                        ent->addComponent(render);
+                    }
+                    else if(sceneBlock->checkCurrentProperty("world"))
+                    {
+                        //World component FOR NOW
+                        WorldComponent* world = new WorldComponent(sceneBlock->getCurrentValue<glm::vec2>());
+                        ent->addComponent(world);
+                    }
                     else
                     {
-                        std::cout << sceneBlock->getCurrentValue<std::string>() << std::endl;
                         std::cout<<"Innapropriate scene property in: "<<readFile.fileName<<std::endl;
                     }
-
                 }
             }
         }

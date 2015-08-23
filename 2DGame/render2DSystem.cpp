@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "worldComponent.h"
-#include "render2DComponent.h"
 #include "loadShader.h"
 #include "openGLFunctions.h"
 #include "loader.h"
@@ -79,14 +78,6 @@ void Render2DSystem::update()
         int bl = vertices.size()-1;
         vertices.push_back(glm::vec3(worldComp->position + render2DComp->bottomRight, 0));
         int br = vertices.size()-1;
-
-        /*vertices.push_back(glm::vec3(worldComp->position + render2DComp->topLeft,0));
-        vertices.push_back(glm::vec3(worldComp->position + render2DComp->topRight,0));
-        vertices.push_back(glm::vec3(worldComp->position + render2DComp->bottomRight,0));
-
-        vertices.push_back(glm::vec3(worldComp->position + render2DComp->topLeft,0));
-        vertices.push_back(glm::vec3(worldComp->position + render2DComp->bottomLeft,0));
-        vertices.push_back(glm::vec3(worldComp->position + render2DComp->bottomRight,0));*/
 
         uvs.push_back(glm::vec2(0,1));
         uvs.push_back(glm::vec2(1,1));

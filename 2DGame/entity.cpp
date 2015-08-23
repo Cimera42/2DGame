@@ -12,11 +12,15 @@ Entity::Entity()
 }
 Entity::~Entity()
 {
+    std::vector<ComponentID> componentToErase;
     for(std::map<ComponentID, Component*>::iterator componentPair = components.begin(); componentPair != components.end(); ++componentPair)
     {
+        //please add to list then delete.
         delete componentPair->second;
-        components.erase(componentPair->first);
+        componentToErase.push_back(componentPair->first);
     }
+    for (int i = 0; i < (int) componentToErase.size(); i++)
+        components.erase(componentToErase[i]);
 }
 
 EntityID Entity::getID()

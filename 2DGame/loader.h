@@ -54,12 +54,6 @@ void* Load<T>::threadedLoad(void* inptr)
     std::cout << s <<" In Load"<< std::endl;
     T** returnLoc = inParam.returnLoc;
 
-    float start = glfwGetTime();
-    while(glfwGetTime() < start + 5.0f)
-    {
-
-    }
-
     //Loading is controlled by the string
     std::map<std::string, Store*>::iterator it = internalMap.find(s); //see if the object already exists
     if(it != internalMap.end())
