@@ -31,16 +31,6 @@ void SceneStore::loadStore(std::string name)
                 {
                     if(sceneBlock->checkCurrentProperty("window"))
                     {
-                        //Window component
-                        WindowComponent* win = new WindowComponent(sceneBlock->getCurrentValue<std::string>());
-                        //GL must be initialised after a window is created
-                        initGL();
-                        //Temporary system init???? WHERE TO PUT
-                        winSys = new WindowSystem();
-                        systems[WindowSystem::getStaticID()] = winSys;
-                        renSys = new Render2DSystem();
-                        systems[Render2DSystem::getStaticID()] = renSys;
-                        ent->addComponent(win);
                     }
                     else if(sceneBlock->checkCurrentProperty("render2d"))
                         bool null = sceneBlock->getCurrentValue<bool>();

@@ -18,6 +18,7 @@ public:
     bool srgb;
 
     //Loaded
+    unsigned char* textureData;
     GLuint textureID;
 };
 

@@ -1,8 +1,12 @@
 #version 330
 
+in vec2 vUV;
+
 out vec3 outColour;
+
+uniform sampler2D textureSampler;
 
 void main()
 {
-    outColour = vec3(1.0f,0.0f,0.0f);
+    outColour = texture(textureSampler, vUV).rgb;
 }

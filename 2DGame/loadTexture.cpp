@@ -73,6 +73,58 @@ GLuint load2DTexture(std::string texturePath, bool srgb)
     return texture_id;
 }
 
+unsigned char* load2DTextureData(std::string texturePath, int* widthLoc, int* heightLoc)
+{
+    int width, height;
+    unsigned char* image;
+    image = SOIL_load_image(texturePath.c_str(), &width, &height, 0, SOIL_LOAD_RGBA);
+
+    if (!image)
+    {
+        std::cout<<"Texture data not loaded- ("<<texturePath<<") - "<<SOIL_last_result()<<std::endl;
+        return 0;
+    }
+    else
+    {
+        std::cout<<"Texture data loaded: "<<texturePath<<"."<<std::endl;
+    }
+    *widthLoc = width;
+    *heightLoc = height;
+
+    return image;
+}
+
+GLuint load2DTextureByData(unsigned char* inData, int width, int height, bool srgb)
+{
+    GLuint texture_id;
+    glGenTextures(1, &texture_id);
+    glSetBindTexture(GL_TEXTURE_2D, texture_id);
+    if(srgb)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, inData);
+    }
+    else
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, inData);
+    }
+    //default
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    if (!texture_id)
+    {
+        std::cout<<"Texture not loaded by data - "<<SOIL_last_result()<<std::endl;
+        return 0;
+    }
+    else
+    {
+        std::cout<<"Texture loaded by data."<<std::endl;
+    }
+
+    return texture_id;
+}
+
 GLuint load2DTextureArray(std::vector<const char*> texturePaths, int imgsize)
 {
     GLuint texture_id;

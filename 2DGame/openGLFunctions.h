@@ -11,6 +11,9 @@ void glSetBindVertexArray(GLuint);
 void glSetBindFramebuffer(GLenum, GLuint);
 void glSetUseProgram(GLuint);
 
-void initGL();
+class WindowComponent;
+extern WindowComponent* mainWindow;
+bool initGLFW();
+bool initGLEW();
 
 #endif // OPENGLBITS_H_INCLUDED

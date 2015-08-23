@@ -1,5 +1,7 @@
 #include "textureStore.h"
 #include "loadTexture.h"
+#include "textureLoadSystem.h"
+#include <pthread.h>
 
 ///TextureStore allows us to store the actual textures from files!
 void TextureStore::loadStore(std::string name)
@@ -24,8 +26,22 @@ void TextureStore::loadStore(std::string name)
                 }
                 if (textureFile != "") //After we've loaded all properties for the texture element, we can actually load the texture!...
                 {
-                    textureID = load2DTexture(textureFile, srgb); //Load the actual texture we store
-                    if(textureID != 0)
+                    int width, height;
+                    textureData = load2DTextureData(textureFile, &width, &height); //Load the actual texture we store
+
+                    TextureToLoad toLoad;
+                    toLoad.idLoc = &textureID;
+                    toLoad.width = width;
+                    toLoad.height = height;
+                    toLoad.data = textureData;
+                    toLoad.srgb = srgb;
+
+                    //Mutex lock variable while editing
+                    pthread_mutex_lock(&textureLoadMutex);
+                    texturesToLoad.push_back(toLoad);
+                    pthread_mutex_unlock(&textureLoadMutex);
+
+                    if(textureData != 0)
                         correctlyLoaded = true;
                 }
             }

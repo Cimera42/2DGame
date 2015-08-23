@@ -4,7 +4,7 @@
 #include <string>
 #include "component.h"
 #include "fileReader.h"
-#include <GLFW/glfw3.h>
+#include "openGLFunctions.h"
 #include <glm/glm.hpp>
 
 class WindowComponent : public Component

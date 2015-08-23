@@ -15,19 +15,28 @@
 #include "render2DComponent.h"
 #include "sceneStore.h"
 #include "textureStore.h"
+#include "textureLoadSystem.h"
 
 #include <iostream>
 #include <string>
 #include <fstream>
 
-#include <pthread.h>
-
 System * winSys;
 System * renSys;
+System * texLoadSys;
 
 int main()
 {
-    glfwInit();
+    initGLFW();
+    initGLEW();
+
+    winSys = new WindowSystem();
+    systems[WindowSystem::getStaticID()] = winSys;
+    renSys = new Render2DSystem();
+    systems[Render2DSystem::getStaticID()] = renSys;
+    texLoadSys = new TextureLoadSystem();
+    systems[TextureLoadSystem::getStaticID()] = texLoadSys;
+
     //File loading TEST
     SceneStore * scene;
     if(Load<SceneStore>::Object(&scene, "debug/scene.store"))
@@ -43,10 +52,12 @@ int main()
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             //Temporary system loop
+            //Texture loading system
+            systems[TextureLoadSystem::getStaticID()]->update();
             //2D rendering system
-            renSys->update();
+            systems[Render2DSystem::getStaticID()]->update();
             //Should go last, since it updates window buffer
-            winSys->update();
+            systems[WindowSystem::getStaticID()]->update();
 
             glfwPollEvents();
         }

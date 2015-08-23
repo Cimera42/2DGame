@@ -143,6 +143,12 @@
 		<Unit filename="testSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
+		<Unit filename="textureLoadSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="textureLoadSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
 		<Unit filename="textureStore.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>

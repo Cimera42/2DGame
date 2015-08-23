@@ -20,6 +20,7 @@
 #include <iostream>
 #include "fileReader.h"
 #include "store.h"
+#include "openGLFunctions.h"
 #include <pthread.h>
 
 extern std::map<std::string, Store*> internalMap;
@@ -52,6 +53,12 @@ void* Load<T>::threadedLoad(void* inptr)
     std::string s = inParam.s;
     std::cout << s <<" In Load"<< std::endl;
     T** returnLoc = inParam.returnLoc;
+
+    float start = glfwGetTime();
+    while(glfwGetTime() < start + 5.0f)
+    {
+
+    }
 
     //Loading is controlled by the string
     std::map<std::string, Store*>::iterator it = internalMap.find(s); //see if the object already exists
@@ -101,28 +108,29 @@ void* Load<T>::threadedLoad(void* inptr)
             return NULL; //false;
         }
     }
+
+    delete inptr;
 }
 
-#include <GLFW/glfw3.h>
 //IMPLEMENTATION - needs to be moved and the acceptable classes controlled in .cpp
 template <class T>
 bool Load<T>::Object(T** returnLoc, std::string s)
 {
     //Create a new instance of the store
     T * create = new T();
-    create->loadStore(s); //REMOVE IF 2ND THREAD
-    create->internalName = s; //REMOVE IF 2ND THREAD
+    //create->loadStore(s); //REMOVE IF 2ND THREAD
+    //create->internalName = s; //REMOVE IF 2ND THREAD
     *returnLoc = create;
 
     //Create paramters to send to secondary thread
-    LoadJoin<T> param;
-    param.returnLoc = returnLoc;
-    param.s = s;
+    LoadJoin<T>* param = new LoadJoin<T>();
+    param->returnLoc = returnLoc;
+    param->s = s;
 
     //IF 2ND THREAD, REMOVE COMMENTS
     //Create a thread which does loading, and in the meantime - return the created instance of the store.
-    //pthread_t thread;
-    //pthread_create(&thread, NULL, threadedLoad, (void*) &param);
+    pthread_t thread;
+    pthread_create(&thread, NULL, threadedLoad, (void*) param);
     //pthread_join(thread, NULL);
 
     return true;

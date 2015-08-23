@@ -1,6 +1,7 @@
 #include "openGLFunctions.h"
 #include <iostream>
 #include <stdlib.h>
+#include "windowComponent.h"
 
 GLenum currentState;
 void glSetActiveTexture(GLenum state) //Handler to stop redundant glActiveTexture calls, hopefully speed up frames.
@@ -62,13 +63,38 @@ void glSetUseProgram(GLuint program) //Handler to stop redundant glUseProgram ca
     }
 }
 
-void initGL()
+void errCallback(int inCode, const char* descrip)
+{
+    std::cout << "#GLFW ERROR# -- " << descrip << std::endl;
+}
+
+WindowComponent* mainWindow;
+bool initGLFW()
+{
+    if(!glfwInit())
+    {
+        std::cout << "GLFW init failed" << std::endl;
+        return false;
+    }
+    else
+    {
+        std::cout << "GLFW init successful" << std::endl;
+    }
+    glfwSetErrorCallback(errCallback);
+
+    mainWindow = new WindowComponent("debug/window.cfg");
+
+    return true;
+}
+
+bool initGLEW()
 {
     glewExperimental = true;
     GLenum err = glewInit();
     if(err!=GLEW_OK)
     {
         std::cout<<"GLEW failed to load"<<std::endl;
+        return false;
     }
     else
     {
@@ -85,4 +111,5 @@ void initGL()
         //glEnable(GL_BLEND);
         //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
+    return true;
 }

@@ -1,5 +1,5 @@
 Texture "whatever"
 {
-filename: hello.png;
+filename: textures/hello.png;
 srgb: true;
 }

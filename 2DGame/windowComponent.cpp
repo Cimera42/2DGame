@@ -1,8 +1,14 @@
 #include "windowComponent.h"
 #include "globals.h"
+#include "openGLFunctions.h"
 #include <iostream>
 
 ComponentID WindowComponent::ID;
+
+void test()
+{
+
+}
 
 WindowComponent::WindowComponent(std::string fileName)
 {
@@ -34,16 +40,7 @@ WindowComponent::WindowComponent(std::string fileName)
             }
         }
     }
-    //char* inTitle, int inWindowWidth, int inWindowHeight
-    if(!glfwInit())
-    {
-        std::cout << "Failed to initialise GLFW" << std::endl;
-        return;
-    }
-    else
-    {
-        std::cout << "Initialised GLFW" << std::endl;
-    }
+    std::cout << "window size" << windowSize.x << std::endl;
 
     windowAspect = windowSize.x/windowSize.y;
 
@@ -70,6 +67,10 @@ WindowComponent::WindowComponent(std::string fileName)
     {
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
         glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, NULL);
+        if(!glfwWindow)
+        {
+            std::cout << "new window not made" << std::endl;
+        }
         glfwSetWindowPos(glfwWindow, clientWidth/2-windowSize.x/2, clientHeight/2-windowSize.y/2);
     }
 
@@ -81,8 +82,6 @@ WindowComponent::WindowComponent(std::string fileName)
     else
     {
         glfwMakeContextCurrent(glfwWindow);
-        glfwWindow = glfwGetCurrentContext();
-
         glfwSetWindowCloseCallback(glfwWindow, windowCloseEvent);
     }
 }

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "windowComponent.h"
+#include "openGLFunctions.h"
 
 SystemID WindowSystem::ID;
 
@@ -21,4 +22,6 @@ void WindowSystem::update()
         WindowComponent* windowComp = static_cast<WindowComponent*>(entity->getComponent(WindowComponent::getStaticID()));
         glfwSwapBuffers(windowComp->glfwWindow);
     }
+
+    glfwSwapBuffers(mainWindow->glfwWindow);
 }

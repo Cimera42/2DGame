@@ -3,6 +3,7 @@
 
 #include "system.h"
 #include "render2DComponent.h"
+#include "textureStore.h"
 #include <GL/glew.h>
 
 class Render2DSystem : public System
@@ -18,7 +19,11 @@ class Render2DSystem : public System
 
         GLuint VAO;
         GLuint vertexBuffer;
+        GLuint uvBuffer;
         GLuint indexBuffer;
+
+        TextureStore* textureStore;
+        GLuint textureLoc;
 
         glm::mat4 M;
 
