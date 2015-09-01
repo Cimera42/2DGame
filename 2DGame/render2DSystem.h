@@ -3,6 +3,7 @@
 
 #include "system.h"
 #include "render2DComponent.h"
+#include "worldComponent.h"
 #include "textureStore.h"
 #include <GL/glew.h>
 
@@ -21,18 +22,29 @@ class Render2DSystem : public System
         GLuint vertexBuffer;
         GLuint uvBuffer;
         GLuint indexBuffer;
+        GLuint matrixBuffer;
 
         TextureStore* textureStore;
         GLuint textureLoc;
 
-        glm::mat4 M;
-
+        std::vector<glm::vec2> vertices;
+        std::vector<glm::vec2> uvs;
+        std::vector<unsigned int> indices;
         int bufSize;
+        std::vector<glm::mat4> matrices;
 
         //Auto generation of ID
         SystemID getID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
         static SystemID getStaticID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
 
+        bool shouldResizeBuffers = false;
+        void resizeBuffers();
+        void refillBuffers();
+
+        void addToList(WorldComponent*, Render2DComponent*);
+
+        void entitySubscribed(Entity*);
+        void entityUnsubscribed(Entity*);
         void update();
 };
 

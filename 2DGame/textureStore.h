@@ -4,6 +4,7 @@
 #include "fileReader.h"
 #include "store.h"
 #include "openGLFunctions.h"
+#include <pthread.h>
 
 class TextureStore : public Store
 {
@@ -20,6 +21,8 @@ public:
     //Loaded
     unsigned char* textureData;
     GLuint textureID;
+
+    pthread_mutex_t textureLoadMutex ;
 };
 
 #endif // TEXTURESTORE_H_INCLUDED

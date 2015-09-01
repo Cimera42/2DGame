@@ -10,10 +10,15 @@ class WorldComponent : public Component
         static ComponentID ID;
 
     public:
-        WorldComponent(glm::vec2);
+        WorldComponent(glm::vec2,glm::vec2);
         virtual ~WorldComponent();
 
         glm::vec2 position;
+        glm::vec2 scale;
+
+        glm::mat4 modelMatrix;
+
+        void updateMatrix();
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

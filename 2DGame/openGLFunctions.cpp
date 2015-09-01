@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "windowComponent.h"
+#include "logger.h"
 
 GLenum currentState;
 void glSetActiveTexture(GLenum state) //Handler to stop redundant glActiveTexture calls, hopefully speed up frames.
@@ -65,24 +66,32 @@ void glSetUseProgram(GLuint program) //Handler to stop redundant glUseProgram ca
 
 void errCallback(int inCode, const char* descrip)
 {
-    std::cout << "#GLFW ERROR# -- " << descrip << std::endl;
+    Logger() << "#GLFW ERROR# -- " << descrip << std::endl;
 }
 
+GLFWwindow* glContext;
 WindowComponent* mainWindow;
 bool initGLFW()
 {
     if(!glfwInit())
     {
-        std::cout << "GLFW init failed" << std::endl;
+        Logger() << "GLFW init failed" << std::endl;
         return false;
     }
     else
     {
-        std::cout << "GLFW init successful" << std::endl;
+        Logger() << "GLFW init successful" << std::endl;
     }
     glfwSetErrorCallback(errCallback);
 
-    mainWindow = new WindowComponent("debug/window.cfg");
+    //Load main context for sharing
+    glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+    glContext = glfwCreateWindow(1,1,"CONTEXT",NULL,NULL);
+
+    //Load display window
+    //Possibly could be turned back into an entity
+    glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
+    mainWindow = new WindowComponent("debug/window.cfg",glContext);
     glfwMakeContextCurrent(mainWindow->glfwWindow);
 
     return true;
@@ -94,13 +103,13 @@ bool initGLEW()
     GLenum err = glewInit();
     if(err!=GLEW_OK)
     {
-        std::cout<<"GLEW failed to load"<<std::endl;
+        Logger()<<"GLEW failed to load"<<std::endl;
         return false;
     }
     else
     {
-        std::cout<<"GLEW loaded"<<std::endl;
-        std::cout << "OpenGL " << glGetString(GL_VERSION) << ", GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+        Logger()<<"GLEW loaded"<<std::endl;
+        Logger() << "OpenGL " << glGetString(GL_VERSION) << ", GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
         //Sets up common OpenGL Functions
         //glEnable(GL_MULTISAMPLE);
@@ -109,8 +118,8 @@ bool initGLEW()
         //glEnable(GL_PROGRAM_POINT_SIZE);
         //glEnable(GL_LINE_SMOOTH);
         //glLineWidth(1);
-        //glEnable(GL_BLEND);
-        //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
     return true;
 }

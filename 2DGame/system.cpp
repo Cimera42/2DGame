@@ -3,7 +3,7 @@
 #include "globals.h"
 
 #include <map>
-#include <iostream>
+#include "logger.h"
 
 SystemID System::systemIDIncrementor = 1;
 SystemID System::ID;
@@ -57,9 +57,10 @@ bool System::subscribe(Entity* inEntity, ComponentID newCompID)
             if(checkEntityComponents(inEntity))
             {
                 subscribedEntities.push_back(inEntity->entityID);
+                entitySubscribed(inEntity);
 
                 if(DEBUG)
-                    std::cout << "Entity " << inEntity->entityID << " subscribed to system " << getID() << std::endl;
+                    Logger() << "Entity " << inEntity->entityID << " subscribed to system " << getID() << std::endl;
                 return true;
             }
         }
@@ -77,6 +78,7 @@ bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
         if(subID != -1)
         {
             subscribedEntities.erase(subscribedEntities.begin() + subID);
+            entityUnsubscribed(inEntity);
             return true;
         }
     }

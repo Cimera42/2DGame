@@ -2,21 +2,13 @@
 
 ComponentID Render2DComponent::ID;
 
-Render2DComponent::Render2DComponent(float inWidth, float inHeight)
+Render2DComponent::Render2DComponent(glm::vec2 startUV, glm::vec2 endUV)
 {
-    float halfWidth = inWidth/2;
-    float halfHeight = inHeight/2;
+    //UVs for each corner
+    topLeftUV = glm::vec2(startUV.x, endUV.y);
+    topRightUV = glm::vec2(endUV.x, endUV.y);
 
-    topLeft = glm::vec2(-halfWidth, halfHeight);
-    topRight = glm::vec2(halfWidth, halfHeight);
-
-    bottomLeft = glm::vec2(-halfWidth, -halfHeight);
-    bottomRight = glm::vec2(halfWidth, -halfHeight);
-
-    /*topLeft = glm::vec2(-1, 1);
-    topRight = glm::vec2(1, 1);
-
-    bottomLeft = glm::vec2(-1, -1);
-    bottomRight = glm::vec2(1, -1);*/
+    bottomLeftUV = glm::vec2(startUV.x, startUV.y);
+    bottomRightUV = glm::vec2(endUV.x, startUV.y);
 }
 Render2DComponent::~Render2DComponent(){}

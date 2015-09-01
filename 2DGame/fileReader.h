@@ -37,51 +37,60 @@ public:
     bool checkCurrentElement(std::string elementNameT);
     bool getNextProperty();
     bool checkCurrentProperty(std::string propertyNameT);
-    template <typename T> T getCurrentValue()
+    template <typename T> T getCurrentValue(int offset)
     {
         //this calls the private functions depending on type
         T value;
         if(elementIndex != -1 && propertyIndex != -1)
-            value = getCurrentValue(typeIdentity<T>()); //http://stackoverflow.com/questions/3052579/explicit-specialization-in-non-namespace-scope
+            value = getCurrentValue(typeIdentity<T>(),offset); //http://stackoverflow.com/questions/3052579/explicit-specialization-in-non-namespace-scope
         return value;
     }
 private:
     void resetElementIndex();
     void resetPropertyIndex();
-    template<typename T> T getCurrentValue(typeIdentity<T>)
+    template<typename T> T getCurrentValue(typeIdentity<T>,int offset)
     {
         //get the current value through index's depending on the type
-        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0];
+        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
         return str;
     }
-    bool getCurrentValue(typeIdentity<bool>)
+    bool getCurrentValue(typeIdentity<bool>,int offset)
     {
-        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0];
+        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
         return stringToBool(str);
     }
-    float getCurrentValue(typeIdentity<float>)
+    float getCurrentValue(typeIdentity<float>,int offset)
     {
-        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0];
+        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
         return stringToFloat(str);
     }
-    int getCurrentValue(typeIdentity<int>)
+    int getCurrentValue(typeIdentity<int>,int offset)
     {
-        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0];
+        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
         return stringToInt(str);
     }
-    glm::vec2 getCurrentValue(typeIdentity<glm::vec2>)
+    glm::vec2 getCurrentValue(typeIdentity<glm::vec2>,int offset)
     {
-        std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0];
-        std::string str2 = elements[elementIndex]->properties[propertyIndex]->values[1];
+        std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
+        std::string str2 = elements[elementIndex]->properties[propertyIndex]->values[1+offset];
         glm::vec2 vec = glm::vec2(stringToFloat(str1), stringToFloat(str2));
         return vec;
     }
-    glm::vec3 getCurrentValue(typeIdentity<glm::vec3>)
+    glm::vec3 getCurrentValue(typeIdentity<glm::vec3>,int offset)
     {
-        std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0];
-        std::string str2 = elements[elementIndex]->properties[propertyIndex]->values[1];
-        std::string str3 = elements[elementIndex]->properties[propertyIndex]->values[2];
+        std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
+        std::string str2 = elements[elementIndex]->properties[propertyIndex]->values[1+offset];
+        std::string str3 = elements[elementIndex]->properties[propertyIndex]->values[2+offset];
         glm::vec3 vec = glm::vec3(stringToFloat(str1), stringToFloat(str2), stringToFloat(str3));
+        return vec;
+    }
+    glm::vec4 getCurrentValue(typeIdentity<glm::vec4>,int offset)
+    {
+        std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
+        std::string str2 = elements[elementIndex]->properties[propertyIndex]->values[1+offset];
+        std::string str3 = elements[elementIndex]->properties[propertyIndex]->values[2+offset];
+        std::string str4 = elements[elementIndex]->properties[propertyIndex]->values[3+offset];
+        glm::vec4 vec = glm::vec4(stringToFloat(str1), stringToFloat(str2), stringToFloat(str3), stringToFloat(str4));
         return vec;
     }
 };

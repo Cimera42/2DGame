@@ -1,4 +1,5 @@
 #include "loadTexture.h"
+#include "logger.h"
 
 GLuint load2DTexture(std::string texturePath, bool srgb)
 {
@@ -62,12 +63,12 @@ GLuint load2DTexture(std::string texturePath, bool srgb)
     }
     if (!texture_id)
     {
-        std::cout<<"Texture not loaded- ("<<texturePath<<") - "<<SOIL_last_result()<<std::endl;
+        Logger()<<"Texture not loaded- ("<<texturePath<<") - "<<SOIL_last_result()<<std::endl;
         return 0;
     }
     else
     {
-        std::cout<<"Texture loaded: "<<texturePath<<"."<<std::endl;
+        Logger()<<"Texture loaded: "<<texturePath<<"."<<std::endl;
     }
 
     return texture_id;
@@ -81,12 +82,12 @@ unsigned char* load2DTextureData(std::string texturePath, int* widthLoc, int* he
 
     if (!image)
     {
-        std::cout<<"Texture data not loaded- ("<<texturePath<<") - "<<SOIL_last_result()<<std::endl;
+        Logger()<<"Texture data not loaded- ("<<texturePath<<") - "<<SOIL_last_result()<<std::endl;
         return 0;
     }
     else
     {
-        std::cout<<"Texture data loaded: "<<texturePath<<"."<<std::endl;
+        Logger()<<"Texture data loaded: "<<texturePath<<"."<<std::endl;
     }
     *widthLoc = width;
     *heightLoc = height;
@@ -114,12 +115,12 @@ GLuint load2DTextureByData(unsigned char* inData, int width, int height, bool sr
 
     if (!texture_id)
     {
-        std::cout<<"Texture not loaded by data - "<<SOIL_last_result()<<std::endl;
+        Logger()<<"Texture not loaded by data - "<<SOIL_last_result()<<std::endl;
         return 0;
     }
     else
     {
-        std::cout<<"Texture loaded by data."<<std::endl;
+        Logger()<<"Texture loaded by data."<<std::endl;
     }
 
     return texture_id;
@@ -153,11 +154,11 @@ GLuint load2DTextureArray(std::vector<const char*> texturePaths, int imgsize)
         if (image)
         {
             glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0,0,0, i, width, height, 1, GL_RGBA, GL_UNSIGNED_BYTE, image);
-            std::cout<<"RGBA texture loaded- ("<<texturePaths[i]<<") - "<<SOIL_last_result()<<std::endl;
+            Logger()<<"RGBA texture loaded- ("<<texturePaths[i]<<") - "<<SOIL_last_result()<<std::endl;
         }
         else
         {
-            std::cout<<"RGBA texture not loaded- ("<<texturePaths[i]<<") - "<<SOIL_last_result()<<std::endl;
+            Logger()<<"RGBA texture not loaded- ("<<texturePaths[i]<<") - "<<SOIL_last_result()<<std::endl;
             return 0;
         }
     }

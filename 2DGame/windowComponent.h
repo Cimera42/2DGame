@@ -13,7 +13,7 @@ class WindowComponent : public Component
         static ComponentID ID;
 
     public:
-        WindowComponent(std::string fileName);
+        WindowComponent(std::string fileName,GLFWwindow* share);
         virtual ~WindowComponent();
 
         //Values set

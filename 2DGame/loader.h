@@ -17,10 +17,11 @@
 
 #include <map>
 #include <string>
-#include <iostream>
 #include "fileReader.h"
 #include "store.h"
 #include "openGLFunctions.h"
+#include "logger.h"
+#include "windowComponent.h"
 #include <pthread.h>
 
 extern std::map<std::string, Store*> internalMap;
@@ -51,7 +52,7 @@ void* Load<T>::threadedLoad(void* inptr)
     LoadJoin<T> inParam;
     inParam = *((LoadJoin<T>*) inptr);
     std::string s = inParam.s;
-    std::cout << s <<" In Load"<< std::endl;
+    Logger() << s <<" In Load"<< std::endl;
     T** returnLoc = inParam.returnLoc;
 
     //Loading is controlled by the string
@@ -70,7 +71,7 @@ void* Load<T>::threadedLoad(void* inptr)
         else
         {
             //Name mismatch: Give error
-            std::cout<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr. \n \n"; //cannot guarentee safety of the pointer.
+            Logger()<<"Load Error: Name mismatch '"<<s<<"'. - Something has been altered. Returning nullptr. \n \n"; //cannot guarentee safety of the pointer.
             //use default and return
             *returnLoc = nullptr;
             return NULL; //false;
@@ -96,7 +97,7 @@ void* Load<T>::threadedLoad(void* inptr)
             delete create;
             //set returnLoc to point to default or just nullptr it?
             //Loading incomplete: Give error
-            std::cout<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n \n"; //Loading a new object hasnt worked - report it
+            Logger()<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n \n"; //Loading a new object hasnt worked - report it
             //use default and delete the new threaded one etc etc and return
             *returnLoc = nullptr;
             return NULL; //false;
@@ -169,7 +170,7 @@ bool Unload<T>::Object(T** deletePtr)
         *deletePtr = nullptr;
         return true;
     }
-    std::cout<<"Unload Error: Cannot locate object. Returning nullptr. \n \n";
+    Logger()<<"Unload Error: Cannot locate object. Returning nullptr. \n \n";
     *deletePtr = nullptr;
     return false;
 }

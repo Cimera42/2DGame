@@ -1,16 +1,11 @@
 #include "windowComponent.h"
 #include "globals.h"
 #include "openGLFunctions.h"
-#include <iostream>
+#include "logger.h"
 
 ComponentID WindowComponent::ID;
 
-void test()
-{
-
-}
-
-WindowComponent::WindowComponent(std::string fileName)
+WindowComponent::WindowComponent(std::string fileName, GLFWwindow* shareContext)
 {
     //load the the window from file. Most components should not have this form of reading directly.
     File readFile;
@@ -25,17 +20,17 @@ WindowComponent::WindowComponent(std::string fileName)
                 while(windowBlock->getNextProperty()) //Add the components to the entity
                 {
                     if(windowBlock->checkCurrentProperty("title"))
-                        windowTitle = windowBlock->getCurrentValue<std::string>();
+                        windowTitle = windowBlock->getCurrentValue<std::string>(0);
                     else if(windowBlock->checkCurrentProperty("size"))
-                        windowSize = windowBlock->getCurrentValue<glm::vec2>();
+                        windowSize = windowBlock->getCurrentValue<glm::vec2>(0);
                     else if(windowBlock->checkCurrentProperty("windowed"))
-                        modeWindowed = windowBlock->getCurrentValue<bool>();
+                        modeWindowed = windowBlock->getCurrentValue<bool>(0);
                     else if(windowBlock->checkCurrentProperty("fullscreen"))
-                        modeFullscreen = windowBlock->getCurrentValue<bool>();
+                        modeFullscreen = windowBlock->getCurrentValue<bool>(0);
                     else if(windowBlock->checkCurrentProperty("borderless"))
-                        modeBorderless = windowBlock->getCurrentValue<bool>();
+                        modeBorderless = windowBlock->getCurrentValue<bool>(0);
                     else
-                        std::cout<<"Innapropriate window property in: "<<readFile.fileName<<std::endl;
+                        Logger()<<"Innapropriate window property in: "<<readFile.fileName<<std::endl;
                 }
             }
         }
@@ -53,24 +48,24 @@ WindowComponent::WindowComponent(std::string fileName)
     glfwWindowHint(GLFW_REFRESH_RATE, glfwVideoMode->refreshRate);
     if (modeFullscreen)
     {
-        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), glfwMonitor, NULL);
+        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), glfwMonitor, shareContext);
     }
     else if(modeBorderless)
     {
         glfwWindowHint(GLFW_DECORATED, GL_FALSE);
 
-        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, NULL);
+        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, shareContext);
         glfwSetWindowPos(glfwWindow, clientWidth/2-windowSize.x/2, clientHeight/2-windowSize.y/2);
     }
     else if(modeWindowed)
     {
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, NULL);
+        glfwWindow = glfwCreateWindow(windowSize.x,windowSize.y, windowTitle.c_str(), NULL, shareContext);
         glfwSetWindowPos(glfwWindow, clientWidth/2-windowSize.x/2, clientHeight/2-windowSize.y/2);
     }
     if(!glfwWindow)
     {
-        std::cout << "Failed to create window" << std::endl;
+        Logger() << "Failed to create window" << std::endl;
         return;
     }
     else
@@ -81,7 +76,7 @@ WindowComponent::WindowComponent(std::string fileName)
 WindowComponent::~WindowComponent()
 {
     glfwDestroyWindow(glfwWindow);
-    std::cout << "Window destroyed" << std::endl;
+    Logger() << "Window destroyed" << std::endl;
 }
 
 void windowCloseEvent(GLFWwindow* closingWindow)

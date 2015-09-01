@@ -1,7 +1,6 @@
 #include "textureStore.h"
 #include "loadTexture.h"
-#include "textureLoadSystem.h"
-#include <pthread.h>
+#include "logger.h"
 
 ///TextureStore allows us to store the actual textures from files!
 TextureStore::TextureStore()
@@ -13,6 +12,7 @@ TextureStore::TextureStore()
     */
 
     //Default values
+    textureLoadMutex = PTHREAD_MUTEX_INITIALIZER;
     textureID = 0;
     srgb = false;
     textureFile = "";
@@ -20,6 +20,10 @@ TextureStore::TextureStore()
 
 void TextureStore::loadStore(std::string name)
 {
+    glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+    GLFWwindow* tempWindow = glfwCreateWindow(1,1,"",NULL,glContext);
+    glfwMakeContextCurrent(tempWindow);
+
     //Read file
     File readFile;
     textureBlock = readFile.readFromFile(name);
@@ -32,27 +36,16 @@ void TextureStore::loadStore(std::string name)
                 while(textureBlock->getNextProperty())
                 {
                     if(textureBlock->checkCurrentProperty("filename"))
-                        textureFile = readFile.fileDirectory+textureBlock->getCurrentValue<std::string>();
+                        textureFile = readFile.fileDirectory+textureBlock->getCurrentValue<std::string>(0);
                     else if(textureBlock->checkCurrentProperty("srgb"))
-                        srgb = textureBlock->getCurrentValue<bool>();
+                        srgb = textureBlock->getCurrentValue<bool>(0);
                     else
-                        std::cout<<"Innapropriate texture property in: "<<readFile.fileName<<std::endl;
+                        Logger()<<"Innapropriate texture property in: "<<readFile.fileName<<std::endl;
                 }
                 if (textureFile != "") //After we've loaded all properties for the texture element, we can actually load the texture!...
                 {
-                    int width, height;
-                    textureData = load2DTextureData(textureFile, &width, &height); //Load the actual texture we store
-
-                    TextureToLoad toLoad;
-                    toLoad.idLoc = &textureID;
-                    toLoad.width = width;
-                    toLoad.height = height;
-                    toLoad.data = textureData;
-                    toLoad.srgb = srgb;
-
-                    //Mutex lock variable while editing
                     pthread_mutex_lock(&textureLoadMutex);
-                    texturesToLoad.push_back(toLoad);
+                    textureID = load2DTexture(textureFile, srgb); //Load the actual texture we store
                     pthread_mutex_unlock(&textureLoadMutex);
 
                     if(textureData != 0)
@@ -61,5 +54,5 @@ void TextureStore::loadStore(std::string name)
             }
         }
     }
+    glfwDestroyWindow(tempWindow);
 }
-

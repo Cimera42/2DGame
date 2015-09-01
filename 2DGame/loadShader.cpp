@@ -1,4 +1,5 @@
 #include "loadShader.h"
+#include "logger.h"
 
 void loadShaderPart(GLuint partID, char * path)
 {
@@ -24,7 +25,7 @@ void loadShaderPart(GLuint partID, char * path)
     std::vector<char> compileLog(compileLogLength);
     glGetShaderInfoLog(partID, compileLogLength, NULL, &compileLog[0]);
     if (compileLog.size() > 1)
-        std::cout << compileLog.data() << std::endl;
+        Logger() << compileLog.data() << std::endl;
 
     std::vector<char>().swap(compileLog);
 }
@@ -47,7 +48,7 @@ void createProgram(GLuint progID, std::vector<const char*> layoutLocations)
             std::vector<char> compileLog(compileLogLength);
             glGetShaderInfoLog(progID, compileLogLength, NULL, &compileLog[0]);
             if (compileLog.size() > 1)
-                std::cout << compileLog.data() <<std::endl;
+                Logger() << compileLog.data() <<std::endl;
 
             std::vector<char>().swap(compileLog);
     }
@@ -61,12 +62,12 @@ void createProgram(GLuint progID, std::vector<const char*> layoutLocations)
 GLuint loadShader(char * vertPath, char * fragPath,
                   std::vector<const char*> layoutLocations)
 {
-    std::cout<< "Creating Shader" << std::endl;
-    std::cout <<"Vertex: " << vertPath << std::endl;
+    Logger()<< "Creating Shader" << std::endl;
+    Logger() <<"Vertex: " << vertPath << std::endl;
     GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
         loadShaderPart(vertID, vertPath);
 
-    std::cout <<"Fragment: "<< fragPath << std::endl;
+    Logger() <<"Fragment: "<< fragPath << std::endl;
     GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
         loadShaderPart(fragID, fragPath);
 
@@ -85,16 +86,16 @@ GLuint loadShader(char * vertPath, char * fragPath,
 GLuint loadShaderG(char * vertPath, char * fragPath, char * geoPath,
                    std::vector<const char*> layoutLocations)
 {
-    std::cout<< "Creating Shader" << std::endl;
-    std::cout <<"Vertex: " << vertPath << std::endl;
+    Logger()<< "Creating Shader" << std::endl;
+    Logger() <<"Vertex: " << vertPath << std::endl;
     GLuint vertID = glCreateShader(GL_VERTEX_SHADER);
         loadShaderPart(vertID, vertPath);
 
-    std::cout <<"Fragment: "<< fragPath << std::endl;
+    Logger() <<"Fragment: "<< fragPath << std::endl;
     GLuint fragID = glCreateShader(GL_FRAGMENT_SHADER);
         loadShaderPart(fragID, fragPath);
 
-    std::cout <<"Geometry: "<< geoPath << std::endl;
+    Logger() <<"Geometry: "<< geoPath << std::endl;
     GLuint geoID = glCreateShader(GL_GEOMETRY_SHADER);
         loadShaderPart(geoID, geoPath);
 

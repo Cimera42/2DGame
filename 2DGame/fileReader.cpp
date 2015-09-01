@@ -1,6 +1,6 @@
 #include "fileReader.h"
+#include "logger.h"
 
-#include <iostream>
 #include <algorithm>
 
 ///Purpose is to extract properties under a common token layout within a non-binary format
@@ -79,7 +79,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                 std::string elementToken = block.substr(currentPos, extractPos1);
                 if(!checkToken(elementToken))
                 {
-                    std::cout<<"Element contains incorrect syntax: \n"<<elementToken<<"\n"<<std::endl; //syntax error
+                    Logger()<<"Element contains incorrect syntax: \n"<<elementToken<<"\n"<<std::endl; //syntax error
                     return false;
                 }
                 datablock->elements[elementIndex]->elementName = elementToken;
@@ -91,7 +91,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                 std::string elementToken = block.substr(currentPos, extractPos2);
                 if(!checkToken(elementToken))
                 {
-                    std::cout<<"Element contains incorrect syntax: \n"<<elementToken<<"\n"<<std::endl; //syntax error
+                    Logger()<<"Element contains incorrect syntax: \n"<<elementToken<<"\n"<<std::endl; //syntax error
                     return false;
                 }
                 datablock->elements[elementIndex]->elementName = elementToken;
@@ -100,7 +100,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
             }
             else
             {
-                std::cout<<"Element doesn't contain properties OR no terminating comment: \n"
+                Logger()<<"Element doesn't contain properties OR no terminating comment: \n"
                 <<datablock->elements[elementIndex]->elementName<<" '"
                 <<datablock->elements[elementIndex]->elementIdentifier<<"'\n"<<std::endl; //error
                 return false;
@@ -117,7 +117,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                 std::string optionalTokenStr = block.substr(currentPos, extractPos1);
                 if(!checkToken(optionalTokenStr))
                 {
-                    std::cout<<"Optional Identifier contains incorrect syntax: \n"
+                    Logger()<<"Optional Identifier contains incorrect syntax: \n"
                     <<datablock->elements[elementIndex]->elementName<<" "<<optionalTokenStr<<"\n"<<std::endl; //syntax error
                     return false;
                 }
@@ -128,7 +128,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                     currentPos++;
                 else
                 {
-                    std::cout<<"Element doesn't contain properties (are you missing an '{' ?): \n"
+                    Logger()<<"Element doesn't contain properties (are you missing an '{' ?): \n"
                     <<datablock->elements[elementIndex]->elementName<<" '"
                     <<datablock->elements[elementIndex]->elementIdentifier<<"'\n"<<std::endl;
                     return false;
@@ -149,7 +149,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                 std::string propertyToken = block.substr(currentPos, extractPos1);
                 if(!checkToken(propertyToken))
                 {
-                    std::cout<<"Property contains incorrect syntax: \n"
+                    Logger()<<"Property contains incorrect syntax: \n"
                     <<datablock->elements[elementIndex]->elementName<<" '"
                     <<datablock->elements[elementIndex]->elementIdentifier<<"': \n"<<propertyToken<<"\n"<<std::endl; //syntax error
                     return false;
@@ -169,7 +169,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                         std::string valueToken = block.substr(currentPos, extractPos1);
                         if(!checkToken(valueToken))
                         {
-                            std::cout<<"Value contains incorrect syntax: \n"
+                            Logger()<<"Value contains incorrect syntax: \n"
                             <<datablock->elements[elementIndex]->elementName<<" '"
                             <<datablock->elements[elementIndex]->elementIdentifier<<"': \n"
                             <<datablock->elements[elementIndex]->properties[propertyIndex]->propertyName<<": "<<valueToken<<"\n"<<std::endl; //syntax error;
@@ -183,7 +183,7 @@ bool File::ReadDataBlock(std::string block, DataBlock* datablock)
                         std::string valueToken = block.substr(currentPos, extractPos2);
                         if(!checkToken(valueToken))
                         {
-                            std::cout<<"Value contains incorrect syntax: \n"
+                            Logger()<<"Value contains incorrect syntax: \n"
                             <<datablock->elements[elementIndex]->elementName<<" '"
                             <<datablock->elements[elementIndex]->elementIdentifier<<"': \n"
                             <<datablock->elements[elementIndex]->properties[propertyIndex]->propertyName<<": "<<valueToken<<"\n"<<std::endl; //syntax error;
@@ -333,7 +333,7 @@ DataBlock* File::readFromFile(std::string name)
             //Append word to blocks
             if((int)(block.size()+word.size()) > maxSize)
             {
-                std::cout<<"STRING IS FULL - HOW?!?!!"<<std::endl;
+                Logger()<<"STRING IS FULL - HOW?!?!!"<<std::endl;
                 break;
             }
             block += word;
@@ -349,11 +349,11 @@ DataBlock* File::readFromFile(std::string name)
     else
     {
         success = false;
-        std::cout<<"Could not open file to read from: "<<fileName<<std::endl;
+        Logger()<<"Could not open file to read from: "<<fileName<<std::endl;
         return nullptr;
     }
     success = false;
-    std::cout<<"Something went wrong when attempting to read from file: "<<fileName<<std::endl;
+    Logger()<<"Something went wrong when attempting to read from file: "<<fileName<<std::endl;
     return nullptr;
 }
 

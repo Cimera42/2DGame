@@ -1,8 +1,8 @@
 #include "testSystem.h"
 #include "globals.h"
 
-#include <iostream>
 #include "testComponent.h"
+#include "logger.h"
 
 SystemID TestSystem::ID;
 
@@ -10,16 +10,16 @@ TestSystem::TestSystem()
 {
     //componentSubList.push_back(TestComponent::getStaticID());
 }
-TestSystem::~TestSystem(){std::cout << "detroyed" << std::endl;}
+TestSystem::~TestSystem(){Logger() << "detroyed" << std::endl;}
 
 void TestSystem::update()
 {
-    std::cout << "Test System updated" << std::endl;
+    Logger() << "Test System updated" << std::endl;
 
     for(int subID = 0; subID < subscribedEntities.size(); subID++)
     {
         Entity * entity = entities[subscribedEntities[subID]];
 
-        std::cout << "Entity " << entity->getID() << " is subscribed to Test System" << std::endl;
+        Logger() << "Entity " << entity->getID() << " is subscribed to Test System" << std::endl;
     }
 }

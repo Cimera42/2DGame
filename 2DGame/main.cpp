@@ -15,46 +15,56 @@
 #include "render2DComponent.h"
 #include "sceneStore.h"
 #include "textureStore.h"
-#include "textureLoadSystem.h"
+#include "terrainComponent.h"
+#include "renderTerrainSystem.h"
+#include "tempplayerControlSystem.h"
 
 #include <iostream>
 #include <string>
 #include <fstream>
-
-System * winSys;
-System * renSys;
-System * texLoadSys;
 
 int main()
 {
     initGLFW();
     initGLEW();
 
-    winSys = new WindowSystem();
-    systems[WindowSystem::getStaticID()] = winSys;
-    renSys = new Render2DSystem();
-    systems[Render2DSystem::getStaticID()] = renSys;
-    texLoadSys = new TextureLoadSystem();
-    systems[TextureLoadSystem::getStaticID()] = texLoadSys;
+    //Temporary loading place for systems
+    systems[WindowSystem::getStaticID()] = new WindowSystem();
+    systems[RenderTerrainSystem::getStaticID()] = new RenderTerrainSystem();
+    systems[Render2DSystem::getStaticID()] = new Render2DSystem();
+    systems[PlayerControlSystem::getStaticID()] = new PlayerControlSystem();
 
     //File loading TEST
     SceneStore * scene;
     if(Load<SceneStore>::Object(&scene, "debug/scene.store"))
     {
-        glClearColor(0.55f,0.65f,0.7f,1.0f);
-        while(!shouldExit)
+        int fps = 0;
+        double now = glfwGetTime();
+        glClearColor(0.55f,0.65f,0.8f,1.0f);
+        while(!shouldExit && !glfwGetKey(mainWindow->glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             //Temporary system loop
-            //Texture loading system
-            systems[TextureLoadSystem::getStaticID()]->update();
+            //Player movement system
+            systems[PlayerControlSystem::getStaticID()]->update();
+            //Terrain rendering system
+            systems[RenderTerrainSystem::getStaticID()]->update();
             //2D rendering system
             systems[Render2DSystem::getStaticID()]->update();
             //Should go last, since it updates window buffer
             systems[WindowSystem::getStaticID()]->update();
 
             glfwPollEvents();
+
+            //Simple fps counter
+            fps++;
+            if(glfwGetTime() > now + 1.0f)
+            {
+                Logger() << fps << std::endl;
+                now = glfwGetTime();
+                fps = 0;
+            }
         }
 
         deleteEntities();

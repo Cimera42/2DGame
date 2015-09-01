@@ -5,7 +5,7 @@
 		<Option title="2DGame" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;" />
+		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;Shaders\Terrain\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/2DGame" prefix_auto="1" extension_auto="1" />
@@ -96,6 +96,12 @@
 		<Unit filename="loader.h">
 			<Option virtualFolder="Loading/" />
 		</Unit>
+		<Unit filename="logger.cpp">
+			<Option virtualFolder="Global/" />
+		</Unit>
+		<Unit filename="logger.h">
+			<Option virtualFolder="Global/" />
+		</Unit>
 		<Unit filename="main.cpp">
 			<Option virtualFolder="Other/" />
 		</Unit>
@@ -120,6 +126,8 @@
 		<Unit filename="render2DSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
+		<Unit filename="renderTerrainSystem.cpp" />
+		<Unit filename="renderTerrainSystem.h" />
 		<Unit filename="sceneStore.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>
@@ -128,6 +136,12 @@
 		</Unit>
 		<Unit filename="shaders/frag.frag">
 			<Option virtualFolder="Shaders/" />
+		</Unit>
+		<Unit filename="shaders/terrainFrag.frag">
+			<Option virtualFolder="Shaders/Terrain/" />
+		</Unit>
+		<Unit filename="shaders/terrainVert.vert">
+			<Option virtualFolder="Shaders/Terrain/" />
 		</Unit>
 		<Unit filename="shaders/vert.vert">
 			<Option virtualFolder="Shaders/" />
@@ -144,6 +158,12 @@
 		<Unit filename="system.h">
 			<Option virtualFolder="System/" />
 		</Unit>
+		<Unit filename="tempplayerControlComponent.cpp" />
+		<Unit filename="tempplayerControlComponent.h" />
+		<Unit filename="tempplayerControlSystem.cpp" />
+		<Unit filename="tempplayerControlSystem.h" />
+		<Unit filename="terrainComponent.cpp" />
+		<Unit filename="terrainComponent.h" />
 		<Unit filename="testComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>
@@ -154,12 +174,6 @@
 			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="testSystem.h">
-			<Option virtualFolder="System/" />
-		</Unit>
-		<Unit filename="textureLoadSystem.cpp">
-			<Option virtualFolder="System/" />
-		</Unit>
-		<Unit filename="textureLoadSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="textureStore.cpp">

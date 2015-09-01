@@ -10,13 +10,13 @@ class Render2DComponent : public Component
         static ComponentID ID;
 
     public:
-        Render2DComponent(float, float);
+        Render2DComponent(glm::vec2, glm::vec2);
         virtual ~Render2DComponent();
 
-        glm::vec2 topLeft;
-        glm::vec2 topRight;
-        glm::vec2 bottomLeft;
-        glm::vec2 bottomRight;
+        glm::vec2 topLeftUV;
+        glm::vec2 topRightUV;
+        glm::vec2 bottomLeftUV;
+        glm::vec2 bottomRightUV;
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

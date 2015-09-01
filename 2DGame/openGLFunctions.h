@@ -12,6 +12,7 @@ void glSetBindFramebuffer(GLenum, GLuint);
 void glSetUseProgram(GLuint);
 
 class WindowComponent;
+extern GLFWwindow* glContext;
 extern WindowComponent* mainWindow;
 bool initGLFW();
 bool initGLEW();
