@@ -28,7 +28,7 @@ class Render2DSystem : public System
         GLuint textureLoc;
 
         std::vector<glm::vec2> vertices;
-        std::vector<glm::vec2> uvs;
+        std::vector<glm::vec4> uvs;
         std::vector<unsigned int> indices;
         int bufSize;
         std::vector<glm::mat4> matrices;

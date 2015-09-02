@@ -44,12 +44,15 @@ void TextureStore::loadStore(std::string name)
                 }
                 if (textureFile != "") //After we've loaded all properties for the texture element, we can actually load the texture!...
                 {
-                    pthread_mutex_lock(&textureLoadMutex);
-                    textureID = load2DTexture(textureFile, srgb); //Load the actual texture we store
-                    pthread_mutex_unlock(&textureLoadMutex);
+                    int tempID = load2DTexture(textureFile, srgb); //Load the actual texture we store
+                    if(tempID != 0)
+                    {
+                        pthread_mutex_lock(&textureLoadMutex);
+                        textureID = tempID;
+                        pthread_mutex_unlock(&textureLoadMutex);
 
-                    if(textureData != 0)
                         correctlyLoaded = true;
+                    }
                 }
             }
         }

@@ -290,7 +290,7 @@
 	<sys/types.h>
 	<time.h>
 
-1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\globals.cpp
+1441188204 source:e:\programming\c++\projects\2dgame\trunk\2dgame\globals.cpp
 	"globals.h"
 	"logger.h"
 	<pthread.h>
@@ -304,7 +304,7 @@
 1439541934 source:e:\programming\c++\projects\2dgame\trunk\2dgame\loader.cpp
 	"loader.h"
 
-1441102958 e:\programming\c++\projects\2dgame\trunk\2dgame\loader.h
+1441165508 e:\programming\c++\projects\2dgame\trunk\2dgame\loader.h
 	<map>
 	<string>
 	"fileReader.h"
@@ -363,7 +363,7 @@
 	<map>
 	<GL/glew.h>
 
-1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\loadtexture.cpp
+1441175832 source:e:\programming\c++\projects\2dgame\trunk\2dgame\loadtexture.cpp
 	"loadTexture.h"
 	"logger.h"
 
@@ -408,18 +408,18 @@
 1439697090 e:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.h
 	"system.h"
 
-1441103956 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
+1441178052 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
 	"system.h"
 	"render2DComponent.h"
 	"worldComponent.h"
 	"textureStore.h"
 	<GL/glew.h>
 
-1441105888 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.h
+1441177364 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.h
 	"component.h"
 	<glm/glm.hpp>
 
-1441001566 e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.h
+1441109710 e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.h
 	"fileReader.h"
 	"store.h"
 	"openGLFunctions.h"
@@ -467,10 +467,11 @@
 	"windowComponent.h"
 	"logger.h"
 
-1440465326 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
+1441187720 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
 	"render2DComponent.h"
+	"logger.h"
 
-1441103898 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
+1441188014 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
 	"render2DSystem.h"
 	"globals.h"
 	<iostream>
@@ -494,7 +495,7 @@
 
 1439534216 e:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.inl
 
-1441102946 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
+1441104252 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
 	"sceneStore.h"
 	"openGLFunctions.h"
 	"entity.h"
@@ -543,7 +544,7 @@
 	"globals.h"
 	<pthread.h>
 
-1441102944 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
+1441156546 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
 	"loadTexture.h"
 	"logger.h"
@@ -589,7 +590,7 @@
 1441010578 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolcomponent.cpp
 	"tempplayerControlComponent.h"
 
-1441011080 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
+1441105824 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
 	"tempplayerControlSystem.h"
 	"globals.h"
 	"openGLFunctions.h"

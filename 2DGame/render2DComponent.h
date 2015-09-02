@@ -13,10 +13,8 @@ class Render2DComponent : public Component
         Render2DComponent(glm::vec2, glm::vec2);
         virtual ~Render2DComponent();
 
-        glm::vec2 topLeftUV;
-        glm::vec2 topRightUV;
-        glm::vec2 bottomLeftUV;
-        glm::vec2 bottomRightUV;
+        glm::vec2 startUV;
+        glm::vec2 UVsize;
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

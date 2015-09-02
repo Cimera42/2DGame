@@ -44,6 +44,7 @@ class LoadJoin //Class to allow for paramter transfer to thread
 public:
     T** returnLoc;
     std::string s;
+    T* defaultValues;
 };
 
 template <class T>
@@ -80,31 +81,33 @@ void* Load<T>::threadedLoad(void* inptr)
     else
     {
         //if it doesnt exist, create it
-        T* create = new T();
-        create->loadStore(s);
-        if(create->correctlyLoaded)
+        T* loadedValues = new T();
+        loadedValues->loadStore(s);
+        if(loadedValues->correctlyLoaded)
         {
             //check loading process succeded
-            internalMap.insert(std::pair<std::string, Store*>(s, create));
-            create->internalName = s;
+            internalMap.insert(std::pair<std::string, Store*>(s, loadedValues));
+            loadedValues->internalName = s;
             //overide and delete and return
-            *returnLoc = create;
+            *returnLoc = loadedValues;
+            delete inParam.defaultValues;
             return NULL; //true;
         }
         else
         {
             //if something goes wrong in loading, return indication of failure
-            delete create;
+            delete loadedValues;
             //set returnLoc to point to default or just nullptr it?
             //Loading incomplete: Give error
-            Logger()<<"Load Error: Cannot load object '"<<s<<"'. Returning nullptr. \n \n"; //Loading a new object hasnt worked - report it
+            Logger()<<"Load Error: Cannot load object '"<<s<<"'. \n \n"; //Loading a new object hasnt worked - report it
             //use default and delete the new threaded one etc etc and return
-            *returnLoc = nullptr;
+            //*returnLoc = nullptr;
             return NULL; //false;
         }
     }
 
     delete inptr;
+    return NULL;
 }
 
 //IMPLEMENTATION - needs to be moved and the acceptable classes controlled in .cpp
@@ -112,15 +115,16 @@ template <class T>
 bool Load<T>::Object(T** returnLoc, std::string s)
 {
     //Create a new instance of the store
-    T * create = new T();
+    T * defaultValues = new T();
     //create->loadStore(s); //REMOVE IF 2ND THREAD
     //create->internalName = s; //REMOVE IF 2ND THREAD
-    *returnLoc = create;
+    *returnLoc = defaultValues;
 
     //Create paramters to send to secondary thread
     LoadJoin<T>* param = new LoadJoin<T>();
     param->returnLoc = returnLoc;
     param->s = s;
+    param->defaultValues = defaultValues;
 
     //IF 2ND THREAD, REMOVE COMMENTS
     //Create a thread which does loading, and in the meantime - return the created instance of the store.

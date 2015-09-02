@@ -1,14 +1,14 @@
 #include "render2DComponent.h"
+#include "logger.h"
 
 ComponentID Render2DComponent::ID;
 
-Render2DComponent::Render2DComponent(glm::vec2 startUV, glm::vec2 endUV)
+Render2DComponent::Render2DComponent(glm::vec2 inStartUV, glm::vec2 inSize)
 {
-    //UVs for each corner
-    topLeftUV = glm::vec2(startUV.x, endUV.y);
-    topRightUV = glm::vec2(endUV.x, endUV.y);
+    //start position of UV
+    startUV = glm::vec2(inStartUV.x, inStartUV.y);
 
-    bottomLeftUV = glm::vec2(startUV.x, startUV.y);
-    bottomRightUV = glm::vec2(endUV.x, startUV.y);
+    //Width and height of UV
+    UVsize = glm::vec2(inSize.x, inSize.y);
 }
 Render2DComponent::~Render2DComponent(){}

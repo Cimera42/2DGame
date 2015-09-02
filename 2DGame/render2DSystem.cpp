@@ -62,35 +62,38 @@ Render2DSystem::Render2DSystem()
     glSetBindVertexArray(VAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
         //Enable vertex buffer
+        int vertLoc = 0;
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0); //attribute, size, type, is normalised?, stride, offset
+        glEnableVertexAttribArray(vertLoc);
+        glVertexAttribPointer(vertLoc, 2, GL_FLOAT, GL_FALSE, 0, 0); //attribute, size, type, is normalised?, stride, offset
         //Use same data set each draw
-        glVertexAttribDivisor(0,0);
+        glVertexAttribDivisor(vertLoc,0);
 
+        int uvLoc = 1;
         glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0); //attribute, size, type, is normalised?, stride, offset
+        glEnableVertexAttribArray(uvLoc);
+        glVertexAttribPointer(uvLoc, 4, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), 0); //attribute, size, type, is normalised?, stride, offset
         //PROBLEM HERE
         //Use unique uvs for each draw
-        //glVertexAttribDivisor(1,1);
+        glVertexAttribDivisor(uvLoc,1);
 
         //Use a unique matrix for each draw
+        int matLoc = 2;
         glBindBuffer(GL_ARRAY_BUFFER, matrixBuffer);
         //Vertex attribute for each matrix row
-        glEnableVertexAttribArray(2);
-        glEnableVertexAttribArray(3);
-        glEnableVertexAttribArray(4);
-        glEnableVertexAttribArray(5);
-        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*0)); //attribute, size, type, is normalised?, stride, offset
-        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*4)); //attribute, size, type, is normalised?, stride, offset
-        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*8)); //attribute, size, type, is normalised?, stride, offset
-        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*12)); //attribute, size, type, is normalised?, stride, offset
+        glEnableVertexAttribArray(matLoc+0);
+        glEnableVertexAttribArray(matLoc+1);
+        glEnableVertexAttribArray(matLoc+2);
+        glEnableVertexAttribArray(matLoc+3);
+        glVertexAttribPointer(matLoc+0, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*0)); //attribute, size, type, is normalised?, stride, offset
+        glVertexAttribPointer(matLoc+1, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*4)); //attribute, size, type, is normalised?, stride, offset
+        glVertexAttribPointer(matLoc+2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*8)); //attribute, size, type, is normalised?, stride, offset
+        glVertexAttribPointer(matLoc+3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float)*12)); //attribute, size, type, is normalised?, stride, offset
 
-        glVertexAttribDivisor(2,1);
-        glVertexAttribDivisor(3,1);
-        glVertexAttribDivisor(4,1);
-        glVertexAttribDivisor(5,1);
+        glVertexAttribDivisor(matLoc+0,1);
+        glVertexAttribDivisor(matLoc+1,1);
+        glVertexAttribDivisor(matLoc+2,1);
+        glVertexAttribDivisor(matLoc+3,1);
     glSetBindVertexArray(0);
 
     //Create shader
@@ -117,10 +120,7 @@ Render2DSystem::~Render2DSystem()
 void Render2DSystem::addToList(WorldComponent* inWorld, Render2DComponent* inRender)
 {
     //Push uvs
-    uvs.push_back(inRender->topLeftUV);
-    uvs.push_back(inRender->topRightUV);
-    uvs.push_back(inRender->bottomLeftUV);
-    uvs.push_back(inRender->bottomRightUV);
+    uvs.push_back(glm::vec4(inRender->startUV.x,inRender->startUV.y,inRender->UVsize.x,inRender->UVsize.y));
 
     //Push matrix
     matrices.push_back(inWorld->modelMatrix);
@@ -128,9 +128,9 @@ void Render2DSystem::addToList(WorldComponent* inWorld, Render2DComponent* inRen
 
 void Render2DSystem::resizeBuffers()
 {
-    //Reallocate buffers
+    //Reallocate buffers in order
     glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec4), &uvs[0], GL_STREAM_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, matrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, matrices.size() * sizeof(glm::mat4), &matrices[0][0], GL_STREAM_DRAW);
@@ -169,7 +169,7 @@ void Render2DSystem::entitySubscribed(Entity* inEntity)
 void Render2DSystem::entityUnsubscribed(Entity* inEntity)
 {
     //Clear buffers
-    std::vector<glm::vec2>().swap(uvs);
+    std::vector<glm::vec4>().swap(uvs);
     std::vector<glm::mat4>().swap(matrices);
     //Reload data for all objects
     for(int subID = 0; subID < subscribedEntities.size(); subID++)
@@ -199,7 +199,8 @@ void Render2DSystem::update()
     }
     else
     {
-        refillBuffers();
+        if(!glfwGetKey(mainWindow->glfwWindow, GLFW_KEY_R))
+            refillBuffers();
     }
     glSetUseProgram(shader);
 

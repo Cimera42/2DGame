@@ -126,8 +126,12 @@
 		<Unit filename="render2DSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
-		<Unit filename="renderTerrainSystem.cpp" />
-		<Unit filename="renderTerrainSystem.h" />
+		<Unit filename="renderTerrainSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="renderTerrainSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
 		<Unit filename="sceneStore.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>
@@ -158,12 +162,24 @@
 		<Unit filename="system.h">
 			<Option virtualFolder="System/" />
 		</Unit>
-		<Unit filename="tempplayerControlComponent.cpp" />
-		<Unit filename="tempplayerControlComponent.h" />
-		<Unit filename="tempplayerControlSystem.cpp" />
-		<Unit filename="tempplayerControlSystem.h" />
-		<Unit filename="terrainComponent.cpp" />
-		<Unit filename="terrainComponent.h" />
+		<Unit filename="tempplayerControlComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="tempplayerControlComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="tempplayerControlSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="tempplayerControlSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="terrainComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="terrainComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
 		<Unit filename="testComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>

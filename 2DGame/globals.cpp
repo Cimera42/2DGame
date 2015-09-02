@@ -31,20 +31,24 @@ void deleteEntities()
         Logger() << "Entity " << toDelete[i] << " deleted" << std::endl;
         entities.erase(toDelete[i]);
         entCount++;
-        Logger() << "Entity " << toDelete[i] << " deleted1" << std::endl;
     }
-        Logger() << "Entityis" << " deleted2" << std::endl;
     Logger() << entCount << " entities deleted" << std::endl;
 }
 
 void deleteSystems()
 {
-    int sysCount = 0;
+    std::vector<SystemID> toDelete;
     for(std::map<SystemID, System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
     {
-        delete systemPair->second;
-        Logger() << "System " << systemPair->first << " deleted" << std::endl;
-        systems.erase(systemPair->first);
+        toDelete.push_back(systemPair->first);
+    }
+
+    int sysCount = 0;
+    for(int i = 0; i < toDelete.size(); i++)
+    {
+        delete systems[toDelete[i]];
+        Logger() << "System " << toDelete[i] << " deleted" << std::endl;
+        systems.erase(toDelete[i]);
         sysCount++;
     }
     Logger() << sysCount << " systems deleted" << std::endl;

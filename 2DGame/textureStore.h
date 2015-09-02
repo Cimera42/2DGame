@@ -19,7 +19,6 @@ public:
     bool srgb;
 
     //Loaded
-    unsigned char* textureData;
     GLuint textureID;
 
     pthread_mutex_t textureLoadMutex ;
