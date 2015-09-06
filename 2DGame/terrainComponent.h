@@ -13,7 +13,7 @@ class TerrainComponent : public Component
         static ComponentID ID;
 
     public:
-        TerrainComponent();
+        TerrainComponent(int, float);
         virtual ~TerrainComponent();
 
         std::vector<glm::vec2> surface;

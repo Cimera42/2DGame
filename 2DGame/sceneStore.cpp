@@ -61,7 +61,9 @@ void SceneStore::loadStore(std::string name)
                     else if(sceneBlock->checkCurrentProperty("terrain"))
                     {
                         //Terrain component FOR NOW
-                        TerrainComponent* terrain = new TerrainComponent();
+                        int numPoints = sceneBlock->getCurrentValue<int>(0);
+                        float scale = sceneBlock->getCurrentValue<float>(1);
+                        TerrainComponent* terrain = new TerrainComponent(numPoints, scale);
                         ent->addComponent(terrain);
                     }
                     else if(sceneBlock->checkCurrentProperty("control"))

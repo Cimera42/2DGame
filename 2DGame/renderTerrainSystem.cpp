@@ -11,9 +11,11 @@ SystemID RenderTerrainSystem::ID;
 
 RenderTerrainSystem::RenderTerrainSystem()
 {
+    std::vector<ComponentID> subList1;
     //Components needed to subscribe to system
-    componentSubList.push_back(WorldComponent::getStaticID());
-    componentSubList.push_back(TerrainComponent::getStaticID());
+    subList1.push_back(WorldComponent::getStaticID());
+    subList1.push_back(TerrainComponent::getStaticID());
+    addSubList(subList1);
 
     //Generate shader
     std::vector<const char*> shaderLocations;
@@ -35,9 +37,9 @@ void RenderTerrainSystem::update()
     //Set shader
     glSetUseProgram(shader);
 
-    for(int subID = 0; subID < subscribedEntities.size(); subID++)
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {
-        Entity * entity = entities[subscribedEntities[subID]];
+        Entity * entity = entities[subscribedEntities[0][subID]];
 
         //Get components
         WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));

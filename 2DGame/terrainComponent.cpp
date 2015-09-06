@@ -4,12 +4,12 @@
 
 ComponentID TerrainComponent::ID;
 
-TerrainComponent::TerrainComponent()
+TerrainComponent::TerrainComponent(int numPoints, float heightScale)
 {
     //Generate surface points
-    for(int i = 0; i <= 10; i++)
+    for(int i = 0; i <= numPoints; i++)
     {
-        surface.push_back(glm::vec2(i/10.0f,(rand()%100)/400.0f ));
+        surface.push_back(glm::vec2((float)i/numPoints,(rand()%100)/100.0f*heightScale));
     }
 
     //Position of bottom of terrain - where terrain ends vertically
@@ -71,6 +71,8 @@ TerrainComponent::~TerrainComponent()
     glDeleteBuffers(1, &vertexBuffer);
     glDeleteBuffers(1, &uvBuffer);
     glDeleteBuffers(1, &indexBuffer);
+
+    Unload<TextureStore>::Object(&textureStore);
 }
 
 //Regenerate buffers if data has changed

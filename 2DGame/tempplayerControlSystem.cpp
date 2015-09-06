@@ -10,16 +10,19 @@ SystemID PlayerControlSystem::ID;
 
 PlayerControlSystem::PlayerControlSystem()
 {
-    componentSubList.push_back(WorldComponent::getStaticID());
-    componentSubList.push_back(PlayerControlComponent::getStaticID());
+    std::vector<ComponentID> subList1;
+    //Components needed to subscribe to system
+    subList1.push_back(WorldComponent::getStaticID());
+    subList1.push_back(PlayerControlComponent::getStaticID());
+    addSubList(subList1);
 }
 PlayerControlSystem::~PlayerControlSystem(){}
 
 void PlayerControlSystem::update()
 {
-    for(int subID = 0; subID < subscribedEntities.size(); subID++)
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {
-        Entity * entity = entities[subscribedEntities[subID]];
+        Entity * entity = entities[subscribedEntities[0][subID]];
 
         WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
         PlayerControlComponent* controlComp = static_cast<PlayerControlComponent*>(entity->getComponent(PlayerControlComponent::getStaticID()));

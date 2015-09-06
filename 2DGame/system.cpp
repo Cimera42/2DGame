@@ -12,34 +12,42 @@ System::System(){}
 System::~System(){}
 void System::update(){}
 
-//Check if component is in list
-bool System::checkComponent(ComponentID inCompID)
+//Add list of components needed for subscription
+void System::addSubList(std::vector<ComponentID> inList)
 {
-    for(int i = 0; i < componentSubList.size(); i++)
+    componentSubList.push_back(inList);
+    std::vector<EntityID> a;
+    subscribedEntities.push_back(a);
+}
+
+//Check if component is in list
+bool System::checkComponent(ComponentID inCompID, int listID)
+{
+    for(int i = 0; i < componentSubList[listID].size(); i++)
     {
-        if(componentSubList[i] == inCompID)
+        if(componentSubList[listID][i] == inCompID)
             return true;
     }
     return false;
 }
 
 //Check if entity has all components required
-bool System::checkEntityComponents(Entity* inEntity)
+bool System::checkEntityComponents(Entity* inEntity, int listID)
 {
-    for(int i = 0; i < componentSubList.size(); i++)
+    for(int i = 0; i < componentSubList[listID].size(); i++)
     {
-        if(!inEntity->hasComponent(componentSubList[i]))
+        if(!inEntity->hasComponent(componentSubList[listID][i]))
             return false;
     }
     return true;
 }
 
 //Check if entity is already subscribed to system
-int System::checkEntityAlreadySubscribed(EntityID inEntID)
+int System::checkEntityAlreadySubscribed(EntityID inEntID, int listID)
 {
-    for(int i = 0; i < subscribedEntities.size(); i++)
+    for(int i = 0; i < subscribedEntities[listID].size(); i++)
     {
-        if(subscribedEntities[i] == inEntID)
+        if(subscribedEntities[listID][i] == inEntID)
             return i;
     }
     return -1;
@@ -47,39 +55,46 @@ int System::checkEntityAlreadySubscribed(EntityID inEntID)
 
 bool System::subscribe(Entity* inEntity, ComponentID newCompID)
 {
-    //Check if newly added component is in list
-    if(checkComponent(newCompID))
+    bool subbed = false;
+    for(int i = 0; i < componentSubList.size(); i++)
     {
-        //Check if entity is already subscribed to system
-        if(checkEntityAlreadySubscribed(inEntity->entityID) == -1)
+        //Check if newly added component is in list
+        if(checkComponent(newCompID, i))
         {
-            //Check entity has all required components
-            if(checkEntityComponents(inEntity))
+            //Check if entity is already subscribed to system
+            if(checkEntityAlreadySubscribed(inEntity->entityID, i) == -1)
             {
-                subscribedEntities.push_back(inEntity->entityID);
-                entitySubscribed(inEntity);
+                //Check entity has all required components
+                if(checkEntityComponents(inEntity, i))
+                {
+                    subscribedEntities[i].push_back(inEntity->entityID);
+                    entitySubscribed(inEntity);
 
-                if(DEBUG)
                     Logger() << "Entity " << inEntity->entityID << " subscribed to system " << getID() << std::endl;
-                return true;
+                    subbed = true;
+                }
             }
         }
     }
-    return false;
+    return subbed;
 }
 
 bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
 {
-    //Check if newly removed component is in list
-    if(checkComponent(oldCompID))
+    bool subbed = false;
+    for(int i = 0; i < componentSubList.size(); i++)
     {
-        //Check if entity is already subscribed to system
-        int subID = checkEntityAlreadySubscribed(inEntity->entityID);
-        if(subID != -1)
+        //Check if newly removed component is in list
+        if(checkComponent(oldCompID, i))
         {
-            subscribedEntities.erase(subscribedEntities.begin() + subID);
-            entityUnsubscribed(inEntity);
-            return true;
+            //Check if entity is already subscribed to system
+            int subID = checkEntityAlreadySubscribed(inEntity->entityID, i);
+            if(subID != -1)
+            {
+                subscribedEntities[i].erase(subscribedEntities[i].begin() + subID);
+                entityUnsubscribed(inEntity);
+                return true;
+            }
         }
     }
     return false;

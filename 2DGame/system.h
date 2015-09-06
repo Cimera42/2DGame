@@ -25,11 +25,13 @@ class System
         static SystemID getStaticID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
 
         //Entity subscription
-        std::vector<ComponentID> componentSubList;
-        std::vector<EntityID> subscribedEntities;
-        bool checkComponent(ComponentID);
-        bool checkEntityComponents(Entity*);
-        int checkEntityAlreadySubscribed(EntityID);
+        std::vector<std::vector<ComponentID> > componentSubList;
+        void addSubList(std::vector<ComponentID>);
+
+        std::vector<std::vector<EntityID> > subscribedEntities;
+        bool checkComponent(ComponentID, int);
+        bool checkEntityComponents(Entity*, int);
+        int checkEntityAlreadySubscribed(EntityID, int);
         bool subscribe(Entity*, ComponentID);
         bool unsubscribe(Entity*, ComponentID);
         virtual void entitySubscribed(Entity*){}

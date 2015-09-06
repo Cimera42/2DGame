@@ -14,9 +14,11 @@ SystemID Render2DSystem::ID;
 
 Render2DSystem::Render2DSystem()
 {
-    //Components required for subscription
-    componentSubList.push_back(WorldComponent::getStaticID());
-    componentSubList.push_back(Render2DComponent::getStaticID());
+    std::vector<ComponentID> subList1;
+    //Components needed to subscribe to system
+    subList1.push_back(WorldComponent::getStaticID());
+    subList1.push_back(Render2DComponent::getStaticID());
+    addSubList(subList1);
 
     //Standard quad vertices
     vertices.push_back(glm::vec2(-0.5f,0.5f));
@@ -104,7 +106,7 @@ Render2DSystem::Render2DSystem()
     shader = loadShader("shaders/vert.vert", "shaders/frag.frag", shaderLocations);
 
     //Load texture
-    bool success = Load<TextureStore>::Object(&textureStore, "debug/texture.store");
+    Load<TextureStore>::Object(&textureStore, "debug/texture.store");
     textureLoc = glGetUniformLocation(shader, "textureSampler");
 }
 Render2DSystem::~Render2DSystem()
@@ -115,6 +117,8 @@ Render2DSystem::~Render2DSystem()
     glDeleteBuffers(1, &indexBuffer);
     glDeleteBuffers(1, &matrixBuffer);
     glDeleteShader(shader);
+
+    Unload<TextureStore>::Object(&textureStore);
 }
 
 void Render2DSystem::addToList(WorldComponent* inWorld, Render2DComponent* inRender)
@@ -140,9 +144,9 @@ void Render2DSystem::refillBuffers()
 {
     //Reload matrix data
     std::vector<glm::mat4>().swap(matrices);
-    for(int subID = 0; subID < subscribedEntities.size(); subID++)
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {
-        Entity * entity = entities[subscribedEntities[subID]];
+        Entity * entity = entities[subscribedEntities[0][subID]];
 
         WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
 
@@ -172,9 +176,9 @@ void Render2DSystem::entityUnsubscribed(Entity* inEntity)
     std::vector<glm::vec4>().swap(uvs);
     std::vector<glm::mat4>().swap(matrices);
     //Reload data for all objects
-    for(int subID = 0; subID < subscribedEntities.size(); subID++)
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {
-        Entity * entity = entities[subscribedEntities[subID]];
+        Entity * entity = entities[subscribedEntities[0][subID]];
 
         if(entity != inEntity)
         {

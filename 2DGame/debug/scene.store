@@ -22,14 +22,8 @@ world: -0.5,-0.5, 0.75,1;
 render2d: 0, 0, 0.5, 0.5;
 }
 
-Entity "house"
-{
-world: 0.5,-0.5, 0.75,1;
-render2d: 0, 0, 0.5, 0.5;
-}
-
 Entity
 {
 world: -1,-0.25, 2,1;
-terrain: 0;
+terrain: 100, 0.25;
 }

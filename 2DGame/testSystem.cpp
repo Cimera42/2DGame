@@ -16,9 +16,9 @@ void TestSystem::update()
 {
     Logger() << "Test System updated" << std::endl;
 
-    for(int subID = 0; subID < subscribedEntities.size(); subID++)
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {
-        Entity * entity = entities[subscribedEntities[subID]];
+        Entity * entity = entities[subscribedEntities[0][subID]];
 
         Logger() << "Entity " << entity->getID() << " is subscribed to Test System" << std::endl;
     }

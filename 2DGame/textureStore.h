@@ -10,7 +10,7 @@ class TextureStore : public Store
 {
 public:
     TextureStore();
-    ~TextureStore(){};
+    ~TextureStore();
     void loadStore(std::string);
 
     //Extracted

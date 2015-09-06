@@ -13,7 +13,7 @@
 1439436218 e:\programming\c++\projects\2dgame\trunk\2dgame\entity.h
 	<map>
 
-1440561038 e:\programming\c++\projects\2dgame\trunk\2dgame\system.h
+1441348986 e:\programming\c++\projects\2dgame\trunk\2dgame\system.h
 	<vector>
 
 1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\filereader.cpp
@@ -295,7 +295,7 @@
 	"logger.h"
 	<pthread.h>
 
-1440592612 e:\programming\c++\projects\2dgame\trunk\2dgame\globals.h
+1441347592 e:\programming\c++\projects\2dgame\trunk\2dgame\globals.h
 	<map>
 	"entity.h"
 	"component.h"
@@ -419,7 +419,7 @@
 	"component.h"
 	<glm/glm.hpp>
 
-1441109710 e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.h
+1441197100 e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.h
 	"fileReader.h"
 	"store.h"
 	"openGLFunctions.h"
@@ -445,7 +445,7 @@
 	"openGLFunctions.h"
 	<pthread.h>
 
-1441000194 e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
+1441239818 e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
 	"component.h"
 	"openGLFunctions.h"
 	<glm/glm.hpp>
@@ -471,7 +471,7 @@
 	"render2DComponent.h"
 	"logger.h"
 
-1441188014 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
+1441348636 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
 	"render2DSystem.h"
 	"globals.h"
 	<iostream>
@@ -495,7 +495,7 @@
 
 1439534216 e:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.inl
 
-1441104252 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
+1441239784 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
 	"sceneStore.h"
 	"openGLFunctions.h"
 	"entity.h"
@@ -511,14 +511,14 @@
 1440420426 source:e:\programming\c++\projects\2dgame\trunk\2dgame\store.cpp
 	"store.h"
 
-1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
+1441348836 source:e:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
 	"system.h"
 	"entity.h"
 	"globals.h"
 	<map>
 	"logger.h"
 
-1441000690 source:e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
+1441342374 source:e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
 	"terrainComponent.h"
 	"loader.h"
 	"logger.h"
@@ -529,7 +529,7 @@
 1439437358 e:\programming\c++\projects\2dgame\trunk\2dgame\testcomponent.h
 	"component.h"
 
-1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\testsystem.cpp
+1441348872 source:e:\programming\c++\projects\2dgame\trunk\2dgame\testsystem.cpp
 	"testSystem.h"
 	"globals.h"
 	"testComponent.h"
@@ -544,7 +544,7 @@
 	"globals.h"
 	<pthread.h>
 
-1441156546 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
+1441196988 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
 	"loadTexture.h"
 	"logger.h"
@@ -561,7 +561,7 @@
 	"openGLFunctions.h"
 	"logger.h"
 
-1440321946 source:e:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.cpp
+1441348698 source:e:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.cpp
 	"windowSystem.h"
 	"globals.h"
 	<iostream>
@@ -572,7 +572,7 @@
 	"worldComponent.h"
 	<glm/gtx/transform.hpp>
 
-1441000868 source:e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
+1441348662 source:e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
 	"renderTerrainSystem.h"
 	"terrainComponent.h"
 	"worldComponent.h"
@@ -590,11 +590,599 @@
 1441010578 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolcomponent.cpp
 	"tempplayerControlComponent.h"
 
-1441105824 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
+1441349218 source:e:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
 	"tempplayerControlSystem.h"
 	"globals.h"
 	"openGLFunctions.h"
 	"windowComponent.h"
 	"worldComponent.h"
 	"tempplayerControlComponent.h"
+
+1438942990 source:d:\programming\c++\projects\2dgame\trunk\2dgame\component.cpp
+	"component.h"
+
+1439435204 d:\programming\c++\projects\2dgame\trunk\2dgame\component.h
+
+1440420422 source:d:\programming\c++\projects\2dgame\trunk\2dgame\entity.cpp
+	"entity.h"
+	"component.h"
+	"system.h"
+	<stdlib.h>
+
+1439436218 d:\programming\c++\projects\2dgame\trunk\2dgame\entity.h
+	<map>
+
+1441348986 d:\programming\c++\projects\2dgame\trunk\2dgame\system.h
+	<vector>
+
+1440751506 source:d:\programming\c++\projects\2dgame\trunk\2dgame\filereader.cpp
+	"fileReader.h"
+	"logger.h"
+	<algorithm>
+
+1440464484 d:\programming\c++\projects\2dgame\trunk\2dgame\filereader.h
+	<string>
+	<vector>
+	<fstream>
+	<glm/glm.hpp>
+	"typeConversion.h"
+
+1439534150 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\glm.hpp
+	"core/_fixes.hpp"
+	<cmath>
+	<climits>
+	<cfloat>
+	<limits>
+	<cstdio>
+	"core/setup.hpp"
+	"./core/_detail.hpp"
+	"./core/type.hpp"
+	"./core/func_trigonometric.hpp"
+	"./core/func_exponential.hpp"
+	"./core/func_common.hpp"
+	"./core/func_packing.hpp"
+	"./core/func_geometric.hpp"
+	"./core/func_matrix.hpp"
+	"./core/func_vector_relational.hpp"
+	"./core/func_integer.hpp"
+	"./core/func_noise.hpp"
+	"./core/_swizzle.hpp"
+
+1439534122 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\_fixes.hpp
+	<cmath>
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\setup.hpp
+	<immintrin.h>
+	<immintrin.h>
+	<smmintrin.h>
+	<pmmintrin.h>
+	<emmintrin.h>
+
+1439534122 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\_detail.hpp
+	"setup.hpp"
+	<cassert>
+	<cstdint>
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type.hpp
+	"type_half.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_gentype.hpp"
+	"type_vec1.hpp"
+	"type_vec2.hpp"
+	"type_vec3.hpp"
+	"type_vec4.hpp"
+	"type_mat2x2.hpp"
+	"type_mat2x3.hpp"
+	"type_mat2x4.hpp"
+	"type_mat3x2.hpp"
+	"type_mat3x3.hpp"
+	"type_mat3x4.hpp"
+	"type_mat4x2.hpp"
+	"type_mat4x3.hpp"
+	"type_mat4x4.hpp"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_half.hpp
+	<cstdlib>
+	"type_half.inl"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_half.inl
+	"_detail.hpp"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_float.hpp
+	"type_half.hpp"
+	"setup.hpp"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_int.hpp
+	"setup.hpp"
+	"_detail.hpp"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_gentype.hpp
+	"type_size.hpp"
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_size.hpp
+	<cstdlib>
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec1.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec1.inl"
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec.hpp
+	"type_gentype.hpp"
+
+1439534122 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\_swizzle.hpp
+	"_swizzle_func.hpp"
+
+1439534122 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\_swizzle_func.hpp
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec1.inl
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec2.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec2.inl"
+
+1439534140 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec2.inl
+
+1439534140 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec3.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec3.inl"
+
+1439534140 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec3.inl
+
+1439534140 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec4.hpp
+	"type_vec.hpp"
+	"type_float.hpp"
+	"type_int.hpp"
+	"type_size.hpp"
+	"_swizzle.hpp"
+	"type_vec4.inl"
+
+1439534140 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_vec4.inl
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x2.hpp
+	"type_mat.hpp"
+	"type_mat2x2.inl"
+
+1439534132 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat.hpp
+	"type_gentype.hpp"
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x2.inl
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x3.hpp
+	"type_mat.hpp"
+	"type_mat2x3.inl"
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x3.inl
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x4.hpp
+	"type_mat.hpp"
+	"type_mat2x4.inl"
+
+1439534134 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat2x4.inl
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x2.hpp
+	"type_mat.hpp"
+	"type_mat3x2.inl"
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x2.inl
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x3.hpp
+	"type_mat.hpp"
+	"type_mat3x3.inl"
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x3.inl
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x4.hpp
+	"type_mat.hpp"
+	"type_mat3x4.inl"
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat3x4.inl
+
+1439534136 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x2.hpp
+	"type_mat.hpp"
+	"type_mat4x2.inl"
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x2.inl
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x3.hpp
+	"type_mat.hpp"
+	"type_mat4x3.inl"
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x3.inl
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x4.hpp
+	"type_mat.hpp"
+	"type_mat4x4.inl"
+
+1439534138 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\type_mat4x4.inl
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_trigonometric.hpp
+	"func_trigonometric.inl"
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_trigonometric.inl
+	"_vectorize.hpp"
+
+1439534122 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\_vectorize.hpp
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_exponential.hpp
+	"func_exponential.inl"
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_exponential.inl
+	"_vectorize.hpp"
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_common.hpp
+	"_fixes.hpp"
+	"func_common.inl"
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_common.inl
+	"_vectorize.hpp"
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_packing.hpp
+	"func_packing.inl"
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_packing.inl
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_geometric.hpp
+	"func_geometric.inl"
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_geometric.inl
+	"_vectorize.hpp"
+
+1439534126 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_matrix.hpp
+	"func_matrix.inl"
+
+1439534126 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_matrix.inl
+	"_vectorize.hpp"
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_vector_relational.hpp
+	"_detail.hpp"
+	"func_vector_relational.inl"
+
+1439534128 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_vector_relational.inl
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_integer.hpp
+	"func_integer.inl"
+
+1439534124 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_integer.inl
+	"_vectorize.hpp"
+	<intrin.h>
+
+1439534126 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_noise.hpp
+	"func_noise.inl"
+
+1439534126 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\core\func_noise.inl
+
+1440160654 d:\programming\c++\projects\2dgame\trunk\2dgame\typeconversion.h
+	<string>
+
+1441105766 d:\programming\c++\projects\2dgame\trunk\2dgame\logger.h
+	<pthread.h>
+	<iostream>
+	<sstream>
+
+1439534252 d:\programming\c++\projects\2dgame\trunk\libraries\include\pthread.h
+	<windows.h>
+	"config.h"
+	<time.h>
+	<signal.h>
+	<limits.h>
+	"need_errno.h"
+	<errno.h>
+	<sched.h>
+	<sys/types.h>
+
+1439534252 d:\programming\c++\projects\2dgame\trunk\libraries\include\sched.h
+	"need_errno.h"
+	<errno.h>
+	<sys/types.h>
+	<time.h>
+
+1441188204 source:d:\programming\c++\projects\2dgame\trunk\2dgame\globals.cpp
+	"globals.h"
+	"logger.h"
+	<pthread.h>
+
+1441347592 d:\programming\c++\projects\2dgame\trunk\2dgame\globals.h
+	<map>
+	"entity.h"
+	"component.h"
+	"system.h"
+
+1439541934 source:d:\programming\c++\projects\2dgame\trunk\2dgame\loader.cpp
+	"loader.h"
+
+1441165508 d:\programming\c++\projects\2dgame\trunk\2dgame\loader.h
+	<map>
+	<string>
+	"fileReader.h"
+	"store.h"
+	"openGLFunctions.h"
+	"logger.h"
+	"windowComponent.h"
+	<pthread.h>
+
+1440160652 d:\programming\c++\projects\2dgame\trunk\2dgame\store.h
+	<string>
+	<iostream>
+
+1440908306 d:\programming\c++\projects\2dgame\trunk\2dgame\openglfunctions.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+
+1440225062 d:\programming\c++\projects\2dgame\trunk\libraries\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<Availability.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
+1439533906 d:\programming\c++\projects\2dgame\trunk\libraries\include\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl3ext.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl3.h>
+	<GLES3/gl2ext.h>
+	<GLES3/gl31.h>
+	<GLES3/gl2ext.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<GL/glu.h>
+
+1440939682 d:\programming\c++\projects\2dgame\trunk\2dgame\windowcomponent.h
+	<string>
+	"component.h"
+	"fileReader.h"
+	"openGLFunctions.h"
+	<glm/glm.hpp>
+
+1440751506 source:d:\programming\c++\projects\2dgame\trunk\2dgame\loadshader.cpp
+	"loadShader.h"
+	"logger.h"
+
+1439816444 d:\programming\c++\projects\2dgame\trunk\2dgame\loadshader.h
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<glm/glm.hpp>
+	<map>
+	<GL/glew.h>
+
+1441175832 source:d:\programming\c++\projects\2dgame\trunk\2dgame\loadtexture.cpp
+	"loadTexture.h"
+	"logger.h"
+
+1440304484 d:\programming\c++\projects\2dgame\trunk\2dgame\loadtexture.h
+	"openGLFunctions.h"
+	<SOIL.h>
+	<iostream>
+	<vector>
+
+1439533916 d:\programming\c++\projects\2dgame\trunk\libraries\include\soil.h
+
+1441104292 source:d:\programming\c++\projects\2dgame\trunk\2dgame\logger.cpp
+	"logger.h"
+
+1441104040 source:d:\programming\c++\projects\2dgame\trunk\2dgame\main.cpp
+	"main.h"
+	"globals.h"
+	"entity.h"
+	"component.h"
+	"system.h"
+	"store.h"
+	"loader.h"
+	"openGLFunctions.h"
+	"worldComponent.h"
+	"windowSystem.h"
+	"windowComponent.h"
+	"render2DSystem.h"
+	"render2DComponent.h"
+	"sceneStore.h"
+	"textureStore.h"
+	"terrainComponent.h"
+	"renderTerrainSystem.h"
+	"tempplayerControlSystem.h"
+	<iostream>
+	<string>
+	<fstream>
+
+1440160652 d:\programming\c++\projects\2dgame\trunk\2dgame\main.h
+	"windowSystem.h"
+	"render2DSystem.h"
+
+1439697090 d:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.h
+	"system.h"
+
+1441457842 d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
+	"system.h"
+	"render2DComponent.h"
+	"worldComponent.h"
+	"textureStore.h"
+	<GL/glew.h>
+
+1441177364 d:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.h
+	"component.h"
+	<glm/glm.hpp>
+
+1441457834 d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.h
+	"component.h"
+	<glm/glm.hpp>
+
+1441197100 d:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.h
+	"fileReader.h"
+	"store.h"
+	"openGLFunctions.h"
+	<pthread.h>
+
+1440160652 d:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.h
+	"fileReader.h"
+	"store.h"
+
+1441239818 d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
+	"component.h"
+	"openGLFunctions.h"
+	<glm/glm.hpp>
+	<vector>
+	"textureStore.h"
+
+1440985236 d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.h
+	"system.h"
+	"openGLFunctions.h"
+	<glm/glm.hpp>
+	"textureStore.h"
+	"terrainComponent.h"
+	"worldComponent.h"
+
+1441010388 d:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.h
+	"system.h"
+
+1441104098 source:d:\programming\c++\projects\2dgame\trunk\2dgame\openglfunctions.cpp
+	"openGLFunctions.h"
+	<iostream>
+	<stdlib.h>
+	"windowComponent.h"
+	"logger.h"
+
+1441187720 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
+	"render2DComponent.h"
+	"logger.h"
+
+1441457838 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
+	"render2DSystem.h"
+	"globals.h"
+	<iostream>
+	"worldComponent.h"
+	"loadShader.h"
+	"openGLFunctions.h"
+	"loader.h"
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1439534216 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.hpp
+	"../glm.hpp"
+	"../gtc/matrix_transform.hpp"
+	"transform.inl"
+
+1439534152 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtc\matrix_transform.hpp
+	"../glm.hpp"
+	"matrix_transform.inl"
+
+1439534152 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtc\matrix_transform.inl
+
+1439534216 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.inl
+
+1441348662 source:d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
+	"renderTerrainSystem.h"
+	"terrainComponent.h"
+	"worldComponent.h"
+	"loadShader.h"
+	"loader.h"
+	"globals.h"
+	"logger.h"
+
+1441239784 source:d:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
+	"sceneStore.h"
+	"openGLFunctions.h"
+	"entity.h"
+	"globals.h"
+	"main.h"
+	"windowComponent.h"
+	"render2DComponent.h"
+	"worldComponent.h"
+	"terrainComponent.h"
+	"tempplayerControlComponent.h"
+	"logger.h"
+
+1441011016 d:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolcomponent.h
+	"component.h"
+
+1440420426 source:d:\programming\c++\projects\2dgame\trunk\2dgame\store.cpp
+	"store.h"
+
+1441348836 source:d:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
+	"system.h"
+	"entity.h"
+	"globals.h"
+	<map>
+	"logger.h"
+
+1441010578 source:d:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolcomponent.cpp
+	"tempplayerControlComponent.h"
+
+1441349218 source:d:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
+	"tempplayerControlSystem.h"
+	"globals.h"
+	"openGLFunctions.h"
+	"windowComponent.h"
+	"worldComponent.h"
+	"tempplayerControlComponent.h"
+
+1441342374 source:d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
+	"terrainComponent.h"
+	"loader.h"
+	"logger.h"
+
+1439689168 source:d:\programming\c++\projects\2dgame\trunk\2dgame\testcomponent.cpp
+	"testComponent.h"
+
+1439437358 d:\programming\c++\projects\2dgame\trunk\2dgame\testcomponent.h
+	"component.h"
+
+1441348872 source:d:\programming\c++\projects\2dgame\trunk\2dgame\testsystem.cpp
+	"testSystem.h"
+	"globals.h"
+	"testComponent.h"
+	"logger.h"
+
+1439437350 d:\programming\c++\projects\2dgame\trunk\2dgame\testsystem.h
+	"system.h"
+
+1441196988 source:d:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
+	"textureStore.h"
+	"loadTexture.h"
+	"logger.h"
+
+1440160654 source:d:\programming\c++\projects\2dgame\trunk\2dgame\typeconversion.cpp
+	"typeConversion.h"
+	<stdlib.h>
+	<sstream>
+	<cstring>
+
+1440939668 source:d:\programming\c++\projects\2dgame\trunk\2dgame\windowcomponent.cpp
+	"windowComponent.h"
+	"globals.h"
+	"openGLFunctions.h"
+	"logger.h"
+
+1441348698 source:d:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.cpp
+	"windowSystem.h"
+	"globals.h"
+	<iostream>
+	"windowComponent.h"
+	"openGLFunctions.h"
+
+1441457830 source:d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.cpp
+	"worldComponent.h"
+	<glm/gtx/transform.hpp>
 

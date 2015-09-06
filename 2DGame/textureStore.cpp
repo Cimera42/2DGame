@@ -18,6 +18,11 @@ TextureStore::TextureStore()
     textureFile = "";
 }
 
+TextureStore::~TextureStore()
+{
+    glDeleteTextures(1, &textureID);
+}
+
 void TextureStore::loadStore(std::string name)
 {
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
