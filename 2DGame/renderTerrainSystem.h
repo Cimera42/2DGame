@@ -21,6 +21,7 @@ class RenderTerrainSystem : public System
         GLuint shader;
         GLuint textureLoc;
         GLuint modelMatLoc;
+        GLuint viewProjMatLoc;
 
         //Auto generation of ID
         SystemID getID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}

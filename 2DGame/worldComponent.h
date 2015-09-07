@@ -10,11 +10,12 @@ class WorldComponent : public Component
         static ComponentID ID;
 
     public:
-        WorldComponent(glm::vec2,glm::vec2);
+        WorldComponent(glm::vec2,glm::vec2,float);
         virtual ~WorldComponent();
 
         glm::vec2 position;
         glm::vec2 scale;
+        float rotation;
 
         glm::mat4 modelMatrix;
 

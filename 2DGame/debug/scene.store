@@ -5,25 +5,33 @@ window: window.cfg;
 
 Entity "house"
 {
-world: -0.5,0.5, 0.75,1;
+world: -0.5,0.5, 1,1, 0;
 render2d: 0.5, 0.5, 0.5, 0.5;
-control: 0.01, 87, 83, 65, 68;
+control: 0.02, W, S, A, D;
+camera: 2, false;
 }
 
 Entity "house"
 {
-world: 0.5,0.5, 0.75,1;
-render2d: 0, 0, 0.5,0.5;
+world: 0.0,0.15, 1,1, 0;
+render2d: 0, 0.5, 0.5, 0.5;
+control: 0.01, I, K, J, L;
 }
 
 Entity "house"
 {
-world: -0.5,-0.5, 0.75,1;
+world: -1,-0.1, 1,1, 0;
 render2d: 0, 0, 0.5, 0.5;
 }
 
-Entity
+Entity "house"
 {
-world: -1,-0.25, 2,1;
-terrain: 100, 0.25;
+world: -1.95,0.0, 1,1, 0;
+render2d: 0, 0, 0.5, 0.5;
+}
+
+Entity "terrain"
+{
+world: -10,-0.25, 20,1, 0;
+terrain: 1000, 0.5, 25;
 }

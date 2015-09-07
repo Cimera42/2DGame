@@ -13,7 +13,7 @@
 1439436218 e:\programming\c++\projects\2dgame\trunk\2dgame\entity.h
 	<map>
 
-1441348986 e:\programming\c++\projects\2dgame\trunk\2dgame\system.h
+1441524216 e:\programming\c++\projects\2dgame\trunk\2dgame\system.h
 	<vector>
 
 1440751506 source:e:\programming\c++\projects\2dgame\trunk\2dgame\filereader.cpp
@@ -21,7 +21,7 @@
 	"logger.h"
 	<algorithm>
 
-1440464484 e:\programming\c++\projects\2dgame\trunk\2dgame\filereader.h
+1441584076 e:\programming\c++\projects\2dgame\trunk\2dgame\filereader.h
 	<string>
 	<vector>
 	<fstream>
@@ -378,7 +378,7 @@
 1441104292 source:e:\programming\c++\projects\2dgame\trunk\2dgame\logger.cpp
 	"logger.h"
 
-1441104040 source:e:\programming\c++\projects\2dgame\trunk\2dgame\main.cpp
+1441531006 source:e:\programming\c++\projects\2dgame\trunk\2dgame\main.cpp
 	"main.h"
 	"globals.h"
 	"entity.h"
@@ -397,6 +397,7 @@
 	"terrainComponent.h"
 	"renderTerrainSystem.h"
 	"tempplayerControlSystem.h"
+	"cameraSystem.h"
 	<iostream>
 	<string>
 	<fstream>
@@ -408,7 +409,7 @@
 1439697090 e:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.h
 	"system.h"
 
-1441178052 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
+1441524228 e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
 	"system.h"
 	"render2DComponent.h"
 	"worldComponent.h"
@@ -425,7 +426,7 @@
 	"openGLFunctions.h"
 	<pthread.h>
 
-1441010776 e:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.h
+1441517492 e:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.h
 	"component.h"
 	<glm/glm.hpp>
 
@@ -445,14 +446,14 @@
 	"openGLFunctions.h"
 	<pthread.h>
 
-1441239818 e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
+1441583102 e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
 	"component.h"
 	"openGLFunctions.h"
 	<glm/glm.hpp>
 	<vector>
 	"textureStore.h"
 
-1440985236 e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.h
+1441519794 e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.h
 	"system.h"
 	"openGLFunctions.h"
 	<glm/glm.hpp>
@@ -467,15 +468,16 @@
 	"windowComponent.h"
 	"logger.h"
 
-1441187720 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
+1441516342 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
 	"render2DComponent.h"
-	"logger.h"
 
-1441348636 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
+1441606704 source:e:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
 	"render2DSystem.h"
 	"globals.h"
 	<iostream>
 	"worldComponent.h"
+	"cameraComponent.h"
+	"cameraSystem.h"
 	"loadShader.h"
 	"openGLFunctions.h"
 	"loader.h"
@@ -495,7 +497,7 @@
 
 1439534216 e:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.inl
 
-1441239784 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
+1441606154 source:e:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
 	"sceneStore.h"
 	"openGLFunctions.h"
 	"entity.h"
@@ -506,22 +508,24 @@
 	"worldComponent.h"
 	"terrainComponent.h"
 	"tempplayerControlComponent.h"
+	"cameraComponent.h"
 	"logger.h"
 
 1440420426 source:e:\programming\c++\projects\2dgame\trunk\2dgame\store.cpp
 	"store.h"
 
-1441348836 source:e:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
+1441524248 source:e:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
 	"system.h"
 	"entity.h"
 	"globals.h"
 	<map>
 	"logger.h"
 
-1441342374 source:e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
+1441583752 source:e:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
 	"terrainComponent.h"
 	"loader.h"
 	"logger.h"
+	"noise.h"
 
 1439689168 source:e:\programming\c++\projects\2dgame\trunk\2dgame\testcomponent.cpp
 	"testComponent.h"
@@ -544,7 +548,7 @@
 	"globals.h"
 	<pthread.h>
 
-1441196988 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
+1441523492 source:e:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
 	"loadTexture.h"
 	"logger.h"
@@ -568,14 +572,16 @@
 	"windowComponent.h"
 	"openGLFunctions.h"
 
-1441090932 source:e:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.cpp
+1441522232 source:e:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.cpp
 	"worldComponent.h"
 	<glm/gtx/transform.hpp>
 
-1441348662 source:e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
+1441607850 source:e:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
 	"renderTerrainSystem.h"
 	"terrainComponent.h"
 	"worldComponent.h"
+	"cameraComponent.h"
+	"cameraSystem.h"
 	"loadShader.h"
 	"loader.h"
 	"globals.h"
@@ -612,7 +618,7 @@
 1439436218 d:\programming\c++\projects\2dgame\trunk\2dgame\entity.h
 	<map>
 
-1441348986 d:\programming\c++\projects\2dgame\trunk\2dgame\system.h
+1441524216 d:\programming\c++\projects\2dgame\trunk\2dgame\system.h
 	<vector>
 
 1440751506 source:d:\programming\c++\projects\2dgame\trunk\2dgame\filereader.cpp
@@ -620,7 +626,7 @@
 	"logger.h"
 	<algorithm>
 
-1440464484 d:\programming\c++\projects\2dgame\trunk\2dgame\filereader.h
+1441584076 d:\programming\c++\projects\2dgame\trunk\2dgame\filereader.h
 	<string>
 	<vector>
 	<fstream>
@@ -984,7 +990,7 @@
 1441104292 source:d:\programming\c++\projects\2dgame\trunk\2dgame\logger.cpp
 	"logger.h"
 
-1441104040 source:d:\programming\c++\projects\2dgame\trunk\2dgame\main.cpp
+1441531006 source:d:\programming\c++\projects\2dgame\trunk\2dgame\main.cpp
 	"main.h"
 	"globals.h"
 	"entity.h"
@@ -1003,6 +1009,7 @@
 	"terrainComponent.h"
 	"renderTerrainSystem.h"
 	"tempplayerControlSystem.h"
+	"cameraSystem.h"
 	<iostream>
 	<string>
 	<fstream>
@@ -1014,7 +1021,7 @@
 1439697090 d:\programming\c++\projects\2dgame\trunk\2dgame\windowsystem.h
 	"system.h"
 
-1441457842 d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
+1441524228 d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.h
 	"system.h"
 	"render2DComponent.h"
 	"worldComponent.h"
@@ -1025,7 +1032,7 @@
 	"component.h"
 	<glm/glm.hpp>
 
-1441457834 d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.h
+1441517492 d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.h
 	"component.h"
 	<glm/glm.hpp>
 
@@ -1039,14 +1046,14 @@
 	"fileReader.h"
 	"store.h"
 
-1441239818 d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
+1441583102 d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.h
 	"component.h"
 	"openGLFunctions.h"
 	<glm/glm.hpp>
 	<vector>
 	"textureStore.h"
 
-1440985236 d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.h
+1441519794 d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.h
 	"system.h"
 	"openGLFunctions.h"
 	<glm/glm.hpp>
@@ -1064,15 +1071,16 @@
 	"windowComponent.h"
 	"logger.h"
 
-1441187720 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
+1441516342 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dcomponent.cpp
 	"render2DComponent.h"
-	"logger.h"
 
-1441457838 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
+1441606704 source:d:\programming\c++\projects\2dgame\trunk\2dgame\render2dsystem.cpp
 	"render2DSystem.h"
 	"globals.h"
 	<iostream>
 	"worldComponent.h"
+	"cameraComponent.h"
+	"cameraSystem.h"
 	"loadShader.h"
 	"openGLFunctions.h"
 	"loader.h"
@@ -1092,16 +1100,18 @@
 
 1439534216 d:\programming\c++\projects\2dgame\trunk\libraries\include\glm\gtx\transform.inl
 
-1441348662 source:d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
+1441607850 source:d:\programming\c++\projects\2dgame\trunk\2dgame\renderterrainsystem.cpp
 	"renderTerrainSystem.h"
 	"terrainComponent.h"
 	"worldComponent.h"
+	"cameraComponent.h"
+	"cameraSystem.h"
 	"loadShader.h"
 	"loader.h"
 	"globals.h"
 	"logger.h"
 
-1441239784 source:d:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
+1441606154 source:d:\programming\c++\projects\2dgame\trunk\2dgame\scenestore.cpp
 	"sceneStore.h"
 	"openGLFunctions.h"
 	"entity.h"
@@ -1112,6 +1122,7 @@
 	"worldComponent.h"
 	"terrainComponent.h"
 	"tempplayerControlComponent.h"
+	"cameraComponent.h"
 	"logger.h"
 
 1441011016 d:\programming\c++\projects\2dgame\trunk\2dgame\tempplayercontrolcomponent.h
@@ -1120,7 +1131,7 @@
 1440420426 source:d:\programming\c++\projects\2dgame\trunk\2dgame\store.cpp
 	"store.h"
 
-1441348836 source:d:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
+1441524248 source:d:\programming\c++\projects\2dgame\trunk\2dgame\system.cpp
 	"system.h"
 	"entity.h"
 	"globals.h"
@@ -1138,10 +1149,11 @@
 	"worldComponent.h"
 	"tempplayerControlComponent.h"
 
-1441342374 source:d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
+1441583752 source:d:\programming\c++\projects\2dgame\trunk\2dgame\terraincomponent.cpp
 	"terrainComponent.h"
 	"loader.h"
 	"logger.h"
+	"noise.h"
 
 1439689168 source:d:\programming\c++\projects\2dgame\trunk\2dgame\testcomponent.cpp
 	"testComponent.h"
@@ -1158,7 +1170,7 @@
 1439437350 d:\programming\c++\projects\2dgame\trunk\2dgame\testsystem.h
 	"system.h"
 
-1441196988 source:d:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
+1441523492 source:d:\programming\c++\projects\2dgame\trunk\2dgame\texturestore.cpp
 	"textureStore.h"
 	"loadTexture.h"
 	"logger.h"
@@ -1182,7 +1194,55 @@
 	"windowComponent.h"
 	"openGLFunctions.h"
 
-1441457830 source:d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.cpp
+1441619602 source:d:\programming\c++\projects\2dgame\trunk\2dgame\worldcomponent.cpp
 	"worldComponent.h"
 	<glm/gtx/transform.hpp>
+
+1441605570 source:d:\programming\c++\projects\2dgame\trunk\2dgame\cameracomponent.cpp
+	"cameraComponent.h"
+	<glm/gtx/transform.hpp>
+
+1441605556 d:\programming\c++\projects\2dgame\trunk\2dgame\cameracomponent.h
+	"component.h"
+	<glm/glm.hpp>
+
+1441621776 source:d:\programming\c++\projects\2dgame\trunk\2dgame\camerasystem.cpp
+	"cameraSystem.h"
+	"globals.h"
+	"worldComponent.h"
+	"cameraComponent.h"
+
+1441605262 d:\programming\c++\projects\2dgame\trunk\2dgame\camerasystem.h
+	"system.h"
+
+1441537452 source:d:\programming\c++\projects\2dgame\trunk\2dgame\noise.cpp
+	"noise.h"
+	<cstdint>
+
+1441537510 d:\programming\c++\projects\2dgame\trunk\2dgame\noise.h
+	<cstddef>
+
+1441605570 source:e:\programming\c++\projects\2dgame\trunk\2dgame\cameracomponent.cpp
+	"cameraComponent.h"
+	<glm/gtx/transform.hpp>
+
+1441605556 e:\programming\c++\projects\2dgame\trunk\2dgame\cameracomponent.h
+	"component.h"
+	<glm/glm.hpp>
+
+1441607068 source:e:\programming\c++\projects\2dgame\trunk\2dgame\camerasystem.cpp
+	"cameraSystem.h"
+	"globals.h"
+	"worldComponent.h"
+	"cameraComponent.h"
+
+1441605262 e:\programming\c++\projects\2dgame\trunk\2dgame\camerasystem.h
+	"system.h"
+
+1441537452 source:e:\programming\c++\projects\2dgame\trunk\2dgame\noise.cpp
+	"noise.h"
+	<cstdint>
+
+1441537510 e:\programming\c++\projects\2dgame\trunk\2dgame\noise.h
+	<cstddef>
 

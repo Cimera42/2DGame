@@ -1,19 +1,20 @@
 #include "terrainComponent.h"
 #include "loader.h"
 #include "logger.h"
+#include "noise.h"
 
 ComponentID TerrainComponent::ID;
 
-TerrainComponent::TerrainComponent(int numPoints, float heightScale)
+TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noiseScale)
 {
     //Generate surface points
     for(int i = 0; i <= numPoints; i++)
     {
-        surface.push_back(glm::vec2((float)i/numPoints,(rand()%100)/100.0f*heightScale));
+        surface.push_back(glm::vec2((float)i/numPoints,SimplexNoise::noise((float)i/numPoints * noiseScale)*heightScale));
     }
 
     //Position of bottom of terrain - where terrain ends vertically
-    int baseline = -1;
+    int baseline = -2;
     //Generate the triangles
     for(int i = 0; i < surface.size()-1; i++)
     {
@@ -24,10 +25,10 @@ TerrainComponent::TerrainComponent(int numPoints, float heightScale)
         vertices.push_back(glm::vec2(surface[i+1].x,baseline));
 
         //Generate the triangles uvs
-        uvs.push_back(glm::vec2(0,1));
-        uvs.push_back(glm::vec2(0,0));
-        uvs.push_back(glm::vec2(1,1));
-        uvs.push_back(glm::vec2(1,0));
+        uvs.push_back(glm::vec2(surface[i].x,1));
+        uvs.push_back(glm::vec2(surface[i].x,0));
+        uvs.push_back(glm::vec2(surface[i+1].x,1));
+        uvs.push_back(glm::vec2(surface[i+1].x,0));
 
         //Generate indices
         //Start of triangle in array

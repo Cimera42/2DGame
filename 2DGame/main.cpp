@@ -18,6 +18,7 @@
 #include "terrainComponent.h"
 #include "renderTerrainSystem.h"
 #include "tempplayerControlSystem.h"
+#include "cameraSystem.h"
 
 #include <iostream>
 #include <string>
@@ -33,6 +34,7 @@ int main()
     systems[RenderTerrainSystem::getStaticID()] = new RenderTerrainSystem();
     systems[Render2DSystem::getStaticID()] = new Render2DSystem();
     systems[PlayerControlSystem::getStaticID()] = new PlayerControlSystem();
+    systems[CameraSystem::getStaticID()] = new CameraSystem();
 
     //File loading TEST
     SceneStore * scene;
@@ -48,6 +50,8 @@ int main()
             //Temporary system loop
             //Player movement system
             systems[PlayerControlSystem::getStaticID()]->update();
+            //Camera matrix calculation system
+            systems[CameraSystem::getStaticID()]->update();
             //Terrain rendering system
             systems[RenderTerrainSystem::getStaticID()]->update();
             //2D rendering system

@@ -68,7 +68,7 @@ bool System::subscribe(Entity* inEntity, ComponentID newCompID)
                 if(checkEntityComponents(inEntity, i))
                 {
                     subscribedEntities[i].push_back(inEntity->entityID);
-                    entitySubscribed(inEntity);
+                    entitySubscribed(inEntity, i);
 
                     Logger() << "Entity " << inEntity->entityID << " subscribed to system " << getID() << std::endl;
                     subbed = true;
@@ -92,7 +92,7 @@ bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
             if(subID != -1)
             {
                 subscribedEntities[i].erase(subscribedEntities[i].begin() + subID);
-                entityUnsubscribed(inEntity);
+                entityUnsubscribed(inEntity, i);
                 return true;
             }
         }

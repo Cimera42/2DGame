@@ -26,6 +26,7 @@ class Render2DSystem : public System
 
         TextureStore* textureStore;
         GLuint textureLoc;
+        GLuint viewProjMatLoc;
 
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec4> uvs;
@@ -43,8 +44,8 @@ class Render2DSystem : public System
 
         void addToList(WorldComponent*, Render2DComponent*);
 
-        void entitySubscribed(Entity*);
-        void entityUnsubscribed(Entity*);
+        void entitySubscribed(Entity*,int);
+        void entityUnsubscribed(Entity*,int);
         void update();
 };
 

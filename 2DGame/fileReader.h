@@ -69,6 +69,11 @@ private:
         std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
         return stringToInt(str);
     }
+    char getCurrentValue(typeIdentity<char>,int offset)
+    {
+        std::string str = elements[elementIndex]->properties[propertyIndex]->values[0+offset];
+        return str.c_str()[0];
+    }
     glm::vec2 getCurrentValue(typeIdentity<glm::vec2>,int offset)
     {
         std::string str1 = elements[elementIndex]->properties[propertyIndex]->values[0+offset];

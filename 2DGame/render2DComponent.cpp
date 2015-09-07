@@ -1,5 +1,4 @@
 #include "render2DComponent.h"
-#include "logger.h"
 
 ComponentID Render2DComponent::ID;
 

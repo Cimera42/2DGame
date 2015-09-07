@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "worldComponent.h"
+#include "cameraComponent.h"
+#include "cameraSystem.h"
 #include "loadShader.h"
 #include "openGLFunctions.h"
 #include "loader.h"
@@ -108,6 +110,7 @@ Render2DSystem::Render2DSystem()
     //Load texture
     Load<TextureStore>::Object(&textureStore, "debug/texture.store");
     textureLoc = glGetUniformLocation(shader, "textureSampler");
+    viewProjMatLoc = glGetUniformLocation(shader, "viewProjMat");
 }
 Render2DSystem::~Render2DSystem()
 {
@@ -158,39 +161,45 @@ void Render2DSystem::refillBuffers()
     glBufferSubData(GL_ARRAY_BUFFER, 0, matrices.size() * sizeof(glm::mat4), &matrices[0][0]);
 }
 
-void Render2DSystem::entitySubscribed(Entity* inEntity)
+void Render2DSystem::entitySubscribed(Entity* inEntity, int listID)
 {
-    WorldComponent* worldComp = static_cast<WorldComponent*>(inEntity->getComponent(WorldComponent::getStaticID()));
-    Render2DComponent* render2DComp = static_cast<Render2DComponent*>(inEntity->getComponent(Render2DComponent::getStaticID()));
+    if(listID == 0)
+    {
+        WorldComponent* worldComp = static_cast<WorldComponent*>(inEntity->getComponent(WorldComponent::getStaticID()));
+        Render2DComponent* render2DComp = static_cast<Render2DComponent*>(inEntity->getComponent(Render2DComponent::getStaticID()));
 
-    //Add render data to list
-    addToList(worldComp,render2DComp);
+        //Add render data to list
+        addToList(worldComp,render2DComp);
 
-    //Tell system to reallocate buffers to add space for new data
-    shouldResizeBuffers = true;
+        //Tell system to reallocate buffers to add space for new data
+        shouldResizeBuffers = true;
+    }
 }
 
-void Render2DSystem::entityUnsubscribed(Entity* inEntity)
+void Render2DSystem::entityUnsubscribed(Entity* inEntity, int listID)
 {
-    //Clear buffers
-    std::vector<glm::vec4>().swap(uvs);
-    std::vector<glm::mat4>().swap(matrices);
-    //Reload data for all objects
-    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
+    if(listID == 0)
     {
-        Entity * entity = entities[subscribedEntities[0][subID]];
-
-        if(entity != inEntity)
+        //Clear buffers
+        std::vector<glm::vec4>().swap(uvs);
+        std::vector<glm::mat4>().swap(matrices);
+        //Reload data for all objects
+        for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
         {
-            WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
-            Render2DComponent* render2DComp = static_cast<Render2DComponent*>(entity->getComponent(Render2DComponent::getStaticID()));
+            Entity * entity = entities[subscribedEntities[0][subID]];
 
-            addToList(worldComp,render2DComp);
+            if(entity != inEntity)
+            {
+                WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
+                Render2DComponent* render2DComp = static_cast<Render2DComponent*>(entity->getComponent(Render2DComponent::getStaticID()));
+
+                addToList(worldComp,render2DComp);
+            }
         }
-    }
 
-    //Tell system to reallocate buffers to remove old data space
-    shouldResizeBuffers = true;
+        //Tell system to reallocate buffers to remove old data space
+        shouldResizeBuffers = true;
+    }
 }
 
 void Render2DSystem::update()
@@ -212,6 +221,15 @@ void Render2DSystem::update()
     glSetActiveTexture(GL_TEXTURE0);
     glSetBindTexture(GL_TEXTURE_2D, textureStore->textureID);
     glUniform1i(textureLoc, 0);
+
+    //Camera operations
+    CameraSystem* cameraSys = static_cast<CameraSystem*>(systems[CameraSystem::getStaticID()]);
+    if(cameraSys->activeCamera != -1)
+    {
+        CameraComponent* cameraComp = static_cast<CameraComponent*>(entities[cameraSys->activeCamera]->getComponent(CameraComponent::getStaticID()));
+        //Send view and projection matrix to shader
+        glUniformMatrix4fv(viewProjMatLoc, 1, GL_FALSE, &cameraComp->jointMatrix[0][0]);
+    }
 
     //Draw
     glSetBindVertexArray(VAO);

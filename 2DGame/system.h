@@ -34,8 +34,8 @@ class System
         int checkEntityAlreadySubscribed(EntityID, int);
         bool subscribe(Entity*, ComponentID);
         bool unsubscribe(Entity*, ComponentID);
-        virtual void entitySubscribed(Entity*){}
-        virtual void entityUnsubscribed(Entity*){}
+        virtual void entitySubscribed(Entity*,int){}
+        virtual void entityUnsubscribed(Entity*,int){}
 
         virtual void update();
 };

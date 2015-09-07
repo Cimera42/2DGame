@@ -1,6 +1,8 @@
 #include "renderTerrainSystem.h"
 #include "terrainComponent.h"
 #include "worldComponent.h"
+#include "cameraComponent.h"
+#include "cameraSystem.h"
 #include "loadShader.h"
 #include "loader.h"
 #include "globals.h"
@@ -26,6 +28,7 @@ RenderTerrainSystem::RenderTerrainSystem()
     //Get location of uniforms from shader
     textureLoc = glGetUniformLocation(shader, "textureSampler");
     modelMatLoc = glGetUniformLocation(shader, "modelMat");
+    viewProjMatLoc = glGetUniformLocation(shader, "viewProjMat");
 }
 RenderTerrainSystem::~RenderTerrainSystem()
 {
@@ -71,6 +74,15 @@ void RenderTerrainSystem::update()
 
         //Send model matrix to shader
         glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, &worldComp->modelMatrix[0][0]);
+
+        //Camera operations
+        CameraSystem* cameraSys = static_cast<CameraSystem*>(systems[CameraSystem::getStaticID()]);
+        if(cameraSys->activeCamera != -1)
+        {
+            CameraComponent* cameraComp = static_cast<CameraComponent*>(entities[cameraSys->activeCamera]->getComponent(CameraComponent::getStaticID()));
+            //Send view and projection matrix to shader
+            glUniformMatrix4fv(viewProjMatLoc, 1, GL_FALSE, &cameraComp->jointMatrix[0][0]);
+        }
 
         //Draw
         glSetBindVertexArray(terrainComp->VAO);

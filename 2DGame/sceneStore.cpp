@@ -9,6 +9,7 @@
 #include "worldComponent.h"
 #include "terrainComponent.h"
 #include "tempplayerControlComponent.h"
+#include "cameraComponent.h"
 #include "logger.h"
 /**SceneStore allows us to store the entities and any global properties.
     - Evokes components on entities. Essentially the only reason this is a store is to allow for preloading of levels in the future.
@@ -55,24 +56,33 @@ void SceneStore::loadStore(std::string name)
                     else if(sceneBlock->checkCurrentProperty("world"))
                     {
                         //World component FOR NOW
-                        WorldComponent* world = new WorldComponent(sceneBlock->getCurrentValue<glm::vec2>(0),sceneBlock->getCurrentValue<glm::vec2>(2));
+                        WorldComponent* world = new WorldComponent(sceneBlock->getCurrentValue<glm::vec2>(0),sceneBlock->getCurrentValue<glm::vec2>(2),sceneBlock->getCurrentValue<float>(4));
                         ent->addComponent(world);
                     }
                     else if(sceneBlock->checkCurrentProperty("terrain"))
                     {
                         //Terrain component FOR NOW
                         int numPoints = sceneBlock->getCurrentValue<int>(0);
-                        float scale = sceneBlock->getCurrentValue<float>(1);
-                        TerrainComponent* terrain = new TerrainComponent(numPoints, scale);
+                        float heightScale = sceneBlock->getCurrentValue<float>(1);
+                        float noiseScale = sceneBlock->getCurrentValue<float>(2);
+                        TerrainComponent* terrain = new TerrainComponent(numPoints, heightScale, noiseScale);
                         ent->addComponent(terrain);
+                    }
+                    else if(sceneBlock->checkCurrentProperty("camera"))
+                    {
+                        float zoom = sceneBlock->getCurrentValue<float>(0);
+                        bool active = sceneBlock->getCurrentValue<bool>(1);
+                        //Camera component FOR NOW
+                        CameraComponent* camera = new CameraComponent(zoom, active);
+                        ent->addComponent(camera);
                     }
                     else if(sceneBlock->checkCurrentProperty("control"))
                     {
                         float speed = sceneBlock->getCurrentValue<float>(0);
-                        int up = sceneBlock->getCurrentValue<int>(1);
-                        int down = sceneBlock->getCurrentValue<int>(2);
-                        int left = sceneBlock->getCurrentValue<int>(3);
-                        int right = sceneBlock->getCurrentValue<int>(4);
+                        int up = sceneBlock->getCurrentValue<char>(1);
+                        int down = sceneBlock->getCurrentValue<char>(2);
+                        int left = sceneBlock->getCurrentValue<char>(3);
+                        int right = sceneBlock->getCurrentValue<char>(4);
                         //Player control component FOR NOW
                         PlayerControlComponent* control = new PlayerControlComponent(speed, up, down, left, right);
                         ent->addComponent(control);
