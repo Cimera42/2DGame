@@ -5,7 +5,7 @@
 
 ComponentID TerrainComponent::ID;
 
-TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noiseScale)
+TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noiseScale, float inBaseline)
 {
     //Generate surface points
     for(int i = 0; i <= numPoints; i++)
@@ -14,7 +14,7 @@ TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noise
     }
 
     //Position of bottom of terrain - where terrain ends vertically
-    int baseline = -2;
+    int baseline = inBaseline;
     //Generate the triangles
     for(int i = 0; i < surface.size()-1; i++)
     {

@@ -3,19 +3,20 @@ Entity
 window: window.cfg;
 }
 
-Entity "house"
+Entity "lander"
 {
-world: -0.5,0.5, 1,1, 0;
+world: -0.5,1.0, 1,1, 0;
 render2d: 0.5, 0.5, 0.5, 0.5;
-control: 0.02, W, S, A, D;
-camera: 2, false;
+control: 5, W, S, A, D;
+camera: 3, true;
+motion: 0.5;
 }
 
-Entity "house"
+Entity "tower"
 {
-world: 0.0,0.15, 1,1, 0;
+world: 2.0,0.1, 1,1, 0;
 render2d: 0, 0.5, 0.5, 0.5;
-control: 0.01, I, K, J, L;
+control: 1.0, I, K, J, L;
 }
 
 Entity "house"
@@ -26,12 +27,18 @@ render2d: 0, 0, 0.5, 0.5;
 
 Entity "house"
 {
-world: -1.95,0.0, 1,1, 0;
+world: 0.0,0.0, 1,1, 0;
 render2d: 0, 0, 0.5, 0.5;
+}
+
+Entity "turret"
+{
+world: -1.95,0.0, 1,1, 0;
+render2d: 0.5, 0.125, 0.375, 0.375;
 }
 
 Entity "terrain"
 {
 world: -10,-0.25, 20,1, 0;
-terrain: 1000, 0.5, 25;
+terrain: 1000, 0.5, 25, -3;
 }

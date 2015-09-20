@@ -135,6 +135,16 @@ void Render2DSystem::addToList(WorldComponent* inWorld, Render2DComponent* inRen
 
 void Render2DSystem::resizeBuffers()
 {
+    std::vector<glm::mat4>().swap(matrices);
+    for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
+    {
+        Entity * entity = entities[subscribedEntities[0][subID]];
+
+        WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
+
+        matrices.push_back(worldComp->modelMatrix);
+    }
+
     //Reallocate buffers in order
     glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec4), &uvs[0], GL_STREAM_DRAW);
@@ -212,8 +222,7 @@ void Render2DSystem::update()
     }
     else
     {
-        if(!glfwGetKey(mainWindow->glfwWindow, GLFW_KEY_R))
-            refillBuffers();
+        refillBuffers();
     }
     glSetUseProgram(shader);
 

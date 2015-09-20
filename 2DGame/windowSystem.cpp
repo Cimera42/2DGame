@@ -4,6 +4,7 @@
 #include <iostream>
 #include "windowComponent.h"
 #include "openGLFunctions.h"
+#include "keyboardHandler.h"
 
 SystemID WindowSystem::ID;
 
@@ -26,5 +27,7 @@ void WindowSystem::update()
         glfwSwapBuffers(windowComp->glfwWindow);
     }
 
+    if(isKeyPressed(GLFW_KEY_ESCAPE))
+        shouldExit = true;
     glfwSwapBuffers(mainWindow->glfwWindow);
 }

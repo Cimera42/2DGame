@@ -5,7 +5,7 @@
 		<Option title="2DGame" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;Shaders\Terrain\;StoreFiles\;Shaders\2D\;" />
+		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;Shaders\Terrain\;StoreFiles\;Shaders\2D\;InputHandlers\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/2DGame" prefix_auto="1" extension_auto="1" />
@@ -102,6 +102,12 @@
 		<Unit filename="globals.h">
 			<Option virtualFolder="Global/" />
 		</Unit>
+		<Unit filename="keyboardHandler.cpp">
+			<Option virtualFolder="InputHandlers/" />
+		</Unit>
+		<Unit filename="keyboardHandler.h">
+			<Option virtualFolder="InputHandlers/" />
+		</Unit>
 		<Unit filename="loadShader.cpp">
 			<Option virtualFolder="Loading/" />
 		</Unit>
@@ -131,6 +137,30 @@
 		</Unit>
 		<Unit filename="main.h">
 			<Option virtualFolder="Other/" />
+		</Unit>
+		<Unit filename="motionComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="motionComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="motionSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="motionSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="mouseHandler.cpp">
+			<Option virtualFolder="InputHandlers/" />
+		</Unit>
+		<Unit filename="mouseHandler.h">
+			<Option virtualFolder="InputHandlers/" />
+		</Unit>
+		<Unit filename="mouseScreenCoordSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="mouseScreenCoordSystem.h">
+			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="noise.cpp">
 			<Option virtualFolder="Other/" />

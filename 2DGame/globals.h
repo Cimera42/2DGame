@@ -1,15 +1,15 @@
 #ifndef GLOBALS_H_INCLUDED
 #define GLOBALS_H_INCLUDED
 
-#include <map>
 #include "entity.h"
 #include "component.h"
 #include "system.h"
+#include <unordered_map>
 
 extern bool shouldExit;
 
-extern std::map<SystemID, System*> systems;
-extern std::map<EntityID, Entity*> entities;
+extern std::unordered_map<SystemID, System*> systems;
+extern std::unordered_map<EntityID, Entity*> entities;
 
 void addEntity(Entity*);
 void deleteEntities();

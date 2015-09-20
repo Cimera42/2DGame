@@ -1,6 +1,8 @@
 #include "windowComponent.h"
 #include "globals.h"
 #include "openGLFunctions.h"
+#include "keyboardHandler.h"
+#include "mouseHandler.h"
 #include "logger.h"
 
 ComponentID WindowComponent::ID;
@@ -71,6 +73,9 @@ WindowComponent::WindowComponent(std::string fileName, GLFWwindow* shareContext)
     else
     {
         glfwSetWindowCloseCallback(glfwWindow, windowCloseEvent);
+        glfwSetKeyCallback(glfwWindow, keyboardInput);
+        glfwSetCursorPosCallback(glfwWindow, mouseMoveInput);
+        glfwSetMouseButtonCallback(glfwWindow, mouseButtonInput);
     }
 }
 WindowComponent::~WindowComponent()

@@ -4,9 +4,9 @@
 
 bool shouldExit = false;
 
-std::map<SystemID, System*> systems;
+std::unordered_map<SystemID, System*> systems;
 pthread_mutex_t entityMutex = PTHREAD_MUTEX_INITIALIZER;
-std::map<EntityID, Entity*> entities;
+std::unordered_map<EntityID, Entity*> entities;
 
 void addEntity(Entity* inEntity)
 {
@@ -19,7 +19,7 @@ void addEntity(Entity* inEntity)
 void deleteEntities()
 {
     std::vector<EntityID> toDelete;
-    for(std::map<EntityID, Entity*>::iterator entityPair = entities.begin(); entityPair != entities.end(); ++entityPair)
+    for(std::unordered_map<EntityID, Entity*>::iterator entityPair = entities.begin(); entityPair != entities.end(); ++entityPair)
     {
         toDelete.push_back(entityPair->first);
     }
@@ -38,7 +38,7 @@ void deleteEntities()
 void deleteSystems()
 {
     std::vector<SystemID> toDelete;
-    for(std::map<SystemID, System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
+    for(std::unordered_map<SystemID, System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
     {
         toDelete.push_back(systemPair->first);
     }

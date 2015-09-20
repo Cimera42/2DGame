@@ -11,6 +11,7 @@ SystemID System::ID;
 System::System(){}
 System::~System(){}
 void System::update(){}
+void System::update(float inDelta){}
 
 //Add list of components needed for subscription
 void System::addSubList(std::vector<ComponentID> inList)
@@ -104,7 +105,7 @@ bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
 void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
 {
     //Attempt to subscribe entity to all systems
-    for(std::map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
+    for(std::unordered_map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
     {
         System* system = systemPair->second;
 
@@ -116,7 +117,7 @@ void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
 void unsubscribeToSystems(Entity* inEntity, ComponentID oldCompID)
 {
     //Attempt to subscribe entity to all systems
-    for(std::map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
+    for(std::unordered_map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
     {
         System* system = systemPair->second;
 

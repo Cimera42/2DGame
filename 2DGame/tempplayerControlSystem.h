@@ -16,7 +16,7 @@ class PlayerControlSystem : public System
         SystemID getID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
         static SystemID getStaticID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
 
-        void update();
+        void update(float);
 };
 
 #endif // TEMPPLAYERCONTROLSYSTEM_H_INCLUDED

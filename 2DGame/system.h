@@ -38,6 +38,7 @@ class System
         virtual void entityUnsubscribed(Entity*,int){}
 
         virtual void update();
+        virtual void update(float inDelta);
 };
 
 //Attempt to subscribe entity to all systems

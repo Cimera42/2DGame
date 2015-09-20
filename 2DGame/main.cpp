@@ -19,6 +19,8 @@
 #include "renderTerrainSystem.h"
 #include "tempplayerControlSystem.h"
 #include "cameraSystem.h"
+#include "mouseScreenCoordSystem.h"
+#include "motionSystem.h"
 
 #include <iostream>
 #include <string>
@@ -35,6 +37,8 @@ int main()
     systems[Render2DSystem::getStaticID()] = new Render2DSystem();
     systems[PlayerControlSystem::getStaticID()] = new PlayerControlSystem();
     systems[CameraSystem::getStaticID()] = new CameraSystem();
+    systems[MouseScreenCoordSystem::getStaticID()] = new MouseScreenCoordSystem();
+    systems[MotionSystem::getStaticID()] = new MotionSystem();
 
     //File loading TEST
     SceneStore * scene;
@@ -42,14 +46,24 @@ int main()
     {
         int fps = 0;
         double now = glfwGetTime();
+        float delta = 0;
+        float lastFrame = glfwGetTime();
+
         glClearColor(0.55f,0.65f,0.8f,1.0f);
-        while(!shouldExit && !glfwGetKey(mainWindow->glfwWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        while(!shouldExit)
         {
+            delta = (glfwGetTime() - lastFrame);
+            lastFrame = glfwGetTime();
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             //Temporary system loop
+            //System to transform mouse movement to different spaces
+            systems[MouseScreenCoordSystem::getStaticID()]->update();
             //Player movement system
-            systems[PlayerControlSystem::getStaticID()]->update();
+            systems[PlayerControlSystem::getStaticID()]->update(delta);
+            //Motion addition system
+            systems[MotionSystem::getStaticID()]->update(delta);
             //Camera matrix calculation system
             systems[CameraSystem::getStaticID()]->update();
             //Terrain rendering system
@@ -65,7 +79,7 @@ int main()
             fps++;
             if(glfwGetTime() > now + 1.0f)
             {
-                Logger() << fps << std::endl;
+                Logger() << "Frametime:" << 1000.0f/fps << " FPS:" << fps << std::endl;
                 now = glfwGetTime();
                 fps = 0;
             }
