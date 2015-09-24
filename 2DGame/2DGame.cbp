@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-pedantic-errors" />
+					<Add option="-std=c++11" />
 					<Add option="-Wfatal-errors" />
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
@@ -66,6 +67,18 @@
 		<Unit filename="cameraSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
+		<Unit filename="colliderComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="colliderComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="collisionSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="collisionSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
 		<Unit filename="component.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>
@@ -101,6 +114,12 @@
 		</Unit>
 		<Unit filename="globals.h">
 			<Option virtualFolder="Global/" />
+		</Unit>
+		<Unit filename="impactTerrainSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="impactTerrainSystem.h">
+			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="keyboardHandler.cpp">
 			<Option virtualFolder="InputHandlers/" />
@@ -287,6 +306,18 @@
 			<code_completion />
 			<lib_finder disable_auto="1" />
 			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

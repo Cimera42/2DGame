@@ -5,7 +5,10 @@
 #include "openGLFunctions.h"
 #include <glm/glm.hpp>
 #include <vector>
+#include <memory>
 #include "textureStore.h"
+
+#include "colliderComponent.h"
 
 class TerrainComponent : public Component
 {
@@ -16,11 +19,13 @@ class TerrainComponent : public Component
         TerrainComponent(int, float, float, float);
         virtual ~TerrainComponent();
 
+        //Generated data and points
         std::vector<glm::vec2> surface;
         std::vector<glm::vec2> vertices;
         std::vector<glm::vec2> uvs;
         std::vector<unsigned int> indices;
 
+        //Data for GPU
         GLuint VAO;
         bool loadedVAO = false;
         GLuint vertexBuffer;
@@ -29,6 +34,9 @@ class TerrainComponent : public Component
         int bufSize;
 
         TextureStore* textureStore;
+
+        //Data if collisions habe occured with terrain (should this be here, who knows)
+        std::vector<std::shared_ptr<CollisionImpact>> collisionData;
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

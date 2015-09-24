@@ -11,6 +11,7 @@
 #include "tempplayerControlComponent.h"
 #include "cameraComponent.h"
 #include "motionComponent.h"
+#include "colliderComponent.h"
 #include "logger.h"
 /**SceneStore allows us to store the entities and any global properties.
     - Evokes components on entities. Essentially the only reason this is a store is to allow for preloading of levels in the future.
@@ -83,6 +84,17 @@ void SceneStore::loadStore(std::string name)
                         //Camera component FOR NOW
                         CameraComponent* camera = new CameraComponent(zoom, active);
                         ent->addComponent(camera);
+                    }
+                    else if(sceneBlock->checkCurrentProperty("collider"))
+                    {
+                        std::string type = sceneBlock->getCurrentValue<std::string>(0);
+                        std::string collisionType = sceneBlock->getCurrentValue<std::string>(1);
+                        glm::vec2 posOffset = sceneBlock->getCurrentValue<glm::vec2>(2);
+                        float width = sceneBlock->getCurrentValue<float>(4);
+                        float height = sceneBlock->getCurrentValue<float>(5);
+                        //Collider component FOR NOW
+                        ColliderComponent* collider = new ColliderComponent(type, collisionType, posOffset, width, height);
+                        ent->addComponent(collider);
                     }
                     else if(sceneBlock->checkCurrentProperty("control"))
                     {
