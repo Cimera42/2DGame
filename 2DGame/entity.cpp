@@ -84,7 +84,7 @@ bool Entity::deleteComponent(ComponentID compID)
     if(hasComponent(compID))
     {
         //Unsubscribe to systems
-        unsubscribeToSystems(this, compID);
+        unsubscribeToSystemsByComponent(this, compID);
         //Delete object
         delete components[compID];
         //Remove empty pointer from list of components

@@ -7,6 +7,7 @@ bool shouldExit = false;
 std::unordered_map<SystemID, System*> systems;
 pthread_mutex_t entityMutex = PTHREAD_MUTEX_INITIALIZER;
 std::unordered_map<EntityID, Entity*> entities;
+std::vector<EntityID> entitiesToDelete;
 
 void addEntity(Entity* inEntity)
 {
@@ -16,26 +17,39 @@ void addEntity(Entity* inEntity)
     pthread_mutex_unlock(&entityMutex);
 }
 
-void deleteEntities()
+void deleteEntity(EntityID inID)
 {
-    std::vector<EntityID> toDelete;
-    for(std::unordered_map<EntityID, Entity*>::iterator entityPair = entities.begin(); entityPair != entities.end(); ++entityPair)
-    {
-        toDelete.push_back(entityPair->first);
-    }
-
-    int entCount = 0;
-    for(int i = 0; i < toDelete.size(); i++)
-    {
-        delete entities[toDelete[i]];
-        Logger() << "Entity " << toDelete[i] << " deleted" << std::endl;
-        entities.erase(toDelete[i]);
-        entCount++;
-    }
-    Logger() << entCount << " entities deleted" << std::endl;
+    entitiesToDelete.push_back(inID);
 }
 
-void deleteSystems()
+void deleteFlaggedEntities()
+{
+    int entCount = 0;
+    for(int i = 0; i < entitiesToDelete.size(); i++)
+    {
+        EntityID id = entitiesToDelete[i];
+        unsubscribeToSystems(entities[id]);
+        delete entities[id];
+        Logger() << "Entity " << id << " deleted" << std::endl;
+        entities.erase(id);
+        entCount++;
+    }
+    if(entCount)
+        Logger() << entCount << " entities deleted" << std::endl;
+    std::vector<EntityID>().swap(entitiesToDelete);
+}
+
+void deleteAllEntities()
+{
+    std::vector<EntityID>().swap(entitiesToDelete);
+    for(std::unordered_map<EntityID, Entity*>::iterator entityPair = entities.begin(); entityPair != entities.end(); ++entityPair)
+    {
+        entitiesToDelete.push_back(entityPair->first);
+    }
+    deleteFlaggedEntities();
+}
+
+void deleteAllSystems()
 {
     std::vector<SystemID> toDelete;
     for(std::unordered_map<SystemID, System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)

@@ -33,7 +33,8 @@ class System
         bool checkEntityComponents(Entity*, int);
         int checkEntityAlreadySubscribed(EntityID, int);
         bool subscribe(Entity*, ComponentID);
-        bool unsubscribe(Entity*, ComponentID);
+        bool unsubscribeByComponent(Entity*, ComponentID);
+        bool unsubscribe(Entity*);
         virtual void entitySubscribed(Entity*,int){}
         virtual void entityUnsubscribed(Entity*,int){}
 
@@ -44,6 +45,7 @@ class System
 //Attempt to subscribe entity to all systems
 void subscribeToSystems(Entity*, ComponentID);
 //Attempt to unsubscribe entity to all systems
-void unsubscribeToSystems(Entity*, ComponentID);
+void unsubscribeToSystemsByComponent(Entity*, ComponentID);
+void unsubscribeToSystems(Entity*);
 
 #endif // SYSTEM_H_INCLUDED

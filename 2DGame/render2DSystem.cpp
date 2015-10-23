@@ -135,6 +135,7 @@ void Render2DSystem::addToList(WorldComponent* inWorld, Render2DComponent* inRen
 
 void Render2DSystem::resizeBuffers()
 {
+    //Reload matrix data
     std::vector<glm::mat4>().swap(matrices);
     for(int subID = 0; subID < subscribedEntities[0].size(); subID++)
     {

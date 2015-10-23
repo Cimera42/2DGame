@@ -5,9 +5,6 @@
 #include "openGLFunctions.h"
 #include <glm/glm.hpp>
 
-#include "terrainComponent.h"
-#include "worldComponent.h"
-
 /*
 This system is used to handle anything that is colliding with the terrain through
 the terrains only.

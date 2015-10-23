@@ -10,6 +10,7 @@
 #include "cameraSystem.h"
 
 #include "logger.h"
+#include "own_math.h"
 
 SystemID MouseScreenCoordSystem::ID;
 
@@ -46,8 +47,13 @@ void MouseScreenCoordSystem::update()
     {
         WorldComponent* worldComp = static_cast<WorldComponent*>(entities[cameraSys->activeCamera]->getComponent(WorldComponent::getStaticID()));
         CameraComponent* cameraComp = static_cast<CameraComponent*>(entities[cameraSys->activeCamera]->getComponent(CameraComponent::getStaticID()));
-        mouseData.xWorldCoord = worldComp->position.x + mouseData.xScreenCoord*cameraComp->zoom;
-        mouseData.yWorldCoord = worldComp->position.y + mouseData.yScreenCoord*cameraComp->zoom;
+
+        glm::vec2 screen = glm::vec2(mouseData.xScreenCoord, mouseData.yScreenCoord);
+        screen = rotateVec2(screen, toRad(worldComp->rotation));
+        //Logger() << "R " << screen.x << " - " << screen.y << std::endl;
+
+        mouseData.xWorldCoord = worldComp->position.x + screen.x*cameraComp->zoom;
+        mouseData.yWorldCoord = worldComp->position.y + screen.y*cameraComp->zoom;
 
         mouseData.xWorldCoordChange = mouseData.xScreenChange*cameraComp->zoom;
         mouseData.yWorldCoordChange = mouseData.yScreenChange*cameraComp->zoom;

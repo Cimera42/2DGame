@@ -12,7 +12,9 @@ extern std::unordered_map<SystemID, System*> systems;
 extern std::unordered_map<EntityID, Entity*> entities;
 
 void addEntity(Entity*);
-void deleteEntities();
-void deleteSystems();
+void deleteEntity(EntityID);
+void deleteFlaggedEntities();
+void deleteAllEntities();
+void deleteAllSystems();
 
 #endif // GLOBALS_H_INCLUDED

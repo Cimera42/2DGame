@@ -80,7 +80,7 @@ bool System::subscribe(Entity* inEntity, ComponentID newCompID)
     return subbed;
 }
 
-bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
+bool System::unsubscribeByComponent(Entity* inEntity, ComponentID oldCompID)
 {
     bool subbed = false;
     for(int i = 0; i < componentSubList.size(); i++)
@@ -101,6 +101,21 @@ bool System::unsubscribe(Entity* inEntity, ComponentID oldCompID)
     return false;
 }
 
+bool System::unsubscribe(Entity* inEntity)
+{
+    for(int i = 0; i < componentSubList.size(); i++)
+    {
+        int subID = checkEntityAlreadySubscribed(inEntity->entityID, i);
+        if(subID != -1)
+        {
+            subscribedEntities[i].erase(subscribedEntities[i].begin() + subID);
+            entityUnsubscribed(inEntity, i);
+            return true;
+        }
+    }
+    return false;
+}
+
 //Attempt to subscribe entity to all systems
 void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
 {
@@ -114,13 +129,25 @@ void subscribeToSystems(Entity* inEntity, ComponentID newCompID)
 }
 
 //Attempt to subscribe entity to all systems
-void unsubscribeToSystems(Entity* inEntity, ComponentID oldCompID)
+void unsubscribeToSystemsByComponent(Entity* inEntity, ComponentID oldCompID)
 {
     //Attempt to subscribe entity to all systems
     for(std::unordered_map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
     {
         System* system = systemPair->second;
 
-        system->unsubscribe(inEntity, oldCompID);
+        system->unsubscribeByComponent(inEntity, oldCompID);
+    }
+}
+
+//Attempt to subscribe entity to all systems
+void unsubscribeToSystems(Entity* inEntity)
+{
+    //Attempt to subscribe entity to all systems
+    for(std::unordered_map<SystemID,System*>::iterator systemPair = systems.begin(); systemPair != systems.end(); ++systemPair)
+    {
+        System* system = systemPair->second;
+
+        system->unsubscribe(inEntity);
     }
 }

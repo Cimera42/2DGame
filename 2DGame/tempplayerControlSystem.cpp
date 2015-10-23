@@ -10,6 +10,7 @@
 #include "motionComponent.h"
 #include "tempplayerControlComponent.h"
 #include "colliderComponent.h"
+#include "own_math.h"
 
 SystemID PlayerControlSystem::ID;
 
@@ -30,6 +31,7 @@ void PlayerControlSystem::update(float inDelta)
     {
         Entity * entity = entities[subscribedEntities[0][subID]];
 
+        WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
         PlayerControlComponent* controlComp = static_cast<PlayerControlComponent*>(entity->getComponent(PlayerControlComponent::getStaticID()));
 
         glm::vec2 moveDir = glm::vec2(0,0);
@@ -53,26 +55,25 @@ void PlayerControlSystem::update(float inDelta)
         if(moveDir.x != 0 && moveDir.y != 0)
             moveDir = glm::normalize(moveDir);
 
+        moveDir = rotateVec2(moveDir, toRad(worldComp->rotation));
+
         if(entity->canUseComponent(MotionComponent::getStaticID()))
         {
             MotionComponent* motionComp = static_cast<MotionComponent*>(entity->getComponent(MotionComponent::getStaticID()));
 
             motionComp->velocity += moveDir * controlComp->speed * inDelta;
         }
-	else
-	{
-            WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
-
-	    worldComp->position += moveDir * controlComp->speed * inDelta;
-	}
+        else
+        {
+            worldComp->position += moveDir * controlComp->speed * inDelta;
+            worldComp->updateMatrix();
+        }
 
         //Temporary projectile testing
         if(subID == 0)
         {
             if(isButtonPressed(GLFW_MOUSE_BUTTON_1) && countDown <= 0)
             {
-                WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
-
                 glm::vec2 direction = glm::vec2(mouseData.xWorldCoord,mouseData.yWorldCoord) - worldComp->position;
                 glm::vec2 dirNorm = glm::normalize(direction);
 

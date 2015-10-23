@@ -82,6 +82,11 @@ int main()
             //Should go last, since it updates window buffer
             systems[WindowSystem::getStaticID()]->update();
 
+            //To be done per frame
+            //to remove all entities
+            //flagged for deletion
+            deleteFlaggedEntities();
+
             glfwPollEvents();
 
             //Simple fps counter
@@ -94,8 +99,8 @@ int main()
             }
         }
 
-        deleteEntities();
-        deleteSystems();
+        deleteAllEntities();
+        deleteAllSystems();
         glfwTerminate();
     }
     return 0;
