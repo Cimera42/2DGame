@@ -708,9 +708,11 @@
 	"worldComponent.h"
 	"colliderComponent.h"
 
-1444966504 source:e:\programming\c++\projects\2dgame\trunk\2dgame\impactterrainsystem.cpp
+1445604524 source:e:\programming\c++\projects\2dgame\trunk\2dgame\impactterrainsystem.cpp
 	"impactTerrainSystem.h"
 	"globals.h"
+	"terrainComponent.h"
+	"worldComponent.h"
 
 1445604110 e:\programming\c++\projects\2dgame\trunk\2dgame\impactterrainsystem.h
 	"system.h"

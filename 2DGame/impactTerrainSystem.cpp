@@ -3,6 +3,7 @@
 
 #include "terrainComponent.h"
 #include "worldComponent.h"
+#include "tempplayerControlComponent.h"
 
 //Unique system ID
 SystemID ImpactTerrainSystem::ID;
@@ -32,7 +33,8 @@ void ImpactTerrainSystem::update()
             WorldComponent * colWorld = static_cast<WorldComponent*>(collider->getComponent(WorldComponent::getStaticID()));
             //add the minimum translation/other info provided by the collision...
             colWorld->position.y+=2;
-            deleteEntity(collider->entityID);
+            if(!collider->hasComponent(PlayerControlComponent::getStaticID()))
+                deleteEntity(collider->entityID);
         }
     }
 }
