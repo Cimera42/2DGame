@@ -7,13 +7,15 @@
 #include "terrainComponent.h"
 #include "globals.h"
 #include "logger.h"
+#include <limits.h>
 
 /*TODO:
 - CAPSULES (all)
 - Get a better collisionType, where you can choose what types of objects you actually want to collide with.
 - Quadtrees
-- Add other collision information such as minimum translation units...
-- Make the friendship between collision and impact systems closer :)
+- Contact point
+- Contact normal
+
 */
 SystemID CollisionSystem::ID;
 
@@ -79,6 +81,14 @@ bool LineToLine(glm::vec2 a,glm::vec2 b,glm::vec2 c,glm::vec2 d)
     return true;
 }
 
+float intervalDistance(float minA, float maxA, float minB, float maxB)
+{
+    if (minA < minB)
+        return minB - maxA;
+    else
+        return minA - maxB;
+}
+
 void CollisionSystem::update()
 {
     for(int sub2ID = 0; sub2ID < subscribedEntities[1].size(); sub2ID++)
@@ -86,7 +96,7 @@ void CollisionSystem::update()
         //Loop through all terrains to clear previous collisions
         Entity * terrain = entities[subscribedEntities[1][sub2ID]];
         TerrainComponent* terrainComp = static_cast<TerrainComponent*>(terrain->getComponent(TerrainComponent::getStaticID()));
-        terrainComp->collisionData = std::vector<std::shared_ptr<CollisionImpact>>();
+        terrainComp->collisionData = std::vector<std::shared_ptr<CollisionPair>>();
     }
     for(int subID = 0; subID < subscribedEntities[0].size(); subID++) //build loop
     {
@@ -96,7 +106,7 @@ void CollisionSystem::update()
         WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
         ColliderComponent* colliderComp = static_cast<ColliderComponent*>(entity->getComponent(ColliderComponent::getStaticID()));
         //First lets clear all previous collisions
-        colliderComp->collisionData = std::vector<std::shared_ptr<CollisionImpact>>();
+        colliderComp->collisionData = std::vector<std::shared_ptr<CollisionPair>>();
         //Lets then check for changes in the object
         if(worldComp->rotation != colliderComp->previousRotation ||
            worldComp->position.x != colliderComp->previousPosition.x ||
@@ -196,8 +206,9 @@ void CollisionSystem::update()
                        LineToLine(btmleft, topleft, lineSurface1, lineSurface2))
                     {
                         //Add the collisions to both terrain and other collider comps...
-                        terrainComp->collisionData.push_back(std::make_shared<CollisionImpact>(CollisionImpact(subscribedEntities[0][subID])));//Add collided entity to terrain list
-                        //colliderComp->collisionData.push_back(new CollisionImpact(subscribedEntities[1][sub2ID]));//Add terrain entity to collided list
+                        auto a = std::make_shared<CollisionPair>(CollisionPair(subscribedEntities[0][subID],subscribedEntities[1][sub2ID]));
+                        terrainComp->collisionData.push_back(a);//Add collided entity to terrain list
+                        colliderComp->collisionData.push_back(a);//Add terrain entity to collided list
                         break;
                     }
                 }
@@ -210,7 +221,6 @@ void CollisionSystem::update()
             {
 
             }*/
-            //Logger()<<closeLeftIndex<<" "<<closeRightIndex<<" close"<<std::endl;
         }
     }
 
@@ -235,7 +245,9 @@ void CollisionSystem::update()
             if(subID == popID)
                 Logger()<<"Trying to collide with self - destruction soon"<<std::endl;
             //Do a quick circle to circle of the maximum, this will improve efficiency.
-            if (CircleToCircle(occWorld, occCollide, obsWorld, obsCollide))
+            glm::vec2 minimumTranslation;
+            glm::vec2 intersect;
+            if(CircleToCircle(occWorld, occCollide, obsWorld, obsCollide))
             {
                 //More complex detection depending on type.
                 bool collisionExists = false;
@@ -244,26 +256,42 @@ void CollisionSystem::update()
                 {
                     if(obsCollide->type == 0)//box to box
                     {
-                        if(BoxToBox(occWorld, occCollide, obsWorld, obsCollide))
+                        intersect = BoxToBox(occWorld, occCollide, obsWorld, obsCollide);
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
                             collisionExists = true;
+                            minimumTranslation = intersect;
+                        }
                     }
                     else if(obsCollide->type == 1)//box to capsule
                     {
-                        if(BoxToCapsule(occWorld, occCollide, obsWorld, obsCollide))//make sure u get the right order!
+                        intersect = BoxToCapsule(occWorld, occCollide, obsWorld, obsCollide);//make sure u get the right order!
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
                             collisionExists = true;
+                            minimumTranslation = intersect;
+                        }
                     }
                     else if(obsCollide->type == 2)//box to circle
                     {
-                        if(BoxToCircle(occWorld, occCollide, obsWorld, obsCollide))
+                        intersect = BoxToCircle(occWorld, occCollide, obsWorld, obsCollide);
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
                             collisionExists = true;
+                            minimumTranslation = intersect;
+                        }
                     }
                 }
                 else if(occCollide->type == 1)//capsule
                 {
                     if(obsCollide->type == 0)//capsule to box
                     {
-                        if(BoxToCapsule(obsWorld, obsCollide, occWorld, occCollide))
+                        intersect = BoxToCapsule(obsWorld, obsCollide, occWorld, occCollide);
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
                             collisionExists = true;
+                            minimumTranslation = intersect;
+                        }
                     }
                     /*else if(obsCollide->type == 1)//capsule to capsule
                     {
@@ -280,8 +308,12 @@ void CollisionSystem::update()
                 {
                     if(obsCollide->type == 0)//circle to box
                     {
-                        if(BoxToCircle(obsWorld, obsCollide, occWorld, occCollide))
+                        intersect = BoxToCircle(obsWorld, obsCollide, occWorld, occCollide);
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
                             collisionExists = true;
+                            minimumTranslation = -intersect; //negate because inputs are backwards!!!!
+                        }
                     }
                     /*else if(obsCollide->type == 1)//circle to capsule
                     {
@@ -290,7 +322,12 @@ void CollisionSystem::update()
                     }*/
                     else if(obsCollide->type == 2)//circle to circle
                     {
-                        collisionExists = true;
+                        intersect = CircleToCircleCheck(occWorld, occCollide, obsWorld, obsCollide);
+                        if(intersect.x != 0 || intersect.y != 0)
+                        {
+                            collisionExists = true;
+                            minimumTranslation = intersect;
+                        }
                     }
                 }
 
@@ -298,8 +335,10 @@ void CollisionSystem::update()
                 {
                     //add collision objects to list, also have other information (minimum translation vector etc.)
                     //Add the collisions to both collider comps...
-                    obsCollide->collisionData.push_back(std::make_shared<CollisionImpact>(CollisionImpact(subscribedEntities[0][subID])));//Add occupant to observer list
-                    occCollide->collisionData.push_back(std::make_shared<CollisionImpact>(CollisionImpact(subscribedEntities[0][popID])));//Add observer to occupant list
+                    auto a = std::make_shared<CollisionPair>(CollisionPair(subscribedEntities[0][subID],subscribedEntities[0][popID]));
+                    a->minimumTranslation = minimumTranslation;
+                    obsCollide->collisionData.push_back(a);//Add occupant to observer list
+                    occCollide->collisionData.push_back(a);//Add observer to occupant list
                 }
             }
         }
@@ -315,7 +354,19 @@ bool CollisionSystem::CircleToCircle(WorldComponent * oneW, ColliderComponent * 
     return false;
 }
 
-bool CollisionSystem::BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC)
+glm::vec2 CollisionSystem::CircleToCircleCheck(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC)
+{
+    glm::vec2 centre1 = oneW->position + oneC->offsetPos;
+    glm::vec2 centre2 = twoW->position + twoC->offsetPos;
+    if(sq(centre2.x-centre1.x) + sq(centre2.y-centre1.y) <= sq(oneC->maxDistance+twoC->maxDistance))
+    {
+        float intersection = std::abs(glm::length(centre1 - centre2)-oneC->maxDistance-twoC->maxDistance);
+        return (centre1-centre2)*intersection;
+    }
+    return glm::vec2(0,0);
+}
+
+glm::vec2 CollisionSystem::BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC)
 {
     //SAT FOR ROTATED
     glm::vec2 centre1 = oneW->position + oneC->offsetPos;
@@ -340,6 +391,10 @@ bool CollisionSystem::BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, 
     boxCorners2[2] = centre2 + twoC->corner3; //btmright
     boxCorners2[3] = centre2 + twoC->corner4; //btmleft
 
+    //Initialise for collision response
+    float minIntervalDistance = std::numeric_limits<float>::max();
+    glm::vec2 translationAxis;
+
     for(int i = 0; i < 4; i++)//axes
     {
         float minDot1 = 0;
@@ -360,7 +415,7 @@ bool CollisionSystem::BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, 
             {
                 if(dot < minDot1)
                     minDot1 = dot;
-                if(dot > maxDot1)
+                else if(dot > maxDot1)
                     maxDot1 = dot;
             }
         }
@@ -377,17 +432,34 @@ bool CollisionSystem::BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, 
             {
                 if(dot < minDot2)
                     minDot2 = dot;
-                if(dot > maxDot2)
+                else if(dot > maxDot2)
                     maxDot2 = dot;
             }
         }
-        if(!(minDot1 <= maxDot2 && maxDot1 >= minDot2))
-            return false;
+        //Figure out the minimum intersection as we traverse the axes
+        float intervalDist = intervalDistance(minDot1, maxDot1, minDot2, maxDot2);
+        if (intervalDist > 0)
+        {
+            return glm::vec2(0,0);
+        }
+        else
+        {
+            intervalDist = std::abs(intervalDist);
+            if (intervalDist < minIntervalDistance)
+            {
+                minIntervalDistance = intervalDist;
+                translationAxis = axis;
+            }
+        }
     }
-    return true;
+    //check which axis it is on, and negate the axis to get final
+    glm::vec2 dir = centre1 - centre2;
+    if(glm::dot(dir, translationAxis) < 0)
+        translationAxis = glm::vec2(translationAxis.x*-1, translationAxis.y*-1);
+    return minIntervalDistance*translationAxis; //This will always return the minimum translation unit for the first component/input. Negate to get opposite.
 }
 
-bool CollisionSystem::BoxToCapsule(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * capW, ColliderComponent * capC)
+glm::vec2 CollisionSystem::BoxToCapsule(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * capW, ColliderComponent * capC)
 {
     //TODO CAPSULES
     /*//SAT FOR ROTATED
@@ -482,7 +554,7 @@ bool CollisionSystem::BoxToCapsule(WorldComponent * boxW, ColliderComponent * bo
     return true;*/
 }
 
-bool CollisionSystem::BoxToCircle(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * cirW, ColliderComponent * cirC)
+glm::vec2 CollisionSystem::BoxToCircle(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * cirW, ColliderComponent * cirC)
 {
     //SAT FOR ROTATED
     glm::vec2 centre1 = boxW->position + boxC->offsetPos;
@@ -499,6 +571,10 @@ bool CollisionSystem::BoxToCircle(WorldComponent * boxW, ColliderComponent * box
     glm::vec2 axes[3];
     axes[0] = (boxC->corner2-boxC->corner1);
     axes[1] = (boxC->corner2-boxC->corner3);
+
+    //Initialise for collision response
+    float minIntervalDistance = std::numeric_limits<float>::max();
+    glm::vec2 translationAxis;
 
     //Find closest point on box for circle axis.
     float minDistance;
@@ -544,8 +620,25 @@ bool CollisionSystem::BoxToCircle(WorldComponent * boxW, ColliderComponent * box
                     maxDot1 = dot;
             }
         }
-        if(!(minDot1 <= maxDot2 && maxDot1 >= minDot2))
-            return false;
+        //Figure out the minimum intersection as we traverse the axes
+        float intervalDist = intervalDistance(minDot1, maxDot1, minDot2, maxDot2);
+        if (intervalDist > 0)
+        {
+            return glm::vec2(0,0);
+        }
+        else
+        {
+            intervalDist = std::abs(intervalDist);
+            if (intervalDist < minIntervalDistance)
+            {
+                minIntervalDistance = intervalDist;
+                translationAxis = axis;
+            }
+        }
     }
-    return true;
+    //check which axis it is on, and negate the axis to get final
+    glm::vec2 dir = centre1 - centre2;
+    if(glm::dot(dir, translationAxis) < 0)
+        translationAxis = glm::vec2(translationAxis.x*-1, translationAxis.y*-1);
+    return minIntervalDistance*translationAxis; //This will always return the minimum translation unit for the first component/input. Negate to get opposite.
 }

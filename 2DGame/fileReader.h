@@ -35,6 +35,7 @@ public:
     //int valueIndex;
     bool getNextElement();
     bool checkCurrentElement(std::string elementNameT);
+    std::string getCurrentIdentifier();
     bool getNextProperty();
     bool checkCurrentProperty(std::string propertyNameT);
     template <typename T> T getCurrentValue(int offset)

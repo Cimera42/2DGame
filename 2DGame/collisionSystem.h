@@ -22,9 +22,10 @@ class CollisionSystem : public System
 
         //collision types
         bool CircleToCircle(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC);
-        bool BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC);
-        bool BoxToCapsule(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * capW, ColliderComponent * capC);
-        bool BoxToCircle(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * cirW, ColliderComponent * cirC);
+        glm::vec2 CircleToCircleCheck(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC);
+        glm::vec2 BoxToBox(WorldComponent * oneW, ColliderComponent * oneC, WorldComponent * twoW, ColliderComponent * twoC);
+        glm::vec2 BoxToCapsule(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * capW, ColliderComponent * capC);
+        glm::vec2 BoxToCircle(WorldComponent * boxW, ColliderComponent * boxC, WorldComponent * cirW, ColliderComponent * cirC);
 
         std::vector<Entity*> colliding;//need to also store who with? extra info? etc.
 };

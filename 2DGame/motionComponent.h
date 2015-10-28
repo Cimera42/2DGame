@@ -4,17 +4,23 @@
 #include "component.h"
 #include <glm/glm.hpp>
 
-class MotionComponent : public Component
+class MotionComponent : public Component //Rename to physicsComponent
 {
     private:
         static ComponentID ID;
 
     public:
-        MotionComponent(float);
+        MotionComponent(float, float);
         virtual ~MotionComponent();
 
-        float slowRate;
+        float mass;
+        float drag;
+        //float friction;
+
+        glm::vec2 acceleration;
         glm::vec2 velocity;
+
+        void impulse(glm::vec2 in);
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

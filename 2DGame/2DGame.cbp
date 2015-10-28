@@ -5,7 +5,7 @@
 		<Option title="2DGame" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;Shaders\Terrain\;StoreFiles\;Shaders\2D\;InputHandlers\;" />
+		<Option virtualFolders="Entity\;Component\;System\;Store\;Global\;Loading\;Shaders\;Other\;Shaders\Terrain\;StoreFiles\;Shaders\2D\;InputHandlers\;System\Collision\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/2DGame" prefix_auto="1" extension_auto="1" />
@@ -73,10 +73,10 @@
 			<Option virtualFolder="Component/" />
 		</Unit>
 		<Unit filename="collisionSystem.cpp">
-			<Option virtualFolder="System/" />
+			<Option virtualFolder="System/Collision/" />
 		</Unit>
 		<Unit filename="collisionSystem.h">
-			<Option virtualFolder="System/" />
+			<Option virtualFolder="System/Collision/" />
 		</Unit>
 		<Unit filename="component.cpp">
 			<Option virtualFolder="Component/" />
@@ -114,17 +114,17 @@
 		<Unit filename="globals.h">
 			<Option virtualFolder="Global/" />
 		</Unit>
-		<Unit filename="impactTerrainSystem.cpp">
-			<Option virtualFolder="System/" />
-		</Unit>
-		<Unit filename="impactTerrainSystem.h">
-			<Option virtualFolder="System/" />
-		</Unit>
 		<Unit filename="keyboardHandler.cpp">
 			<Option virtualFolder="InputHandlers/" />
 		</Unit>
 		<Unit filename="keyboardHandler.h">
 			<Option virtualFolder="InputHandlers/" />
+		</Unit>
+		<Unit filename="lifetimeComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="lifetimeComponent.h">
+			<Option virtualFolder="Component/" />
 		</Unit>
 		<Unit filename="loadShader.cpp">
 			<Option virtualFolder="Loading/" />
@@ -198,6 +198,24 @@
 		<Unit filename="own_math.h">
 			<Option virtualFolder="Other/" />
 		</Unit>
+		<Unit filename="playerComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="playerComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="projectileCollideSystem.cpp">
+			<Option virtualFolder="System/Collision/" />
+		</Unit>
+		<Unit filename="projectileCollideSystem.h">
+			<Option virtualFolder="System/Collision/" />
+		</Unit>
+		<Unit filename="projectileComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="projectileComponent.h">
+			<Option virtualFolder="Component/" />
+		</Unit>
 		<Unit filename="render2DComponent.cpp">
 			<Option virtualFolder="Component/" />
 		</Unit>
@@ -263,18 +281,6 @@
 		</Unit>
 		<Unit filename="terrainComponent.h">
 			<Option virtualFolder="Component/" />
-		</Unit>
-		<Unit filename="testComponent.cpp">
-			<Option virtualFolder="Component/" />
-		</Unit>
-		<Unit filename="testComponent.h">
-			<Option virtualFolder="Component/" />
-		</Unit>
-		<Unit filename="testSystem.cpp">
-			<Option virtualFolder="System/" />
-		</Unit>
-		<Unit filename="testSystem.h">
-			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="textureStore.cpp">
 			<Option virtualFolder="Store/" />

@@ -23,7 +23,8 @@
 #include "motionSystem.h"
 #include "colliderComponent.h"
 #include "collisionSystem.h"
-#include "impactTerrainSystem.h"
+
+#include "projectileCollideSystem.h"
 
 #include <iostream>
 #include <string>
@@ -43,7 +44,7 @@ int main()
     systems[MouseScreenCoordSystem::getStaticID()] = new MouseScreenCoordSystem();
     systems[MotionSystem::getStaticID()] = new MotionSystem();
     systems[CollisionSystem::getStaticID()] = new CollisionSystem();
-    systems[ImpactTerrainSystem::getStaticID()] = new ImpactTerrainSystem();
+    systems[ProjectileCollideSystem::getStaticID()] = new ProjectileCollideSystem();
 
     //File loading TEST
     SceneStore * scene;
@@ -72,7 +73,7 @@ int main()
             //Collision system
             systems[CollisionSystem::getStaticID()]->update();
             //Impact systems and final updating
-            systems[ImpactTerrainSystem::getStaticID()]->update();
+            systems[ProjectileCollideSystem::getStaticID()]->update();
             //Camera matrix calculation system
             systems[CameraSystem::getStaticID()]->update();
             //Terrain rendering system

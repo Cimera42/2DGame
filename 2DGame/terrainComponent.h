@@ -36,7 +36,7 @@ class TerrainComponent : public Component
         TextureStore* textureStore;
 
         //Data if collisions habe occured with terrain (should this be here, who knows)
-        std::vector<std::shared_ptr<CollisionImpact>> collisionData;
+        std::vector<std::shared_ptr<CollisionPair>> collisionData;
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

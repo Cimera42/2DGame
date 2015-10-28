@@ -26,8 +26,10 @@ void MotionSystem::update(float inDelta)
         WorldComponent* worldComp = static_cast<WorldComponent*>(entity->getComponent(WorldComponent::getStaticID()));
         MotionComponent* motionComp = static_cast<MotionComponent*>(entity->getComponent(MotionComponent::getStaticID()));
 
+        motionComp->velocity += motionComp->acceleration * inDelta;
+        //motionComp->acceleration *= motionComp->drag;
         worldComp->position += motionComp->velocity * inDelta;
-        motionComp->velocity *= glm::pow(motionComp->slowRate, inDelta);
+        motionComp->velocity *= glm::pow(motionComp->drag, inDelta); //Some form of proper deceleration
         //Update matrix since position changed
         worldComp->updateMatrix();
     }

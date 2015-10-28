@@ -1,24 +1,22 @@
-#ifndef IMPACTTERRAINSYSTEM_H_INCLUDED
-#define IMPACTTERRAINSYSTEM_H_INCLUDED
+#ifndef PROJECTILECOLLIDESYSTEM_H_INCLUDED
+#define PROJECTILECOLLIDESYSTEM_H_INCLUDED
 
 #include "system.h"
 #include "openGLFunctions.h"
 #include <glm/glm.hpp>
 
 /*
-This system is used to handle anything that is colliding with the terrain through
-the terrains only.
-
+This system is used to handle anything that the projectiles are colliding with.
 */
 
-class ImpactTerrainSystem : public System
+class ProjectileCollideSystem : public System
 {
     private:
         static SystemID ID;
 
     public:
-        ImpactTerrainSystem();
-        virtual ~ImpactTerrainSystem();
+        ProjectileCollideSystem();
+        virtual ~ProjectileCollideSystem();
 
 
         //Auto generation of ID
@@ -28,4 +26,4 @@ class ImpactTerrainSystem : public System
         void update();
 };
 
-#endif // IMPACTTERRAINSYSTEM_H_INCLUDED
+#endif // PROJECTILECOLLIDESYSTEM_H_INCLUDED

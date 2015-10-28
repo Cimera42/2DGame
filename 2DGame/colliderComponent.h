@@ -7,16 +7,25 @@
 #include <memory>
 #include <glm/glm.hpp>
 
-class CollisionImpact
+class CollisionPair
 {
     public:
-        CollisionImpact(int inCollisionEntityID);
-        ~CollisionImpact();
+        CollisionPair(int inCollisionEntityID, int inCollisionEntityID2);
+        ~CollisionPair();
 
-        int collisionEntityID; //Entity ID of the colliding object
-        //glm::vec2 minimumTranslation; //Minimum translation to move out of collision.
-        //- whatever system implements this can choose to use this data or not
-        //Eg. ProjectileImpactSystem may choose to use this data whilst PlayerImpactSystem may not.
+        bool processed = false;
+
+        int collisionEntityOne; //Entity ID of the colliding object 1
+        int collisionEntityTwo; //Entity ID of the colliding object 2
+        glm::vec2 minimumTranslation; //Minimum translation to move out of collision. - retieve through get
+
+
+        /*Data for use in systems*/
+        int getCollisionPairID(int entityID); //First step is to use this to check for the correct entity - input either entity ID to retrieve pairID
+        int getCollisionEntityID(int pairID); //input pairID to get its entityID
+        int getOppositePairID(int pairID); //input the known pairID to get opposing ID
+        int getOppositeEntityID(int pairID); //input the pairID to get opposing entityID
+        glm::vec2 getMinimumTranslation(int pairID); //input 1 or 2 to retrieve the data of entity1 or 2;
 };
 
 class ColliderComponent : public Component
@@ -48,7 +57,7 @@ class ColliderComponent : public Component
         glm::vec2 previousPosition;
 
         //Data if collision has occured
-        std::vector<std::shared_ptr<CollisionImpact>> collisionData;
+        std::vector<std::shared_ptr<CollisionPair>> collisionData;
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

@@ -387,6 +387,11 @@ bool DataBlock::checkCurrentElement(std::string elementNameT)
     return false;
 }
 
+std::string DataBlock::getCurrentIdentifier()
+{
+    return elements[elementIndex]->elementIdentifier;
+}
+
 bool DataBlock::getNextProperty()
 {
     if(elementIndex == -1)
