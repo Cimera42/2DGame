@@ -15,7 +15,6 @@
 #include "render2DComponent.h"
 #include "sceneStore.h"
 #include "textureStore.h"
-#include "terrainComponent.h"
 #include "renderTerrainSystem.h"
 #include "tempplayerControlSystem.h"
 #include "cameraSystem.h"
@@ -23,8 +22,17 @@
 #include "motionSystem.h"
 #include "colliderComponent.h"
 #include "collisionSystem.h"
-
 #include "projectileCollideSystem.h"
+#include "consoleSystem.h"
+
+#include "cameraComponent.h"
+#include "colliderComponent.h"
+#include "motionComponent.h"
+#include "render2DComponent.h"
+#include "tempplayerControlComponent.h"
+#include "terrainComponent.h"
+#include "windowComponent.h"
+#include "worldComponent.h"
 
 #include <iostream>
 #include <string>
@@ -45,6 +53,16 @@ int main()
     systems[MotionSystem::getStaticID()] = new MotionSystem();
     systems[CollisionSystem::getStaticID()] = new CollisionSystem();
     systems[ProjectileCollideSystem::getStaticID()] = new ProjectileCollideSystem();
+    systems[ConsoleSystem::getStaticID()] = new ConsoleSystem();
+
+    components[CameraComponent::getStaticID()] = new CameraComponent();
+    components[ColliderComponent::getStaticID()] = new ColliderComponent();
+    components[MotionComponent::getStaticID()] = new MotionComponent();
+    components[Render2DComponent::getStaticID()] = new Render2DComponent();
+    components[PlayerControlComponent::getStaticID()] = new PlayerControlComponent();
+    components[TerrainComponent::getStaticID()] = new TerrainComponent();
+    components[WindowComponent::getStaticID()] = new WindowComponent();
+    components[WorldComponent::getStaticID()] = new WorldComponent();
 
     //File loading TEST
     SceneStore * scene;
@@ -82,6 +100,8 @@ int main()
             systems[Render2DSystem::getStaticID()]->update();
             //Should go last, since it updates window buffer
             systems[WindowSystem::getStaticID()]->update();
+            //Command console
+            systems[ConsoleSystem::getStaticID()]->update();
 
             //To be done per frame
             //to remove all entities
@@ -94,7 +114,8 @@ int main()
             fps++;
             if(glfwGetTime() > now + 1.0f)
             {
-                Logger() << "Frametime:" << 1000.0f/fps << " FPS:" << fps << std::endl;
+                if(outputFPS)
+                    Logger() << "Frametime:" << 1000.0f/fps << " FPS:" << fps << std::endl;
                 now = glfwGetTime();
                 fps = 0;
             }

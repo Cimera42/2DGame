@@ -11,7 +11,7 @@
 #include "projectileComponent.h"
 #include "tempplayerControlComponent.h"
 #include "colliderComponent.h"
-#include "own_math.h"
+#include "own_funcs.h"
 
 SystemID PlayerControlSystem::ID;
 
@@ -79,12 +79,13 @@ void PlayerControlSystem::update(float inDelta)
                 glm::vec2 dirNorm = glm::normalize(direction);
 
                 Entity* projectile = new Entity();
+                projectile->vanityName = "Projectile";
                 addEntity(projectile);
-                projectile->addComponent(new ProjectileComponent());
-                projectile->addComponent(new WorldComponent(glm::vec2(worldComp->position.x,worldComp->position.y), glm::vec2(0.5,0.5), atan2(dirNorm.y, dirNorm.x) * 180/3.1415));
-                projectile->addComponent(new Render2DComponent(glm::vec2(0.875,0), glm::vec2(0.125,0.125)));
-                projectile->addComponent(new ColliderComponent("box", "all", glm::vec2(0,0), 1,1));
-                MotionComponent* motion = new MotionComponent(1, 1.0f);
+                projectile->addComponent(new ProjectileComponent());                projectile->addComponent((new WorldComponent())->construct(glm::vec2(worldComp->position.x,worldComp->position.y), glm::vec2(0.5,0.5), atan2(dirNorm.y, dirNorm.x) * 180/3.1415));
+                projectile->addComponent((new Render2DComponent())->construct(glm::vec2(0.875,0), glm::vec2(0.125,0.125)));
+                projectile->addComponent((new ColliderComponent())->construct("box", "terrain", glm::vec2(0,0), 1,1));
+
+                MotionComponent* motion = (new MotionComponent())->construct(1, 1.0f);
                 motion->velocity = dirNorm * 5.0f;
                 projectile->addComponent(motion);
 

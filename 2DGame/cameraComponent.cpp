@@ -3,14 +3,20 @@
 
 ComponentID CameraComponent::ID;
 
-CameraComponent::CameraComponent(float inZoom, bool inActive)
+CameraComponent::CameraComponent(){vanityName = "Camera Component";}
+CameraComponent::~CameraComponent(){}
+CameraComponent* CameraComponent::construct(float inZoom, bool inActive)
 {
     zoom = inZoom;
     activeFlag = inActive;
 
     updateMatrix();
+    return this;
 }
-CameraComponent::~CameraComponent(){}
+CameraComponent* CameraComponent::construct(std::vector<std::string> inArgs)
+{
+    return this;
+}
 
 void CameraComponent::updateMatrix()
 {

@@ -7,7 +7,13 @@
 
 ComponentID WindowComponent::ID;
 
-WindowComponent::WindowComponent(std::string fileName, GLFWwindow* shareContext)
+WindowComponent::WindowComponent(){vanityName = "Window Component";}
+WindowComponent::~WindowComponent()
+{
+    glfwDestroyWindow(glfwWindow);
+    Logger() << "Window destroyed" << std::endl;
+}
+WindowComponent* WindowComponent::construct(std::string fileName, GLFWwindow* shareContext)
 {
     //load the the window from file. Most components should not have this form of reading directly.
     File readFile;
@@ -68,7 +74,7 @@ WindowComponent::WindowComponent(std::string fileName, GLFWwindow* shareContext)
     if(!glfwWindow)
     {
         Logger() << "Failed to create window" << std::endl;
-        return;
+        return this;
     }
     else
     {
@@ -77,11 +83,12 @@ WindowComponent::WindowComponent(std::string fileName, GLFWwindow* shareContext)
         glfwSetCursorPosCallback(glfwWindow, mouseMoveInput);
         glfwSetMouseButtonCallback(glfwWindow, mouseButtonInput);
     }
+
+    return this;
 }
-WindowComponent::~WindowComponent()
+WindowComponent* WindowComponent::construct(std::vector<std::string> inArgs)
 {
-    glfwDestroyWindow(glfwWindow);
-    Logger() << "Window destroyed" << std::endl;
+    return this;
 }
 
 void windowCloseEvent(GLFWwindow* closingWindow)

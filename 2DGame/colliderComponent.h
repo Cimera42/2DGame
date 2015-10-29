@@ -34,8 +34,11 @@ class ColliderComponent : public Component
         static ComponentID ID;
 
     public:
-        ColliderComponent(std::string inType, std::string inCollisionType, glm::vec2 inOffsetPos, float inWidth, float inHeight);
+        ColliderComponent();
         virtual ~ColliderComponent();
+        ColliderComponent* construct(std::string inType, std::string inCollisionType, glm::vec2 inOffsetPos, float inWidth, float inHeight);
+        ColliderComponent* construct(std::vector<std::string>);
+        ColliderComponent* clone() {return new ColliderComponent(*this);}
 
         //All values are to be considered before scaling
         glm::vec2 offsetPos; //center of the object offset from world

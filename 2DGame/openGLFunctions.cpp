@@ -91,7 +91,7 @@ bool initGLFW()
     //Load display window
     //Possibly could be turned back into an entity
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
-    mainWindow = new WindowComponent("debug/window.cfg",glContext);
+    mainWindow = (new WindowComponent())->construct("debug/window.cfg",glContext);
     glfwMakeContextCurrent(mainWindow->glfwWindow);
 
     return true;

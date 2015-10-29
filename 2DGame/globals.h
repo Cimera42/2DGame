@@ -7,8 +7,10 @@
 #include <unordered_map>
 
 extern bool shouldExit;
+extern bool outputFPS;
 
 extern std::unordered_map<SystemID, System*> systems;
+extern std::unordered_map<ComponentID, Component*> components;
 extern std::unordered_map<EntityID, Entity*> entities;
 
 void addEntity(Entity*);

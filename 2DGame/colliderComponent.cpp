@@ -3,7 +3,9 @@
 
 ComponentID ColliderComponent::ID;
 
-ColliderComponent::ColliderComponent(std::string inType, std::string inCollisionType, glm::vec2 inOffsetPos, float inWidth, float inHeight)
+ColliderComponent::ColliderComponent(){vanityName = "Collider Component";}
+ColliderComponent::~ColliderComponent(){}
+ColliderComponent* ColliderComponent::construct(std::string inType, std::string inCollisionType, glm::vec2 inOffsetPos, float inWidth, float inHeight)
 {
     offsetPos = inOffsetPos;
     heightY = inHeight;
@@ -25,8 +27,13 @@ ColliderComponent::ColliderComponent(std::string inType, std::string inCollision
         collisionType = 2;
     else
         collisionType = 2;
+
+    return this;
 }
-ColliderComponent::~ColliderComponent(){}
+ColliderComponent* ColliderComponent::construct(std::vector<std::string> inArgs)
+{
+    return this;
+}
 
 CollisionPair::CollisionPair(int inCollisionEntityID, int inCollisionEntityID2)
 {

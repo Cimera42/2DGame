@@ -1,7 +1,8 @@
 #ifndef ENTITY_H_INCLUDED
 #define ENTITY_H_INCLUDED
 
-#include <map>
+#include <unordered_map>
+#include <string>
 
 typedef int EntityID;
 typedef int ComponentID;
@@ -13,6 +14,8 @@ class Entity
         Entity();
         ~Entity();
 
+        std::string vanityName = "Unnamed Entity";
+
         //Incrementor for ids
         static EntityID globalEntityIncrementorID;
         //Unique id for entity
@@ -20,7 +23,7 @@ class Entity
         EntityID getID();
 
         //List of components attached to entity
-        std::map<ComponentID, Component*> components;
+        std::unordered_map<ComponentID, Component*> components;
 
         bool addComponent(Component*);
         bool hasComponent(ComponentID);

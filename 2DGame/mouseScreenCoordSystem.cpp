@@ -10,7 +10,7 @@
 #include "cameraSystem.h"
 
 #include "logger.h"
-#include "own_math.h"
+#include "own_funcs.h"
 
 SystemID MouseScreenCoordSystem::ID;
 

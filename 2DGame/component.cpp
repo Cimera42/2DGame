@@ -5,3 +5,5 @@ ComponentID Component::ID;
 
 Component::Component(){}
 Component::~Component(){}
+Component* Component::construct(){}
+Component* Component::construct(std::vector<std::string> inArgs){}

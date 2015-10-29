@@ -5,7 +5,17 @@
 
 ComponentID TerrainComponent::ID;
 
-TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noiseScale, float inBaseline)
+TerrainComponent::TerrainComponent(){vanityName = "Terrain Component";}
+TerrainComponent::~TerrainComponent()
+{
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &vertexBuffer);
+    glDeleteBuffers(1, &uvBuffer);
+    glDeleteBuffers(1, &indexBuffer);
+
+    Unload<TextureStore>::Object(&textureStore);
+}
+TerrainComponent* TerrainComponent::construct(int numPoints, float heightScale, float noiseScale, float inBaseline)
 {
     //Generate surface points
     for(int i = 0; i <= numPoints; i++)
@@ -65,15 +75,12 @@ TerrainComponent::TerrainComponent(int numPoints, float heightScale, float noise
 
     //Load texture
     Load<TextureStore>::Object(&textureStore, "debug/textureTerrain.store");
-}
-TerrainComponent::~TerrainComponent()
-{
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &vertexBuffer);
-    glDeleteBuffers(1, &uvBuffer);
-    glDeleteBuffers(1, &indexBuffer);
 
-    Unload<TextureStore>::Object(&textureStore);
+    return this;
+}
+TerrainComponent* TerrainComponent::construct(std::vector<std::string> inArgs)
+{
+    return this;
 }
 
 //Regenerate buffers if data has changed

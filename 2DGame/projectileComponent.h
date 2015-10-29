@@ -11,6 +11,9 @@ class ProjectileComponent : public Component
     public:
         ProjectileComponent();
         virtual ~ProjectileComponent();
+        ProjectileComponent* construct();
+        ProjectileComponent* construct(std::vector<std::string>);
+        ProjectileComponent* clone() {return new ProjectileComponent(*this);}
 
         //Auto generation of ID
         ComponentID getID() {if(ID == 0) {ID = componentIDIncrementor++;} return ID;}

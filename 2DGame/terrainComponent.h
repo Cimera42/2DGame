@@ -16,8 +16,11 @@ class TerrainComponent : public Component
         static ComponentID ID;
 
     public:
-        TerrainComponent(int, float, float, float);
+        TerrainComponent();
         virtual ~TerrainComponent();
+        TerrainComponent* construct(int numPoints, float heightScale, float noiseScale, float inBaseline);
+        TerrainComponent* construct(std::vector<std::string>);
+        TerrainComponent* clone() {return new TerrainComponent(*this);}
 
         //Generated data and points
         std::vector<glm::vec2> surface;

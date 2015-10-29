@@ -10,8 +10,11 @@ class WorldComponent : public Component
         static ComponentID ID;
 
     public:
-        WorldComponent(glm::vec2,glm::vec2,float);
+        WorldComponent();
         virtual ~WorldComponent();
+        WorldComponent* construct(glm::vec2,glm::vec2,float);
+        WorldComponent* construct(std::vector<std::string>);
+        WorldComponent* clone() {return new WorldComponent(*this);}
 
         glm::vec2 position;
         glm::vec2 scale;

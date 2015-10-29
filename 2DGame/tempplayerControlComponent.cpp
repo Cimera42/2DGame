@@ -2,7 +2,9 @@
 
 ComponentID PlayerControlComponent::ID;
 
-PlayerControlComponent::PlayerControlComponent(float inSpeed, int inUp, int inDown, int inLeft, int inRight)
+PlayerControlComponent::PlayerControlComponent(){vanityName = "Player Control Component";}
+PlayerControlComponent::~PlayerControlComponent(){}
+PlayerControlComponent* PlayerControlComponent::construct(float inSpeed, int inUp, int inDown, int inLeft, int inRight)
 {
     speed = inSpeed;
     upKey = inUp;
@@ -10,4 +12,7 @@ PlayerControlComponent::PlayerControlComponent(float inSpeed, int inUp, int inDo
     leftKey = inLeft;
     rightKey = inRight;
 }
-PlayerControlComponent::~PlayerControlComponent(){}
+PlayerControlComponent* PlayerControlComponent::construct(std::vector<std::string> inArgs)
+{
+    return this;
+}

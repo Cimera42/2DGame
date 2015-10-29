@@ -13,7 +13,7 @@ Entity::Entity()
 Entity::~Entity()
 {
     std::vector<ComponentID> componentToErase;
-    for(std::map<ComponentID, Component*>::iterator componentPair = components.begin(); componentPair != components.end(); ++componentPair)
+    for(std::unordered_map<ComponentID, Component*>::iterator componentPair = components.begin(); componentPair != components.end(); ++componentPair)
     {
         //please add to list then delete.
         delete componentPair->second;

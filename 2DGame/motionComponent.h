@@ -10,8 +10,11 @@ class MotionComponent : public Component //Rename to physicsComponent
         static ComponentID ID;
 
     public:
-        MotionComponent(float, float);
+        MotionComponent();
         virtual ~MotionComponent();
+        MotionComponent* construct(float,float);
+        MotionComponent* construct(std::vector<std::string>);
+        MotionComponent* clone() {return new MotionComponent(*this);}
 
         float mass;
         float drag;

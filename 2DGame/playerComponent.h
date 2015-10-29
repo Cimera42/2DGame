@@ -9,8 +9,11 @@ class PlayerComponent : public Component
         static ComponentID ID;
 
     public:
-        PlayerComponent(int inTeamID);
+        PlayerComponent();
         virtual ~PlayerComponent();
+        PlayerComponent* construct(int);
+        PlayerComponent* construct(std::vector<std::string>);
+        PlayerComponent* clone() {return new PlayerComponent(*this);}
 
         int teamID;
 

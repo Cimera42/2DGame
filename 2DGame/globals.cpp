@@ -3,8 +3,10 @@
 #include <pthread.h>
 
 bool shouldExit = false;
+bool outputFPS = false;
 
 std::unordered_map<SystemID, System*> systems;
+std::unordered_map<ComponentID, Component*> components;
 pthread_mutex_t entityMutex = PTHREAD_MUTEX_INITIALIZER;
 std::unordered_map<EntityID, Entity*> entities;
 std::vector<EntityID> entitiesToDelete;

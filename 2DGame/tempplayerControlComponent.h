@@ -9,8 +9,11 @@ class PlayerControlComponent : public Component
         static ComponentID ID;
 
     public:
-        PlayerControlComponent(float,int,int,int,int);
+        PlayerControlComponent();
         virtual ~PlayerControlComponent();
+        PlayerControlComponent* construct(float inSpeed, int inUp, int inDown, int inLeft, int inRight);
+        PlayerControlComponent* construct(std::vector<std::string>);
+        PlayerControlComponent* clone() {return new PlayerControlComponent(*this);}
 
         float speed;
         int upKey;

@@ -10,8 +10,11 @@ class Render2DComponent : public Component
         static ComponentID ID;
 
     public:
-        Render2DComponent(glm::vec2, glm::vec2);
+        Render2DComponent();
         virtual ~Render2DComponent();
+        Render2DComponent* construct(glm::vec2 inStartUV, glm::vec2 inSize);
+        Render2DComponent* construct(std::vector<std::string>);
+        Render2DComponent* clone() {return new Render2DComponent(*this);}
 
         glm::vec2 startUV;
         glm::vec2 UVsize;

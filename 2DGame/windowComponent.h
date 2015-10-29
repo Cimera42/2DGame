@@ -13,8 +13,11 @@ class WindowComponent : public Component
         static ComponentID ID;
 
     public:
-        WindowComponent(std::string fileName,GLFWwindow* share);
+        WindowComponent();
         virtual ~WindowComponent();
+        WindowComponent* construct(std::string fileName, GLFWwindow* shareContext);
+        WindowComponent* construct(std::vector<std::string>);
+        WindowComponent* clone() {return new WindowComponent(*this);}
 
         //Values set
         std::string windowTitle;

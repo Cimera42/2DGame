@@ -10,8 +10,11 @@ class CameraComponent : public Component
         static ComponentID ID;
 
     public:
-        CameraComponent(float, bool);
+        CameraComponent();
         virtual ~CameraComponent();
+        CameraComponent* construct(float inZoom, bool inActive);
+        CameraComponent* construct(std::vector<std::string>);
+        CameraComponent* clone() {return new CameraComponent(*this);}
 
         bool activeFlag;
 
