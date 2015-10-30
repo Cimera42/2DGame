@@ -3,14 +3,17 @@
 
 #include "component.h"
 
-class lifetimeComponent : public Component
+class LifetimeComponent : public Component
 {
     private:
         static ComponentID ID;
 
     public:
-        lifetimeComponent();
-        virtual ~lifetimeComponent();
+        LifetimeComponent();
+        virtual ~LifetimeComponent();
+        LifetimeComponent* construct();
+        LifetimeComponent* construct(std::vector<std::string>);
+        LifetimeComponent* clone() {return new LifetimeComponent(*this);}
 
         //timer
         //delete entity after time runs out?

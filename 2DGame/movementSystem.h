@@ -1,16 +1,16 @@
-#ifndef MOTIONSYSTEM_H_INCLUDED
-#define MOTIONSYSTEM_H_INCLUDED
+#ifndef MOVEMENTSYSTEM_H_INCLUDED
+#define MOVEMENTSYSTEM_H_INCLUDED
 
 #include "system.h"
 
-class MotionSystem : public System
+class MovementSystem : public System
 {
     private:
         static SystemID ID;
 
     public:
-        MotionSystem();
-        virtual ~MotionSystem();
+        MovementSystem();
+        virtual ~MovementSystem();
 
         //Auto generation of ID
         SystemID getID() {if(ID == 0) {ID = systemIDIncrementor++;} return ID;}
@@ -19,4 +19,4 @@ class MotionSystem : public System
         void update(float);
 };
 
-#endif // MOTIONSYSTEM_H_INCLUDED
+#endif // MOVEMENTSYSTEM_H_INCLUDED

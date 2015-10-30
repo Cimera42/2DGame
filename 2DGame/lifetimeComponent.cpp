@@ -1,6 +1,14 @@
 #include "lifetimeComponent.h"
 
-ComponentID lifetimeComponent::ID;
+ComponentID LifetimeComponent::ID;
 
-lifetimeComponent::lifetimeComponent(){}
-lifetimeComponent::~lifetimeComponent(){}
+LifetimeComponent::LifetimeComponent() {vanityName = "Lifetime Component";}
+LifetimeComponent::~LifetimeComponent(){}
+LifetimeComponent* LifetimeComponent::construct()
+{
+    return this;
+}
+LifetimeComponent* LifetimeComponent::construct(std::vector<std::string> inArgs)
+{
+    return this;
+}

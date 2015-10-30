@@ -8,31 +8,30 @@
 
 #include "openGLFunctions.h"
 
-#include "worldComponent.h"
 #include "windowSystem.h"
-#include "windowComponent.h"
 #include "render2DSystem.h"
-#include "render2DComponent.h"
 #include "sceneStore.h"
 #include "textureStore.h"
 #include "renderTerrainSystem.h"
 #include "tempplayerControlSystem.h"
 #include "cameraSystem.h"
 #include "mouseScreenCoordSystem.h"
-#include "motionSystem.h"
-#include "colliderComponent.h"
+#include "movementSystem.h"
 #include "collisionSystem.h"
 #include "projectileCollideSystem.h"
 #include "consoleSystem.h"
 
 #include "cameraComponent.h"
 #include "colliderComponent.h"
-#include "motionComponent.h"
+#include "physicsComponent.h"
 #include "render2DComponent.h"
 #include "tempplayerControlComponent.h"
 #include "terrainComponent.h"
 #include "windowComponent.h"
 #include "worldComponent.h"
+#include "playerComponent.h"
+#include "projectileComponent.h"
+#include "lifetimeComponent.h"
 
 #include <iostream>
 #include <string>
@@ -50,19 +49,22 @@ int main()
     systems[PlayerControlSystem::getStaticID()] = new PlayerControlSystem();
     systems[CameraSystem::getStaticID()] = new CameraSystem();
     systems[MouseScreenCoordSystem::getStaticID()] = new MouseScreenCoordSystem();
-    systems[MotionSystem::getStaticID()] = new MotionSystem();
+    systems[MovementSystem::getStaticID()] = new MovementSystem();
     systems[CollisionSystem::getStaticID()] = new CollisionSystem();
     systems[ProjectileCollideSystem::getStaticID()] = new ProjectileCollideSystem();
     systems[ConsoleSystem::getStaticID()] = new ConsoleSystem();
 
     components[CameraComponent::getStaticID()] = new CameraComponent();
     components[ColliderComponent::getStaticID()] = new ColliderComponent();
-    components[MotionComponent::getStaticID()] = new MotionComponent();
+    components[PhysicsComponent::getStaticID()] = new PhysicsComponent();
     components[Render2DComponent::getStaticID()] = new Render2DComponent();
     components[PlayerControlComponent::getStaticID()] = new PlayerControlComponent();
     components[TerrainComponent::getStaticID()] = new TerrainComponent();
     components[WindowComponent::getStaticID()] = new WindowComponent();
     components[WorldComponent::getStaticID()] = new WorldComponent();
+    components[PlayerComponent::getStaticID()] = new PlayerComponent();
+    components[ProjectileComponent::getStaticID()] = new ProjectileComponent();
+    components[LifetimeComponent::getStaticID()] = new LifetimeComponent();
 
     //File loading TEST
     SceneStore * scene;
@@ -87,7 +89,7 @@ int main()
             //Player movement system
             systems[PlayerControlSystem::getStaticID()]->update(delta);
             //Motion addition system
-            systems[MotionSystem::getStaticID()]->update(delta);
+            systems[MovementSystem::getStaticID()]->update(delta);
             //Collision system
             systems[CollisionSystem::getStaticID()]->update();
             //Impact systems and final updating

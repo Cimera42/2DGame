@@ -7,7 +7,7 @@
 #include "render2DComponent.h"
 
 #include "worldComponent.h"
-#include "motionComponent.h"
+#include "physicsComponent.h"
 #include "projectileComponent.h"
 #include "tempplayerControlComponent.h"
 #include "colliderComponent.h"
@@ -58,9 +58,9 @@ void PlayerControlSystem::update(float inDelta)
 
         moveDir = rotateVec2(moveDir, toRad(worldComp->rotation));
 
-        if(entity->canUseComponent(MotionComponent::getStaticID()))
+        if(entity->canUseComponent(PhysicsComponent::getStaticID()))
         {
-            MotionComponent* motionComp = static_cast<MotionComponent*>(entity->getComponent(MotionComponent::getStaticID()));
+            PhysicsComponent* motionComp = static_cast<PhysicsComponent*>(entity->getComponent(PhysicsComponent::getStaticID()));
 
             motionComp->impulse(moveDir * controlComp->speed * inDelta);
         }
@@ -81,15 +81,16 @@ void PlayerControlSystem::update(float inDelta)
                 Entity* projectile = new Entity();
                 projectile->vanityName = "Projectile";
                 addEntity(projectile);
-                projectile->addComponent(new ProjectileComponent());                projectile->addComponent((new WorldComponent())->construct(glm::vec2(worldComp->position.x,worldComp->position.y), glm::vec2(0.5,0.5), atan2(dirNorm.y, dirNorm.x) * 180/3.1415));
+                projectile->addComponent((new ProjectileComponent())->construct());
+                projectile->addComponent((new WorldComponent())->construct(glm::vec2(worldComp->position.x,worldComp->position.y), glm::vec2(0.5,0.5), atan2(dirNorm.y, dirNorm.x) * 180/3.1415));
                 projectile->addComponent((new Render2DComponent())->construct(glm::vec2(0.875,0), glm::vec2(0.125,0.125)));
-                projectile->addComponent((new ColliderComponent())->construct("box", "terrain", glm::vec2(0,0), 1,1));
+                projectile->addComponent((new ColliderComponent())->construct("box", "all", glm::vec2(0,0), 1,1));
 
-                MotionComponent* motion = (new MotionComponent())->construct(1, 1.0f);
+                PhysicsComponent* motion = (new PhysicsComponent())->construct(1, 0.5, 1.0f);
                 motion->velocity = dirNorm * 5.0f;
                 projectile->addComponent(motion);
 
-                countDown = 0.1f;
+                countDown = 0.3f;
             }
             if(countDown >= 0)
             {

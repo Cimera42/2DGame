@@ -7,6 +7,7 @@
 #include "terrainComponent.h"
 #include "globals.h"
 #include "logger.h"
+#include "own_funcs.h"
 #include <limits.h>
 
 /*TODO:
@@ -49,16 +50,6 @@ glm::vec2 getRotatedPoint(glm::vec2 point, float angle, glm::vec2 scale)
     float ynew = point.x * s + point.y * c;
 
     return glm::vec2(xnew, ynew);
-}
-
-float sq(float in)
-{
-    return in*in;
-}
-
-float distanceSq(glm::vec2 a, glm::vec2 b)
-{
-    return sq(a.x-b.x)+sq(a.y-b.y);
 }
 
 bool LineToLine(glm::vec2 a,glm::vec2 b,glm::vec2 c,glm::vec2 d)

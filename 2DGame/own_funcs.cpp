@@ -21,6 +21,18 @@ glm::vec2 rotateVec2(glm::vec2 point, float angle)
     return rotated_point;
 }
 
+//Square a float
+float sq(float in)
+{
+    return in*in;
+}
+
+//Returns squared distance between two points
+float distanceSq(glm::vec2 a, glm::vec2 b)
+{
+    return sq(a.x-b.x)+sq(a.y-b.y);
+}
+
 std::vector<std::string> splitBy(std::string inString, char splitCharacter)
 {
     std::vector<std::string> words;

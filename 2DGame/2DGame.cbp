@@ -162,18 +162,6 @@
 		<Unit filename="main.h">
 			<Option virtualFolder="Other/" />
 		</Unit>
-		<Unit filename="motionComponent.cpp">
-			<Option virtualFolder="Component/" />
-		</Unit>
-		<Unit filename="motionComponent.h">
-			<Option virtualFolder="Component/" />
-		</Unit>
-		<Unit filename="motionSystem.cpp">
-			<Option virtualFolder="System/" />
-		</Unit>
-		<Unit filename="motionSystem.h">
-			<Option virtualFolder="System/" />
-		</Unit>
 		<Unit filename="mouseHandler.cpp">
 			<Option virtualFolder="InputHandlers/" />
 		</Unit>
@@ -184,6 +172,12 @@
 			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="mouseScreenCoordSystem.h">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="movementSystem.cpp">
+			<Option virtualFolder="System/" />
+		</Unit>
+		<Unit filename="movementSystem.h">
 			<Option virtualFolder="System/" />
 		</Unit>
 		<Unit filename="noise.cpp">
@@ -203,6 +197,12 @@
 		</Unit>
 		<Unit filename="own_funcs.h">
 			<Option virtualFolder="Other/" />
+		</Unit>
+		<Unit filename="physicsComponent.cpp">
+			<Option virtualFolder="Component/" />
+		</Unit>
+		<Unit filename="physicsComponent.h">
+			<Option virtualFolder="Component/" />
 		</Unit>
 		<Unit filename="playerComponent.cpp">
 			<Option virtualFolder="Component/" />

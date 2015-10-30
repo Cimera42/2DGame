@@ -10,7 +10,7 @@
 #include "terrainComponent.h"
 #include "tempplayerControlComponent.h"
 #include "cameraComponent.h"
-#include "motionComponent.h"
+#include "physicsComponent.h"
 #include "colliderComponent.h"
 #include "playerComponent.h"
 #include "logger.h"
@@ -72,11 +72,13 @@ void SceneStore::loadStore(std::string name)
                         PlayerComponent* player = (new PlayerComponent())->construct(sceneBlock->getCurrentValue<int>(0));
                         ent->addComponent(player);
                     }
-                    else if(sceneBlock->checkCurrentProperty("motion"))
+                    else if(sceneBlock->checkCurrentProperty("physics"))
                     {
-                        //Motion component FOR NOW
-                        MotionComponent* motion = (new MotionComponent())->construct(sceneBlock->getCurrentValue<float>(0),sceneBlock->getCurrentValue<float>(1));
-                        ent->addComponent(motion);
+                        //Physics component FOR NOW
+                        PhysicsComponent* physics = (new PhysicsComponent())->construct(sceneBlock->getCurrentValue<float>(0),
+                                                                                        sceneBlock->getCurrentValue<float>(1),
+                                                                                        sceneBlock->getCurrentValue<float>(2));
+                        ent->addComponent(physics);
                     }
                     else if(sceneBlock->checkCurrentProperty("terrain"))
                     {
