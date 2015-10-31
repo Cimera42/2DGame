@@ -18,7 +18,7 @@ class CollisionPair
         int collisionEntityOne; //Entity ID of the colliding object 1
         int collisionEntityTwo; //Entity ID of the colliding object 2
         glm::vec2 minimumTranslation; //Minimum translation to move out of collision. - retieve through get
-
+        glm::vec2 normal;//Normal of pairID 1
 
         /*Data for use in systems*/
         int getCollisionPairID(int entityID); //First step is to use this to check for the correct entity - input either entity ID to retrieve pairID
@@ -26,6 +26,7 @@ class CollisionPair
         int getOppositePairID(int pairID); //input the known pairID to get opposing ID
         int getOppositeEntityID(int pairID); //input the pairID to get opposing entityID
         glm::vec2 getMinimumTranslation(int pairID); //input 1 or 2 to retrieve the data of entity1 or 2;
+        glm::vec2 getNormal(int pairID); //input 1 or 2 to retrieve the data of entity1 or 2;
 };
 
 class ColliderComponent : public Component

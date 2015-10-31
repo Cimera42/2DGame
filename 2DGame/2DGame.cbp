@@ -288,6 +288,12 @@
 		<Unit filename="terrainComponent.h">
 			<Option virtualFolder="Component/" />
 		</Unit>
+		<Unit filename="terrainImpactSystem.cpp">
+			<Option virtualFolder="System/Collision/" />
+		</Unit>
+		<Unit filename="terrainImpactSystem.h">
+			<Option virtualFolder="System/Collision/" />
+		</Unit>
 		<Unit filename="textureStore.cpp">
 			<Option virtualFolder="Store/" />
 		</Unit>

@@ -780,7 +780,7 @@
 1445656568 d:\stuff\2dgame\trunk\2dgame\system.h
 	<vector>
 
-1446126888 d:\stuff\2dgame\trunk\2dgame\globals.h
+1446260508 d:\stuff\2dgame\trunk\2dgame\globals.h
 	"entity.h"
 	"component.h"
 	"system.h"
@@ -1039,7 +1039,7 @@
 	"component.h"
 	<glm/glm.hpp>
 
-1446222034 source:d:\stuff\2dgame\trunk\2dgame\collisionsystem.cpp
+1446271364 source:d:\stuff\2dgame\trunk\2dgame\collisionsystem.cpp
 	"collisionSystem.h"
 	<cmath>
 	"terrainComponent.h"
@@ -1053,7 +1053,7 @@
 	"worldComponent.h"
 	"colliderComponent.h"
 
-1446126884 d:\stuff\2dgame\trunk\2dgame\collidercomponent.h
+1446269854 d:\stuff\2dgame\trunk\2dgame\collidercomponent.h
 	"component.h"
 	<string>
 	<vector>
@@ -1237,7 +1237,7 @@
 1441623710 d:\stuff\2dgame\trunk\2dgame\noise.h
 	<cstddef>
 
-1446216680 source:d:\stuff\2dgame\trunk\2dgame\projectilecollidesystem.cpp
+1446298972 source:d:\stuff\2dgame\trunk\2dgame\projectilecollidesystem.cpp
 	"projectileCollideSystem.h"
 	"globals.h"
 	"colliderComponent.h"
@@ -1351,7 +1351,7 @@
 	"cameraComponent.h"
 	<glm/gtx/transform.hpp>
 
-1446126884 source:d:\stuff\2dgame\trunk\2dgame\collidercomponent.cpp
+1446269952 source:d:\stuff\2dgame\trunk\2dgame\collidercomponent.cpp
 	"colliderComponent.h"
 	"logger.h"
 
@@ -1383,12 +1383,12 @@
 	"system.h"
 	<stdlib.h>
 
-1446126886 source:d:\stuff\2dgame\trunk\2dgame\globals.cpp
+1446297202 source:d:\stuff\2dgame\trunk\2dgame\globals.cpp
 	"globals.h"
 	"logger.h"
 	<pthread.h>
 
-1446216986 source:d:\stuff\2dgame\trunk\2dgame\main.cpp
+1446297088 source:d:\stuff\2dgame\trunk\2dgame\main.cpp
 	"main.h"
 	"globals.h"
 	"entity.h"
@@ -1408,6 +1408,7 @@
 	"movementSystem.h"
 	"collisionSystem.h"
 	"projectileCollideSystem.h"
+	"terrainImpactSystem.h"
 	"consoleSystem.h"
 	"cameraComponent.h"
 	"colliderComponent.h"
@@ -1495,7 +1496,7 @@
 1446126890 source:d:\stuff\2dgame\trunk\2dgame\tempplayercontrolcomponent.cpp
 	"tempplayerControlComponent.h"
 
-1446222354 source:d:\stuff\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
+1446299170 source:d:\stuff\2dgame\trunk\2dgame\tempplayercontrolsystem.cpp
 	"tempplayerControlSystem.h"
 	"globals.h"
 	"openGLFunctions.h"
@@ -1529,22 +1530,37 @@
 	"logger.h"
 	"typeConversion.h"
 
-1446223520 d:\stuff\2dgame\trunk\2dgame\physicscomponent.h
+1446263706 d:\stuff\2dgame\trunk\2dgame\physicscomponent.h
 	"component.h"
 	<glm/glm.hpp>
 
-1446222328 source:d:\stuff\2dgame\trunk\2dgame\physicscomponent.cpp
+1446263750 source:d:\stuff\2dgame\trunk\2dgame\physicscomponent.cpp
 	"physicsComponent.h"
 
 1446216812 d:\stuff\2dgame\trunk\2dgame\movementsystem.h
 	"system.h"
 
-1446223626 source:d:\stuff\2dgame\trunk\2dgame\movementsystem.cpp
+1446297412 source:d:\stuff\2dgame\trunk\2dgame\movementsystem.cpp
 	"movementSystem.h"
 	<glm/glm.hpp>
 	"globals.h"
 	"own_funcs.h"
 	"worldComponent.h"
 	"physicsComponent.h"
+	"logger.h"
+	"playerComponent.h"
+
+1446266678 d:\stuff\2dgame\trunk\2dgame\terrainimpactsystem.h
+	"system.h"
+	"openGLFunctions.h"
+	<glm/glm.hpp>
+
+1446273772 source:d:\stuff\2dgame\trunk\2dgame\terrainimpactsystem.cpp
+	"terrainImpactSystem.h"
+	"globals.h"
+	"colliderComponent.h"
+	"worldComponent.h"
+	"physicsComponent.h"
+	"terrainComponent.h"
 	"logger.h"
 

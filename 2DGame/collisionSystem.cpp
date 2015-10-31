@@ -181,6 +181,9 @@ void CollisionSystem::update()
             if(colliderComp->type == 0)//box
             {
                 glm::vec2 centre1 = worldComp->position + colliderComp->offsetPos;
+                bool collision = false;
+                glm::vec2 additionNormal = glm::vec2(0,0);
+                int collisionCount = 0;
 
                 //Corners of box
                 glm::vec2 topleft = centre1 + colliderComp->corner1; //topleft
@@ -196,12 +199,21 @@ void CollisionSystem::update()
                        LineToLine(btmright, btmleft, lineSurface1, lineSurface2) ||
                        LineToLine(btmleft, topleft, lineSurface1, lineSurface2))
                     {
-                        //Add the collisions to both terrain and other collider comps...
-                        auto a = std::make_shared<CollisionPair>(CollisionPair(subscribedEntities[0][subID],subscribedEntities[1][sub2ID]));
-                        terrainComp->collisionData.push_back(a);//Add collided entity to terrain list
-                        colliderComp->collisionData.push_back(a);//Add terrain entity to collided list
-                        break;
+                        collision = true;
+                        collisionCount += 1;
+                        glm::vec2 surface = lineSurface2-lineSurface1;
+                        glm::vec2 normal = glm::vec2(-surface.y, surface.x);
+                        additionNormal += normal;
                     }
+                }
+                if(collision)
+                {
+                    //Add the collisions to both terrain and other collider comps...
+                    glm::vec2 avNormal = additionNormal/float(collisionCount);
+                    auto a = std::make_shared<CollisionPair>(CollisionPair(subscribedEntities[1][sub2ID], subscribedEntities[0][subID]));
+                    a->normal = avNormal;
+                    terrainComp->collisionData.push_back(a);//Add collided entity to terrain list
+                    colliderComp->collisionData.push_back(a);//Add terrain entity to collided list
                 }
             }
             /*else if(colliderComp->type == 1) //capsule LOL

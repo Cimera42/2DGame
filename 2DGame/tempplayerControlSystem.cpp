@@ -66,7 +66,7 @@ void PlayerControlSystem::update(float inDelta)
         }
         else
         {
-            worldComp->position += moveDir * controlComp->speed * inDelta;
+            worldComp->position += moveDir * controlComp->speed * inDelta;//bad!
             worldComp->updateMatrix();
         }
 
@@ -86,8 +86,8 @@ void PlayerControlSystem::update(float inDelta)
                 projectile->addComponent((new Render2DComponent())->construct(glm::vec2(0.875,0), glm::vec2(0.125,0.125)));
                 projectile->addComponent((new ColliderComponent())->construct("box", "all", glm::vec2(0,0), 1,1));
 
-                PhysicsComponent* motion = (new PhysicsComponent())->construct(1, 0.5, 1.0f);
-                motion->velocity = dirNorm * 5.0f;
+                PhysicsComponent* motion = (new PhysicsComponent())->construct(0.5, 0.5, 0.04f);
+                motion->velocity = dirNorm * 20.0f;
                 projectile->addComponent(motion);
 
                 countDown = 0.3f;

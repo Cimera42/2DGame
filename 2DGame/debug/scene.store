@@ -8,9 +8,9 @@ Entity "lander"
 world: -0.5,1.0, 1,1, 0;
 render2d: 0.5, 0.5, 0.5, 0.5;
 player: 0;
-control: 5, W, S, A, D;
-camera: 3, true;
-physics: 1, 0.5, 0.5;
+control: 70, W, S, A, D;
+camera: 7.5, true;
+physics: 0.1, 0.5, 0.04;
 collider: box, all, 0,0, 1,1;
 }
 
@@ -18,37 +18,37 @@ Entity "tower"
 {
 world: 2.0,0.1, 1,1, 0;
 render2d: 0, 0.5, 0.5, 0.5;
-control: 1.0, I, K, J, L;
+control: 1000, I, K, J, L;
 physics: 10, 0.5, 0.5;
 collider: box, all, 0,0, 1,1;
 }
 
 Entity "house"
 {
-world: -1,-0.1, 1,1, 0;
+world: -1,2, 1,1, 0;
 render2d: 0, 0, 0.5, 0.5;
 physics: 1, 0.5, 0.5;
-collider: circle, all, 0,0, 1,1;
+collider: box, all, 0,0, 1,1;
 }
 
 Entity "house"
 {
-world: 0.0,0.0, 1,1, 0;
+world: 0.0,2, 1,1, 0;
 render2d: 0, 0, 0.5, 0.5;
 physics: 50, 0.5, 0.5;
-collider: circle, all, 0,0, 1,1;
+collider: box, all, 0,0, 1,1;
 }
 
 Entity "turret"
 {
-world: -1.95,0.0, 1,1, 0;
+world: -1.95,2, 1,1, 0;
 render2d: 0.5, 0.125, 0.375, 0.375;
 physics: 10, 0.5, 0.1;
-collider: circle, all, 0,0, 1,1;
+collider: box, all, 0,0, 1,1;
 }
 
 Entity "terrain"
 {
-world: -10,-0.25, 20,1, 0;
-terrain: 1000, 0.5, 25, -3;
+world: -50,-0.25, 100,2, 0;
+terrain: 1000, 1.0, 25, -2;
 }

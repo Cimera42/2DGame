@@ -19,6 +19,7 @@
 #include "movementSystem.h"
 #include "collisionSystem.h"
 #include "projectileCollideSystem.h"
+#include "terrainImpactSystem.h"
 #include "consoleSystem.h"
 
 #include "cameraComponent.h"
@@ -52,6 +53,7 @@ int main()
     systems[MovementSystem::getStaticID()] = new MovementSystem();
     systems[CollisionSystem::getStaticID()] = new CollisionSystem();
     systems[ProjectileCollideSystem::getStaticID()] = new ProjectileCollideSystem();
+    systems[TerrainImpactSystem::getStaticID()] = new TerrainImpactSystem();
     systems[ConsoleSystem::getStaticID()] = new ConsoleSystem();
 
     components[CameraComponent::getStaticID()] = new CameraComponent();
@@ -94,6 +96,7 @@ int main()
             systems[CollisionSystem::getStaticID()]->update();
             //Impact systems and final updating
             systems[ProjectileCollideSystem::getStaticID()]->update();
+            systems[TerrainImpactSystem::getStaticID()]->update();
             //Camera matrix calculation system
             systems[CameraSystem::getStaticID()]->update();
             //Terrain rendering system

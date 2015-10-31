@@ -20,6 +20,7 @@ ProjectileCollideSystem::ProjectileCollideSystem()
     subList1.push_back(WorldComponent::getStaticID());
     subList1.push_back(ColliderComponent::getStaticID());
     subList1.push_back(ProjectileComponent::getStaticID());
+    subList1.push_back(PhysicsComponent::getStaticID());
     addSubList(subList1);
 }
 ProjectileCollideSystem::~ProjectileCollideSystem(){}
@@ -45,7 +46,7 @@ void ProjectileCollideSystem::update()
             //Check the type of the collided entity and perform action
             if(collidingEnt->hasComponent(TerrainComponent::getStaticID()))
             {
-                //deleteEntity(projectileEnt->entityID);
+                deleteEntity(projectileEnt->entityID);
             }
             if(collidingEnt->hasComponent(PhysicsComponent::getStaticID()) && !collidingEnt->hasComponent(PlayerComponent::getStaticID()))
             {
@@ -54,7 +55,7 @@ void ProjectileCollideSystem::update()
                 //Should 1. Be conserving energy
                 //Should 2. Be making sure the velocity is transfered correctly
                 //http://gafferongames.com/virtual-go/collision-response-and-coulomb-friction/
-                float j = -(1+0)*glm::dot(projectilePhysicsComp->velocity*projectilePhysicsComp->mass,glm::normalize(col)); //projectiles impulse
+                float j = -(1+physicsComp->coefficientRestitution)*glm::dot(projectilePhysicsComp->velocity*projectilePhysicsComp->mass,glm::normalize(col)); //projectiles impulse
                 float impulseMag = glm::max(j, 0.0f);
                 //Logger()<<impulseMag<<std::endl;
                 physicsComp->impulse(impulseMag*glm::normalize(-col));

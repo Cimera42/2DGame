@@ -106,3 +106,16 @@ glm::vec2 CollisionPair::getMinimumTranslation(int pairID)
         return glm::vec2(0,0);
     }
 }
+
+glm::vec2 CollisionPair::getNormal(int pairID)
+{
+    if(pairID == 1)
+        return normal;
+    else if (pairID == 2)
+        return -normal;
+    else
+    {
+        Logger()<<"Error in getNormal: No pair entity found - returning 0"<<std::endl;
+        return glm::vec2(0,0);
+    }
+}

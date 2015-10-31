@@ -6,6 +6,7 @@ PhysicsComponent::PhysicsComponent(){vanityName = "Motion Component";}
 PhysicsComponent::~PhysicsComponent(){}
 PhysicsComponent* PhysicsComponent::construct(float inMass, float inRestitution, float inDrag)
 {
+    staticObject = false;
     mass = inMass;
     coefficientRestitution = inRestitution;
     coefficientDrag = inDrag;

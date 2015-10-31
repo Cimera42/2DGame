@@ -19,4 +19,11 @@ void deleteFlaggedEntities();
 void deleteAllEntities();
 void deleteAllSystems();
 
+class Constants
+{
+public:
+    static const float airDensity;
+    static const float gravity;
+};
+
 #endif // GLOBALS_H_INCLUDED

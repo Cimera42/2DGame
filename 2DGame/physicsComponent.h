@@ -16,6 +16,8 @@ class PhysicsComponent : public Component //Rename to physicsComponent
         PhysicsComponent* construct(std::vector<std::string>);
         PhysicsComponent* clone() {return new PhysicsComponent(*this);}
 
+        bool staticObject; //not affected by forces
+
         float mass;
         float coefficientRestitution; //objects bounciness 0-1
         float coefficientDrag; //Objects air resistance -->0 is streamlined, cube is 1.05
@@ -26,7 +28,7 @@ class PhysicsComponent : public Component //Rename to physicsComponent
         glm::vec2 force;//Used to work out acceleration - resultant at movementSystem
         glm::vec2 acceleration;
         glm::vec2 velocity;
-        glm::vec2 lastAcceleration;//get rid of
+
 
         void impulse(glm::vec2 in);
 
